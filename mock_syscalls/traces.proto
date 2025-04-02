@@ -1,0 +1,62 @@
+syntax = "proto3";
+package generated.traces;
+
+message Terminated {}
+
+message IoData {
+  bytes available_data = 1;
+  uint64 additional_length = 2;
+}
+
+message Fds {
+  repeated uint64 fds = 1;
+}
+
+message Syscall {
+  oneof value {
+    // When a syscall exits with only a return code and no other data.
+    // It is used in syscalls such as vm version, current cycles, process
+    // ID. It is also used when a more complicated syscall returns with
+    // a non-zero exit code(and no other data have been returned).
+    int64 return_with_code = 1;
+    // In case the return code is 0(SUCCESS), a certain return value
+    // that fit in a 64-bit varible might be written to VM's memory
+    // as well. The spawned process ID in spawn syscalls, the bytes
+    // consumed in write syscalls, and the child process exit code
+    // in wait syscall all fall into this categories.
+    // That being said, it remains a question which of the following
+    // suits fuzzing better:
+    // 1) use a single field for all 3 syscalls;
+    // 2) split them into 3 different fields.
+    uint64 success_output_data = 2;
+    IoData io_data = 3;
+    Terminated terminated = 4;
+    Fds fds = 5;
+  }
+}
+
+message Syscalls {
+  repeated Syscall syscalls = 1;
+  repeated bytes args = 2;
+}
+
+// This builds on top of Syscalls, and choose to keep certain data
+// structure as a single entity. It remains to be tested if it will
+// provide better results for fuzzing.
+message Parts {
+  bytes tx_hash = 1;
+  repeated bytes input_cells = 2;
+  repeated bytes input_cell_data = 3;
+  repeated bytes witnesses = 4;
+  repeated uint64 inherited_fds = 5;
+  map<uint64, bytes> read_data = 6;
+
+  Syscalls other_syscalls = 7;
+}
+
+message Root {
+  oneof value {
+    Parts parts = 1;
+    Syscalls syscalls = 3;
+  }
+}
