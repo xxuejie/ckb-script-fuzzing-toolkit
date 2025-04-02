@@ -1,11 +1,15 @@
 cur_dir = $(dir $(abspath $(firstword $(MAKEFILE_LIST))))
+TOP := $(cur_dir)
+
+CLANG := $(shell $(TOP)/scripts/find_clang)
+CLANG_FORMAT := $(subst clang,clang-format,$(CLANG))
 
 CKB_C_STDLIB := $(cur_dir)/deps/ckb-c-stdlib
 
 all: fmt flatten
 
 fmt:
-	clang-format-18 --style='{BasedOnStyle: google, SortIncludes: false}' -i \
+	$(CLANG_FORMAT) --style='{BasedOnStyle: google, SortIncludes: false}' -i \
 		mock_syscalls/*.h mock_syscalls/*.cc
 
 flatten:
