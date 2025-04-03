@@ -23,8 +23,10 @@ jobs:
       with:
         submodules: "true"
     - name: Install deps
-      run: sudo apt update && sudo apt install -y clang llvm clang-format protobuf-compiler
+      run: sudo apt update && sudo apt install -y clang llvm clang-format protobuf-compiler pkg-config
     - uses: actions-rust-lang/setup-rust-toolchain@v1
+    - name: fmt
+      run: make fmt && git diff --exit-code
     - name: Clone deps
       run: |
         git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
@@ -35,9 +37,9 @@ jobs:
         cd ci_deps/libprotobuf-mutator
         git checkout dc4ced337a9fb4047e2dc727268fbac55ca82f73
     - name: make
-      run: make CKB_C_STDLIB=ci_deps/ckb-c-stdlib LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator fmt flatten test-build
-    - name: git diff
-      run: git diff --exit-code
+      run: |
+        make CKB_C_STDLIB=ci_deps/ckb-c-stdlib LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
+          gen-proto flatten test-build
 
   macos-build:
 
@@ -48,8 +50,10 @@ jobs:
       with:
         submodules: true
     - name: Install deps
-      run: brew install llvm protobuf
+      run: brew install llvm protobuf pkgconfig
     - uses: actions-rust-lang/setup-rust-toolchain@v1
+    - name: fmt
+      run: make fmt && git diff --exit-code
     - name: Clone deps
       run: |
         git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
@@ -60,6 +64,8 @@ jobs:
         cd ci_deps/libprotobuf-mutator
         git checkout dc4ced337a9fb4047e2dc727268fbac55ca82f73
     - name: make
-      run: make CKB_C_STDLIB=ci_deps/ckb-c-stdlib LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator fmt flatten test-build
-    - name: git diff
-      run: git diff --exit-code
+      run: |
+        make \
+          CKB_C_STDLIB=ci_deps/ckb-c-stdlib \
+          LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
+          gen-proto flatten test-build
