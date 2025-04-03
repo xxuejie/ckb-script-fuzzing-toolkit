@@ -65,6 +65,8 @@ jobs:
       run: |
         export PROTOBUF_PATH=`brew --prefix protobuf@3`
         export PKG_CONFIG_PATH="$PROTOBUF_PATH/lib/pkgconfig"
+        ls $PROTOBUF_PATH/bin
+        $PROTOBUF_PATH/bin/protoc --version
         make \
           PROTOC=$PROTOBUF_PATH/bin/protoc
           CKB_C_STDLIB=ci_deps/ckb-c-stdlib \
