@@ -3,6 +3,7 @@ TOP := $(cur_dir)
 
 CLANG := $(shell $(TOP)/scripts/find_clang)
 CLANG_FORMAT := $(subst clang,clang-format,$(CLANG))
+CLANGXX := $(subst clang,clang++,$(CLANG))
 
 CKB_C_STDLIB := $(cur_dir)/deps/ckb-c-stdlib
 LIBPROTOBUF_MUTATOR := $(cur_dir)/deps/libprotobuf-mutator
@@ -18,9 +19,9 @@ flatten:
 		mock_syscalls $(CKB_C_STDLIB)
 
 test-build:
-	clang++-18 -g -Wall -O3 -c test/test.cc -o test.o \
+	$(CLANGXX) -g -Wall -O3 -c test/test.cc -o test.o \
 		-I mock_syscalls -I $(CKB_C_STDLIB) -I $(LIBPROTOBUF_MUTATOR)
-	clang++-18 -g -Wall -O3 -c test/test.cc -o test_amalgamated.o \
+	$(CLANGXX) -g -Wall -O3 -c test/test.cc -o test_amalgamated.o \
 		-I amalgamated -I $(CKB_C_STDLIB) -I $(LIBPROTOBUF_MUTATOR)
 
 .PHONY: flatten fmt test-build

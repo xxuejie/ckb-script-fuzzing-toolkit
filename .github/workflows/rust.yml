@@ -22,15 +22,15 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: "true"
-    - name: Install llvm
-      run: sudo apt update && sudo apt install -y clang llvm clang-format
+    - name: Install deps
+      run: sudo apt update && sudo apt install -y clang llvm clang-format protobuf-compiler
     - uses: actions-rust-lang/setup-rust-toolchain@v1
     - name: Clone deps
       run: |
         git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
         cd ci_deps/ckb-c-stdlib
         git checkout 7245b6268ef623f204501dc2beb6b3ae7d7b3cf4
-        cd ..
+        cd ../..
         git clone https://github.com/google/libprotobuf-mutator ci_deps/libprotobuf-mutator
         cd ci_deps/libprotobuf-mutator
         git checkout dc4ced337a9fb4047e2dc727268fbac55ca82f73
@@ -47,15 +47,15 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: true
-    - name: Install latest llvm
-      run: brew install llvm
+    - name: Install deps
+      run: brew install llvm protobuf
     - uses: actions-rust-lang/setup-rust-toolchain@v1
     - name: Clone deps
       run: |
         git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
         cd ci_deps/ckb-c-stdlib
         git checkout 7245b6268ef623f204501dc2beb6b3ae7d7b3cf4
-        cd ..
+        cd ../..
         git clone https://github.com/google/libprotobuf-mutator ci_deps/libprotobuf-mutator
         cd ci_deps/libprotobuf-mutator
         git checkout dc4ced337a9fb4047e2dc727268fbac55ca82f73
