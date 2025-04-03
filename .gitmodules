@@ -1,6 +1,3 @@
 [submodule "deps/libprotobuf-mutator"]
 	path = deps/libprotobuf-mutator
 	url = https://github.com/google/libprotobuf-mutator
-[submodule "deps/ckb-c-stdlib"]
-	path = deps/ckb-c-stdlib
-	url = https://github.com/nervosnetwork/ckb-c-stdlib

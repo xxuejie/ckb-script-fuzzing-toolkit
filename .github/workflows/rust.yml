@@ -25,7 +25,12 @@ jobs:
     - name: Install llvm
       run: sudo apt update && sudo apt install -y clang llvm clang-format
     - uses: actions-rust-lang/setup-rust-toolchain@v1
-    - name: make
+    - name: Clone deps
+      run: |
+        git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
+        cd ci_deps/ckb-c-stdlib
+        git checkout 7245b6268ef623f204501dc2beb6b3ae7d7b3cf4
+    - name: make CKB_C_STDLIB=ci_deps/ckb-c-sdlib
       run: make
     - name: git diff
       run: git diff --exit-code
