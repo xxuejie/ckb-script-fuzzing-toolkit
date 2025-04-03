@@ -5568,7 +5568,9 @@ int ckb_pipe(uint64_t out_fds[2]) {
 int ckb_read(uint64_t fd, void* buffer, size_t* length) {
   (void)fd;
 
-  WHEN_SYSCALL_FLAVOR(_ckb_fuzzing_io_data(buffer, length, syscalls, counter));
+  assert(sizeof(size_t) == sizeof(uint64_t));
+  WHEN_SYSCALL_FLAVOR(
+      _ckb_fuzzing_io_data(buffer, (uint64_t*)length, syscalls, counter));
 
   return CKB_FUZZING_UNEXPECTED;
 }
