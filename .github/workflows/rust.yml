@@ -40,6 +40,8 @@ jobs:
       run: |
         make CKB_C_STDLIB=ci_deps/ckb-c-stdlib LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
           gen-proto flatten test-build
+    - name: On ubuntu we can ensure amalgamated file do not change
+      run: git diff --exit-code
 
   macos-build:
 

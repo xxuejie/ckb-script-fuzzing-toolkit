@@ -13,6 +13,9 @@
 #include "file_interface.cc"
 #endif /* CKB_FUZZING_DEFINE_FILENAME_INTERFACE */
 
+/* Extra syscall utilities that can be handy */
+#include "ckb_syscall_utils.h"
+
 /*
  * Actual implementations, macros are provided to tweak single header
  * behaviors. Some like it, but some do not.

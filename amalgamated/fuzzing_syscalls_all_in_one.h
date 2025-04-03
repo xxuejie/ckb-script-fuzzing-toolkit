@@ -2800,6 +2800,444 @@ int main(int argc, char* argv[]) {
 /* End of file_interface.cc */
 #endif /* CKB_FUZZING_DEFINE_FILENAME_INTERFACE */
 
+/* Extra syscall utilities that can be handy */
+/* Start of ckb_syscall_utils.h */
+#ifndef CKB_C_STDLIB_CKB_SYSCALL_UTILS_H_
+#define CKB_C_STDLIB_CKB_SYSCALL_UTILS_H_
+
+#include <string.h>
+
+/* Start of ckb_consts.h */
+#ifndef CKB_C_STDLIB_CKB_CONSTS_H_
+#define CKB_C_STDLIB_CKB_CONSTS_H_
+
+#define SYS_exit 93
+#define SYS_ckb_vm_version 2041
+#define SYS_ckb_current_cycles 2042
+#define SYS_ckb_exec 2043
+#define SYS_ckb_load_transaction 2051
+#define SYS_ckb_load_script 2052
+#define SYS_ckb_load_tx_hash 2061
+#define SYS_ckb_load_script_hash 2062
+#define SYS_ckb_load_cell 2071
+#define SYS_ckb_load_header 2072
+#define SYS_ckb_load_input 2073
+#define SYS_ckb_load_witness 2074
+#define SYS_ckb_load_cell_by_field 2081
+#define SYS_ckb_load_header_by_field 2082
+#define SYS_ckb_load_input_by_field 2083
+#define SYS_ckb_load_cell_data_as_code 2091
+#define SYS_ckb_load_cell_data 2092
+#define SYS_ckb_debug 2177
+#define SYS_ckb_load_block_extension 2104
+#define SYS_ckb_spawn 2601
+#define SYS_ckb_wait 2602
+#define SYS_ckb_process_id 2603
+#define SYS_ckb_pipe 2604
+#define SYS_ckb_write 2605
+#define SYS_ckb_read 2606
+#define SYS_ckb_inherited_fds 2607
+#define SYS_ckb_close 2608
+
+#define CKB_SUCCESS 0
+#define CKB_INDEX_OUT_OF_BOUND 1
+#define CKB_ITEM_MISSING 2
+#define CKB_LENGTH_NOT_ENOUGH 3
+#define CKB_INVALID_DATA 4
+#define CKB_WAIT_FAILURE 5
+#define CKB_INVALID_FD 6
+#define CKB_OTHER_END_CLOSED 7
+#define CKB_MAX_VMS_SPAWNED 8
+#define CKB_MAX_FDS_CREATED 9
+
+#define CKB_SOURCE_INPUT 1
+#define CKB_SOURCE_OUTPUT 2
+#define CKB_SOURCE_CELL_DEP 3
+#define CKB_SOURCE_HEADER_DEP 4
+#define CKB_SOURCE_GROUP_INPUT 0x0100000000000001
+#define CKB_SOURCE_GROUP_OUTPUT 0x0100000000000002
+
+#define CKB_CELL_FIELD_CAPACITY 0
+#define CKB_CELL_FIELD_DATA_HASH 1
+#define CKB_CELL_FIELD_LOCK 2
+#define CKB_CELL_FIELD_LOCK_HASH 3
+#define CKB_CELL_FIELD_TYPE 4
+#define CKB_CELL_FIELD_TYPE_HASH 5
+#define CKB_CELL_FIELD_OCCUPIED_CAPACITY 6
+
+#define CKB_HEADER_FIELD_EPOCH_NUMBER 0
+#define CKB_HEADER_FIELD_EPOCH_START_BLOCK_NUMBER 1
+#define CKB_HEADER_FIELD_EPOCH_LENGTH 2
+
+#define CKB_INPUT_FIELD_OUT_POINT 0
+#define CKB_INPUT_FIELD_SINCE 1
+
+#endif /* CKB_C_STDLIB_CKB_CONSTS_H_ */
+/* End of ckb_consts.h */
+/* Start of ckb_syscall_apis.h */
+#ifndef CKB_C_STDLIB_CKB_SYSCALL_APIS_H_
+#define CKB_C_STDLIB_CKB_SYSCALL_APIS_H_
+
+/*
+ * Syscall related APIs that will be shared and used in all CKB
+ * smart contract environments
+ */
+
+#include <stddef.h>
+#include <stdint.h>
+
+/* Raw APIs */
+
+/* VM version 0 APIs */
+int ckb_exit(int8_t code);
+int ckb_load_tx_hash(void* addr, uint64_t* len, size_t offset);
+int ckb_load_transaction(void* addr, uint64_t* len, size_t offset);
+int ckb_load_script_hash(void* addr, uint64_t* len, size_t offset);
+int ckb_load_script(void* addr, uint64_t* len, size_t offset);
+int ckb_debug(const char* s);
+
+int ckb_load_cell(void* addr, uint64_t* len, size_t offset, size_t index,
+                  size_t source);
+int ckb_load_input(void* addr, uint64_t* len, size_t offset, size_t index,
+                   size_t source);
+int ckb_load_header(void* addr, uint64_t* len, size_t offset, size_t index,
+                    size_t source);
+int ckb_load_witness(void* addr, uint64_t* len, size_t offset, size_t index,
+                     size_t source);
+int ckb_load_cell_by_field(void* addr, uint64_t* len, size_t offset,
+                           size_t index, size_t source, size_t field);
+int ckb_load_header_by_field(void* addr, uint64_t* len, size_t offset,
+                             size_t index, size_t source, size_t field);
+int ckb_load_input_by_field(void* addr, uint64_t* len, size_t offset,
+                            size_t index, size_t source, size_t field);
+int ckb_load_cell_data(void* addr, uint64_t* len, size_t offset, size_t index,
+                       size_t source);
+int ckb_load_cell_data_as_code(void* addr, size_t memory_size,
+                               size_t content_offset, size_t content_size,
+                               size_t index, size_t source);
+
+/* VM version 1 APIs */
+int ckb_vm_version();
+uint64_t ckb_current_cycles();
+int ckb_exec(size_t index, size_t source, size_t place, size_t bounds, int argc,
+             const char* argv[]);
+
+/* VM version 2 APIs */
+typedef struct spawn_args_t {
+  size_t argc;
+  const char** argv;
+  /* Spawned VM process ID */
+  uint64_t* process_id;
+  /* A list of file descriptor, 0 indicates end of array */
+  const uint64_t* inherited_fds;
+} spawn_args_t;
+
+int ckb_spawn(size_t index, size_t source, size_t place, size_t bounds,
+              spawn_args_t* spawn_args);
+
+int ckb_wait(uint64_t pid, int8_t* exit_code);
+
+uint64_t ckb_process_id();
+
+int ckb_pipe(uint64_t fds[2]);
+
+int ckb_read(uint64_t fd, void* buffer, size_t* length);
+
+int ckb_write(uint64_t fd, const void* buffer, size_t* length);
+
+int ckb_inherited_fds(uint64_t* fds, size_t* length);
+
+int ckb_close(uint64_t fd);
+
+int ckb_load_block_extension(void* addr, uint64_t* len, size_t offset,
+                             size_t index, size_t source);
+
+/* Handy utilities */
+int ckb_exec_cell(const uint8_t* code_hash, uint8_t hash_type, uint32_t offset,
+                  uint32_t length, int argc, const char* argv[]);
+int ckb_spawn_cell(const uint8_t* code_hash, uint8_t hash_type, uint32_t offset,
+                   uint32_t length, spawn_args_t* spawn_args);
+int ckb_checked_load_tx_hash(void* addr, uint64_t* len, size_t offset);
+int ckb_checked_load_script_hash(void* addr, uint64_t* len, size_t offset);
+int ckb_checked_load_cell(void* addr, uint64_t* len, size_t offset,
+                          size_t index, size_t source);
+int ckb_checked_load_input(void* addr, uint64_t* len, size_t offset,
+                           size_t index, size_t source);
+int ckb_checked_load_header(void* addr, uint64_t* len, size_t offset,
+                            size_t index, size_t source);
+int ckb_checked_load_witness(void* addr, uint64_t* len, size_t offset,
+                             size_t index, size_t source);
+int ckb_checked_load_script(void* addr, uint64_t* len, size_t offset);
+int ckb_checked_load_transaction(void* addr, uint64_t* len, size_t offset);
+int ckb_checked_load_cell_by_field(void* addr, uint64_t* len, size_t offset,
+                                   size_t index, size_t source, size_t field);
+int ckb_checked_load_header_by_field(void* addr, uint64_t* len, size_t offset,
+                                     size_t index, size_t source, size_t field);
+int ckb_checked_load_input_by_field(void* addr, uint64_t* len, size_t offset,
+                                    size_t index, size_t source, size_t field);
+int ckb_checked_load_cell_data(void* addr, uint64_t* len, size_t offset,
+                               size_t index, size_t source);
+/* load the actual witness for the current type verify group.
+   use this instead of ckb_load_witness if type contract needs args to verify
+   input/output.
+ */
+int ckb_load_actual_type_witness(uint8_t* buf, uint64_t* len, size_t index,
+                                 size_t* type_source);
+/* calculate inputs length */
+int ckb_calculate_inputs_len();
+/*
+ * Look for a dep cell with specific code hash, code_hash should be a buffer
+ * with 32 bytes.
+ */
+int ckb_look_for_dep_with_hash2(const uint8_t* code_hash, uint8_t hash_type,
+                                size_t* index);
+/*
+ * Deprecated, please use ckb_look_for_dep_with_hash2 instead.
+ */
+int ckb_look_for_dep_with_hash(const uint8_t* data_hash, size_t* index);
+
+/*
+ * Those 2 are in fact implemented by ckb_dlfcn.h, which is not a direct
+ * CKB syscall(or simple wrapper on a syscall), but rather a whole dynamic
+ * linking solution. However for compatibility reasons, we are still keeping
+ * those APIs in this file so as not to break existing code.
+ */
+int ckb_dlopen2(const uint8_t* dep_cell_hash, uint8_t hash_type,
+                uint8_t* aligned_addr, size_t aligned_size, void** handle,
+                size_t* consumed_size);
+void* ckb_dlsym(void* handle, const char* symbol);
+
+#endif /* CKB_C_STDLIB_CKB_SYSCALL_APIS_H_ */
+/* End of ckb_syscall_apis.h */
+
+#ifndef CKB_STDLIB_NO_SYSCALL_IMPL
+
+int ckb_checked_load_tx_hash(void* addr, uint64_t* len, size_t offset) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_tx_hash(addr, len, offset);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_script_hash(void* addr, uint64_t* len, size_t offset) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_script_hash(addr, len, offset);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_cell(void* addr, uint64_t* len, size_t offset,
+                          size_t index, size_t source) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_cell(addr, len, offset, index, source);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_input(void* addr, uint64_t* len, size_t offset,
+                           size_t index, size_t source) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_input(addr, len, offset, index, source);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_header(void* addr, uint64_t* len, size_t offset,
+                            size_t index, size_t source) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_header(addr, len, offset, index, source);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_witness(void* addr, uint64_t* len, size_t offset,
+                             size_t index, size_t source) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_witness(addr, len, offset, index, source);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_script(void* addr, uint64_t* len, size_t offset) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_script(addr, len, offset);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_transaction(void* addr, uint64_t* len, size_t offset) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_transaction(addr, len, offset);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_cell_by_field(void* addr, uint64_t* len, size_t offset,
+                                   size_t index, size_t source, size_t field) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_cell_by_field(addr, len, offset, index, source, field);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_header_by_field(void* addr, uint64_t* len, size_t offset,
+                                     size_t index, size_t source,
+                                     size_t field) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_header_by_field(addr, len, offset, index, source, field);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_input_by_field(void* addr, uint64_t* len, size_t offset,
+                                    size_t index, size_t source, size_t field) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_input_by_field(addr, len, offset, index, source, field);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_checked_load_cell_data(void* addr, uint64_t* len, size_t offset,
+                               size_t index, size_t source) {
+  uint64_t old_len = *len;
+  int ret = ckb_load_cell_data(addr, len, offset, index, source);
+  if (ret == CKB_SUCCESS && (*len) > old_len) {
+    ret = CKB_LENGTH_NOT_ENOUGH;
+  }
+  return ret;
+}
+
+int ckb_load_actual_type_witness(uint8_t* buf, uint64_t* len, size_t index,
+                                 size_t* type_source) {
+  *type_source = CKB_SOURCE_GROUP_INPUT;
+  uint64_t tmp_len = 0;
+  if (ckb_load_cell_by_field(NULL, &tmp_len, 0, 0, CKB_SOURCE_GROUP_INPUT,
+                             CKB_CELL_FIELD_CAPACITY) ==
+      CKB_INDEX_OUT_OF_BOUND) {
+    *type_source = CKB_SOURCE_GROUP_OUTPUT;
+  }
+
+  return ckb_checked_load_witness(buf, len, 0, index, *type_source);
+}
+
+int ckb_calculate_inputs_len() {
+  uint64_t len = 0;
+  /* lower bound, at least tx has one input */
+  int lo = 0;
+  /* higher bound */
+  int hi = 4;
+  int ret;
+  /* try to load input until failing to increase lo and hi */
+  while (1) {
+    ret = ckb_load_input_by_field(NULL, &len, 0, hi, CKB_SOURCE_INPUT,
+                                  CKB_INPUT_FIELD_SINCE);
+    if (ret == CKB_SUCCESS) {
+      lo = hi;
+      hi *= 2;
+    } else {
+      break;
+    }
+  }
+
+  /* now we get our lower bound and higher bound,
+   count number of inputs by binary search */
+  int i;
+  while (lo + 1 != hi) {
+    i = (lo + hi) / 2;
+    ret = ckb_load_input_by_field(NULL, &len, 0, i, CKB_SOURCE_INPUT,
+                                  CKB_INPUT_FIELD_SINCE);
+    if (ret == CKB_SUCCESS) {
+      lo = i;
+    } else {
+      hi = i;
+    }
+  }
+  /* now lo is last input index and hi is length of inputs */
+  return hi;
+}
+
+int ckb_look_for_dep_with_hash2(const uint8_t* code_hash, uint8_t hash_type,
+                                size_t* index) {
+  size_t current = 0;
+  size_t field =
+      (hash_type == 1) ? CKB_CELL_FIELD_TYPE_HASH : CKB_CELL_FIELD_DATA_HASH;
+  while (current < SIZE_MAX) {
+    uint64_t len = 32;
+    uint8_t hash[32];
+
+    int ret = ckb_load_cell_by_field(hash, &len, 0, current,
+                                     CKB_SOURCE_CELL_DEP, field);
+    switch (ret) {
+      case CKB_ITEM_MISSING:
+        break;
+      case CKB_SUCCESS:
+        if (memcmp(code_hash, hash, 32) == 0) {
+          /* Found a match */
+          *index = current;
+          return CKB_SUCCESS;
+        }
+        break;
+      default:
+        return CKB_INDEX_OUT_OF_BOUND;
+    }
+    current++;
+  }
+  return CKB_INDEX_OUT_OF_BOUND;
+}
+
+int ckb_look_for_dep_with_hash(const uint8_t* data_hash, size_t* index) {
+  return ckb_look_for_dep_with_hash2(data_hash, 0, index);
+}
+
+int ckb_exec_cell(const uint8_t* code_hash, uint8_t hash_type, uint32_t offset,
+                  uint32_t length, int argc, const char* argv[]) {
+  size_t index = SIZE_MAX;
+  int ret = ckb_look_for_dep_with_hash2(code_hash, hash_type, &index);
+  if (ret != CKB_SUCCESS) {
+    return ret;
+  }
+  size_t bounds = ((size_t)offset << 32) | length;
+  return ckb_exec(index, CKB_SOURCE_CELL_DEP, 0, bounds, argc, argv);
+}
+
+int ckb_spawn_cell(const uint8_t* code_hash, uint8_t hash_type, uint32_t offset,
+                   uint32_t length, spawn_args_t* spawn_args) {
+  size_t index = SIZE_MAX;
+  int ret = ckb_look_for_dep_with_hash2(code_hash, hash_type, &index);
+  if (ret != CKB_SUCCESS) {
+    return ret;
+  }
+  size_t bounds = ((size_t)offset << 32) | length;
+  return ckb_spawn(index, CKB_SOURCE_CELL_DEP, 0, bounds, spawn_args);
+}
+
+#endif /* CKB_STDLIB_NO_SYSCALL_IMPL */
+
+#endif /* CKB_C_STDLIB_CKB_SYSCALL_UTILS_H_ */
+/* End of ckb_syscall_utils.h */
+
 /*
  * Actual implementations, macros are provided to tweak single header
  * behaviors. Some like it, but some do not.
@@ -5011,208 +5449,8 @@ PROTOBUF_NAMESPACE_CLOSE
 #include <string.h>
 #include <time.h>
 
-/* Start of ckb_consts.h */
-#ifndef CKB_C_STDLIB_CKB_CONSTS_H_
-#define CKB_C_STDLIB_CKB_CONSTS_H_
-
-#define SYS_exit 93
-#define SYS_ckb_vm_version 2041
-#define SYS_ckb_current_cycles 2042
-#define SYS_ckb_exec 2043
-#define SYS_ckb_load_transaction 2051
-#define SYS_ckb_load_script 2052
-#define SYS_ckb_load_tx_hash 2061
-#define SYS_ckb_load_script_hash 2062
-#define SYS_ckb_load_cell 2071
-#define SYS_ckb_load_header 2072
-#define SYS_ckb_load_input 2073
-#define SYS_ckb_load_witness 2074
-#define SYS_ckb_load_cell_by_field 2081
-#define SYS_ckb_load_header_by_field 2082
-#define SYS_ckb_load_input_by_field 2083
-#define SYS_ckb_load_cell_data_as_code 2091
-#define SYS_ckb_load_cell_data 2092
-#define SYS_ckb_debug 2177
-#define SYS_ckb_load_block_extension 2104
-#define SYS_ckb_spawn 2601
-#define SYS_ckb_wait 2602
-#define SYS_ckb_process_id 2603
-#define SYS_ckb_pipe 2604
-#define SYS_ckb_write 2605
-#define SYS_ckb_read 2606
-#define SYS_ckb_inherited_fds 2607
-#define SYS_ckb_close 2608
-
-#define CKB_SUCCESS 0
-#define CKB_INDEX_OUT_OF_BOUND 1
-#define CKB_ITEM_MISSING 2
-#define CKB_LENGTH_NOT_ENOUGH 3
-#define CKB_INVALID_DATA 4
-#define CKB_WAIT_FAILURE 5
-#define CKB_INVALID_FD 6
-#define CKB_OTHER_END_CLOSED 7
-#define CKB_MAX_VMS_SPAWNED 8
-#define CKB_MAX_FDS_CREATED 9
-
-#define CKB_SOURCE_INPUT 1
-#define CKB_SOURCE_OUTPUT 2
-#define CKB_SOURCE_CELL_DEP 3
-#define CKB_SOURCE_HEADER_DEP 4
-#define CKB_SOURCE_GROUP_INPUT 0x0100000000000001
-#define CKB_SOURCE_GROUP_OUTPUT 0x0100000000000002
-
-#define CKB_CELL_FIELD_CAPACITY 0
-#define CKB_CELL_FIELD_DATA_HASH 1
-#define CKB_CELL_FIELD_LOCK 2
-#define CKB_CELL_FIELD_LOCK_HASH 3
-#define CKB_CELL_FIELD_TYPE 4
-#define CKB_CELL_FIELD_TYPE_HASH 5
-#define CKB_CELL_FIELD_OCCUPIED_CAPACITY 6
-
-#define CKB_HEADER_FIELD_EPOCH_NUMBER 0
-#define CKB_HEADER_FIELD_EPOCH_START_BLOCK_NUMBER 1
-#define CKB_HEADER_FIELD_EPOCH_LENGTH 2
-
-#define CKB_INPUT_FIELD_OUT_POINT 0
-#define CKB_INPUT_FIELD_SINCE 1
-
-#endif /* CKB_C_STDLIB_CKB_CONSTS_H_ */
-/* End of ckb_consts.h */
-/* Start of ckb_syscall_apis.h */
-#ifndef CKB_C_STDLIB_CKB_SYSCALL_APIS_H_
-#define CKB_C_STDLIB_CKB_SYSCALL_APIS_H_
-
-/*
- * Syscall related APIs that will be shared and used in all CKB
- * smart contract environments
- */
-
-#include <stddef.h>
-#include <stdint.h>
-
-/* Raw APIs */
-
-/* VM version 0 APIs */
-int ckb_exit(int8_t code);
-int ckb_load_tx_hash(void* addr, uint64_t* len, size_t offset);
-int ckb_load_transaction(void* addr, uint64_t* len, size_t offset);
-int ckb_load_script_hash(void* addr, uint64_t* len, size_t offset);
-int ckb_load_script(void* addr, uint64_t* len, size_t offset);
-int ckb_debug(const char* s);
-
-int ckb_load_cell(void* addr, uint64_t* len, size_t offset, size_t index,
-                  size_t source);
-int ckb_load_input(void* addr, uint64_t* len, size_t offset, size_t index,
-                   size_t source);
-int ckb_load_header(void* addr, uint64_t* len, size_t offset, size_t index,
-                    size_t source);
-int ckb_load_witness(void* addr, uint64_t* len, size_t offset, size_t index,
-                     size_t source);
-int ckb_load_cell_by_field(void* addr, uint64_t* len, size_t offset,
-                           size_t index, size_t source, size_t field);
-int ckb_load_header_by_field(void* addr, uint64_t* len, size_t offset,
-                             size_t index, size_t source, size_t field);
-int ckb_load_input_by_field(void* addr, uint64_t* len, size_t offset,
-                            size_t index, size_t source, size_t field);
-int ckb_load_cell_data(void* addr, uint64_t* len, size_t offset, size_t index,
-                       size_t source);
-int ckb_load_cell_data_as_code(void* addr, size_t memory_size,
-                               size_t content_offset, size_t content_size,
-                               size_t index, size_t source);
-
-/* VM version 1 APIs */
-int ckb_vm_version();
-uint64_t ckb_current_cycles();
-int ckb_exec(size_t index, size_t source, size_t place, size_t bounds, int argc,
-             const char* argv[]);
-
-/* VM version 2 APIs */
-typedef struct spawn_args_t {
-  size_t argc;
-  const char** argv;
-  /* Spawned VM process ID */
-  uint64_t* process_id;
-  /* A list of file descriptor, 0 indicates end of array */
-  const uint64_t* inherited_fds;
-} spawn_args_t;
-
-int ckb_spawn(size_t index, size_t source, size_t place, size_t bounds,
-              spawn_args_t* spawn_args);
-
-int ckb_wait(uint64_t pid, int8_t* exit_code);
-
-uint64_t ckb_process_id();
-
-int ckb_pipe(uint64_t fds[2]);
-
-int ckb_read(uint64_t fd, void* buffer, size_t* length);
-
-int ckb_write(uint64_t fd, const void* buffer, size_t* length);
-
-int ckb_inherited_fds(uint64_t* fds, size_t* length);
-
-int ckb_close(uint64_t fd);
-
-int ckb_load_block_extension(void* addr, uint64_t* len, size_t offset,
-                             size_t index, size_t source);
-
-/* Handy utilities */
-int ckb_exec_cell(const uint8_t* code_hash, uint8_t hash_type, uint32_t offset,
-                  uint32_t length, int argc, const char* argv[]);
-int ckb_spawn_cell(const uint8_t* code_hash, uint8_t hash_type, uint32_t offset,
-                   uint32_t length, spawn_args_t* spawn_args);
-int ckb_checked_load_tx_hash(void* addr, uint64_t* len, size_t offset);
-int ckb_checked_load_script_hash(void* addr, uint64_t* len, size_t offset);
-int ckb_checked_load_cell(void* addr, uint64_t* len, size_t offset,
-                          size_t index, size_t source);
-int ckb_checked_load_input(void* addr, uint64_t* len, size_t offset,
-                           size_t index, size_t source);
-int ckb_checked_load_header(void* addr, uint64_t* len, size_t offset,
-                            size_t index, size_t source);
-int ckb_checked_load_witness(void* addr, uint64_t* len, size_t offset,
-                             size_t index, size_t source);
-int ckb_checked_load_script(void* addr, uint64_t* len, size_t offset);
-int ckb_checked_load_transaction(void* addr, uint64_t* len, size_t offset);
-int ckb_checked_load_cell_by_field(void* addr, uint64_t* len, size_t offset,
-                                   size_t index, size_t source, size_t field);
-int ckb_checked_load_header_by_field(void* addr, uint64_t* len, size_t offset,
-                                     size_t index, size_t source, size_t field);
-int ckb_checked_load_input_by_field(void* addr, uint64_t* len, size_t offset,
-                                    size_t index, size_t source, size_t field);
-int ckb_checked_load_cell_data(void* addr, uint64_t* len, size_t offset,
-                               size_t index, size_t source);
-/* load the actual witness for the current type verify group.
-   use this instead of ckb_load_witness if type contract needs args to verify
-   input/output.
- */
-int ckb_load_actual_type_witness(uint8_t* buf, uint64_t* len, size_t index,
-                                 size_t* type_source);
-/* calculate inputs length */
-int ckb_calculate_inputs_len();
-/*
- * Look for a dep cell with specific code hash, code_hash should be a buffer
- * with 32 bytes.
- */
-int ckb_look_for_dep_with_hash2(const uint8_t* code_hash, uint8_t hash_type,
-                                size_t* index);
-/*
- * Deprecated, please use ckb_look_for_dep_with_hash2 instead.
- */
-int ckb_look_for_dep_with_hash(const uint8_t* data_hash, size_t* index);
-
-/*
- * Those 2 are in fact implemented by ckb_dlfcn.h, which is not a direct
- * CKB syscall(or simple wrapper on a syscall), but rather a whole dynamic
- * linking solution. However for compatibility reasons, we are still keeping
- * those APIs in this file so as not to break existing code.
- */
-int ckb_dlopen2(const uint8_t* dep_cell_hash, uint8_t hash_type,
-                uint8_t* aligned_addr, size_t aligned_size, void** handle,
-                size_t* consumed_size);
-void* ckb_dlsym(void* handle, const char* symbol);
-
-#endif /* CKB_C_STDLIB_CKB_SYSCALL_APIS_H_ */
-/* End of ckb_syscall_apis.h */
+/* ckb_consts.h has already been included. */
+/* ckb_syscall_apis.h has already been included. */
 
 typedef enum {
   _CKB_FUZZING_SYSCALL_FLAVOR = 1,
