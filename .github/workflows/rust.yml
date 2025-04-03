@@ -63,9 +63,10 @@ jobs:
         git checkout dc4ced337a9fb4047e2dc727268fbac55ca82f73
     - name: make
       run: |
-        export PKG_CONFIG_PATH="/usr/local/opt/protobuf@3/lib/pkgconfig"
+        export PROTOBUF_PATH=`brew --prefix protobuf@3`
+        export PKG_CONFIG_PATH="$PROTOBUF_PATH/lib/pkgconfig"
         make \
-          PROTOC=/usr/local/opt/protobuf@3/bin/protoc
+          PROTOC=$PROTOBUF_PATH/bin/protoc
           CKB_C_STDLIB=ci_deps/ckb-c-stdlib \
           LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
           gen-proto fmt flatten test-build
