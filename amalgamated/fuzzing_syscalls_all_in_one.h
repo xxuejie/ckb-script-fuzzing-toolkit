@@ -54,8 +54,8 @@
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
-#include <google/protobuf/extension_set.h>   // IWYU pragma: export
-#include <google/protobuf/map.h>             // IWYU pragma: export
+#include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/map.h>  // IWYU pragma: export
 #include <google/protobuf/map_entry.h>
 #include <google/protobuf/map_field_inl.h>
 #include <google/protobuf/unknown_field_set.h>
@@ -72,8 +72,7 @@ PROTOBUF_NAMESPACE_CLOSE
 struct TableStruct_traces_2eproto {
   static const uint32_t offsets[];
 };
-extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable
-    descriptor_table_traces_2eproto;
+extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_traces_2eproto;
 namespace generated {
 namespace traces {
 class Fds;
@@ -87,8 +86,7 @@ struct PartsDefaultTypeInternal;
 extern PartsDefaultTypeInternal _Parts_default_instance_;
 class Parts_ReadDataEntry_DoNotUse;
 struct Parts_ReadDataEntry_DoNotUseDefaultTypeInternal;
-extern Parts_ReadDataEntry_DoNotUseDefaultTypeInternal
-    _Parts_ReadDataEntry_DoNotUse_default_instance_;
+extern Parts_ReadDataEntry_DoNotUseDefaultTypeInternal _Parts_ReadDataEntry_DoNotUse_default_instance_;
 class Root;
 struct RootDefaultTypeInternal;
 extern RootDefaultTypeInternal _Root_default_instance_;
@@ -104,49 +102,29 @@ extern TerminatedDefaultTypeInternal _Terminated_default_instance_;
 }  // namespace traces
 }  // namespace generated
 PROTOBUF_NAMESPACE_OPEN
-template <>
-::generated::traces::Fds* Arena::CreateMaybeMessage<::generated::traces::Fds>(
-    Arena*);
-template <>
-::generated::traces::IoData*
-Arena::CreateMaybeMessage<::generated::traces::IoData>(Arena*);
-template <>
-::generated::traces::Parts*
-Arena::CreateMaybeMessage<::generated::traces::Parts>(Arena*);
-template <>
-::generated::traces::Parts_ReadDataEntry_DoNotUse*
-Arena::CreateMaybeMessage<::generated::traces::Parts_ReadDataEntry_DoNotUse>(
-    Arena*);
-template <>
-::generated::traces::Root* Arena::CreateMaybeMessage<::generated::traces::Root>(
-    Arena*);
-template <>
-::generated::traces::Syscall*
-Arena::CreateMaybeMessage<::generated::traces::Syscall>(Arena*);
-template <>
-::generated::traces::Syscalls*
-Arena::CreateMaybeMessage<::generated::traces::Syscalls>(Arena*);
-template <>
-::generated::traces::Terminated*
-Arena::CreateMaybeMessage<::generated::traces::Terminated>(Arena*);
+template<> ::generated::traces::Fds* Arena::CreateMaybeMessage<::generated::traces::Fds>(Arena*);
+template<> ::generated::traces::IoData* Arena::CreateMaybeMessage<::generated::traces::IoData>(Arena*);
+template<> ::generated::traces::Parts* Arena::CreateMaybeMessage<::generated::traces::Parts>(Arena*);
+template<> ::generated::traces::Parts_ReadDataEntry_DoNotUse* Arena::CreateMaybeMessage<::generated::traces::Parts_ReadDataEntry_DoNotUse>(Arena*);
+template<> ::generated::traces::Root* Arena::CreateMaybeMessage<::generated::traces::Root>(Arena*);
+template<> ::generated::traces::Syscall* Arena::CreateMaybeMessage<::generated::traces::Syscall>(Arena*);
+template<> ::generated::traces::Syscalls* Arena::CreateMaybeMessage<::generated::traces::Syscalls>(Arena*);
+template<> ::generated::traces::Terminated* Arena::CreateMaybeMessage<::generated::traces::Terminated>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace generated {
 namespace traces {
 
 // ===================================================================
 
-class Terminated final
-    : public ::PROTOBUF_NAMESPACE_ID::internal::
-          ZeroFieldsBase /* @@protoc_insertion_point(class_definition:generated.traces.Terminated)
-                          */
-{
+class Terminated final :
+    public ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:generated.traces.Terminated) */ {
  public:
   inline Terminated() : Terminated(nullptr) {}
-  explicit PROTOBUF_CONSTEXPR Terminated(
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR Terminated(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   Terminated(const Terminated& from);
-  Terminated(Terminated&& from) noexcept : Terminated() {
+  Terminated(Terminated&& from) noexcept
+    : Terminated() {
     *this = ::std::move(from);
   }
 
@@ -157,9 +135,9 @@ class Terminated final
   inline Terminated& operator=(Terminated&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
         && GetOwningArena() != nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
     ) {
       InternalSwap(&from);
     } else {
@@ -181,19 +159,23 @@ class Terminated final
     return *internal_default_instance();
   }
   static inline const Terminated* internal_default_instance() {
-    return reinterpret_cast<const Terminated*>(&_Terminated_default_instance_);
+    return reinterpret_cast<const Terminated*>(
+               &_Terminated_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 0;
+  static constexpr int kIndexInFileMessages =
+    0;
 
-  friend void swap(Terminated& a, Terminated& b) { a.Swap(&b); }
+  friend void swap(Terminated& a, Terminated& b) {
+    a.Swap(&b);
+  }
   inline void Swap(Terminated* other) {
     if (other == this) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
         GetOwningArena() == other->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() == other->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
       InternalSwap(other);
     } else {
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
@@ -218,21 +200,20 @@ class Terminated final
   void MergeFrom(const Terminated& from) {
     ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl(*this, from);
   }
+  public:
 
- public:
- private:
+  private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "generated.traces.Terminated";
   }
-
- protected:
+  protected:
   explicit Terminated(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                      bool is_message_owned = false);
+                       bool is_message_owned = false);
+  public:
 
- public:
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* GetClassData() const final;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
   ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
@@ -244,28 +225,27 @@ class Terminated final
  private:
   class _Internal;
 
-  template <typename T>
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  struct Impl_ {};
+  struct Impl_ {
+  };
   friend struct ::TableStruct_traces_2eproto;
 };
 // -------------------------------------------------------------------
 
-class IoData final
-    : public ::PROTOBUF_NAMESPACE_ID::
-          Message /* @@protoc_insertion_point(class_definition:generated.traces.IoData)
-                   */
-{
+class IoData final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:generated.traces.IoData) */ {
  public:
   inline IoData() : IoData(nullptr) {}
   ~IoData() override;
-  explicit PROTOBUF_CONSTEXPR IoData(
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR IoData(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   IoData(const IoData& from);
-  IoData(IoData&& from) noexcept : IoData() { *this = ::std::move(from); }
+  IoData(IoData&& from) noexcept
+    : IoData() {
+    *this = ::std::move(from);
+  }
 
   inline IoData& operator=(const IoData& from) {
     CopyFrom(from);
@@ -274,9 +254,9 @@ class IoData final
   inline IoData& operator=(IoData&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
         && GetOwningArena() != nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
     ) {
       InternalSwap(&from);
     } else {
@@ -298,19 +278,23 @@ class IoData final
     return *internal_default_instance();
   }
   static inline const IoData* internal_default_instance() {
-    return reinterpret_cast<const IoData*>(&_IoData_default_instance_);
+    return reinterpret_cast<const IoData*>(
+               &_IoData_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 1;
+  static constexpr int kIndexInFileMessages =
+    1;
 
-  friend void swap(IoData& a, IoData& b) { a.Swap(&b); }
+  friend void swap(IoData& a, IoData& b) {
+    a.Swap(&b);
+  }
   inline void Swap(IoData* other) {
     if (other == this) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
         GetOwningArena() == other->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() == other->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
       InternalSwap(other);
     } else {
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
@@ -330,44 +314,39 @@ class IoData final
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
   void CopyFrom(const IoData& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const IoData& from) { IoData::MergeImpl(*this, from); }
-
- private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                        const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-
- public:
+  void MergeFrom( const IoData& from) {
+    IoData::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
   size_t ByteSizeLong() const final;
-  const char* _InternalParse(
-      const char* ptr,
-      ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target,
-      ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
- private:
+  private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(IoData* other);
 
- private:
+  private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "generated.traces.IoData";
   }
-
- protected:
+  protected:
   explicit IoData(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                  bool is_message_owned = false);
+                       bool is_message_owned = false);
+  public:
 
- public:
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* GetClassData() const final;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
   ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
@@ -387,30 +366,26 @@ class IoData final
   std::string* mutable_available_data();
   PROTOBUF_NODISCARD std::string* release_available_data();
   void set_allocated_available_data(std::string* available_data);
-
- private:
+  private:
   const std::string& _internal_available_data() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_available_data(
-      const std::string& value);
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_available_data(const std::string& value);
   std::string* _internal_mutable_available_data();
+  public:
 
- public:
   // uint64 additional_length = 2;
   void clear_additional_length();
   uint64_t additional_length() const;
   void set_additional_length(uint64_t value);
-
- private:
+  private:
   uint64_t _internal_additional_length() const;
   void _internal_set_additional_length(uint64_t value);
+  public:
 
- public:
   // @@protoc_insertion_point(class_scope:generated.traces.IoData)
  private:
   class _Internal;
 
-  template <typename T>
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
@@ -418,26 +393,23 @@ class IoData final
     uint64_t additional_length_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
-  union {
-    Impl_ _impl_;
-  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_traces_2eproto;
 };
 // -------------------------------------------------------------------
 
-class Fds final
-    : public ::PROTOBUF_NAMESPACE_ID::
-          Message /* @@protoc_insertion_point(class_definition:generated.traces.Fds)
-                   */
-{
+class Fds final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:generated.traces.Fds) */ {
  public:
   inline Fds() : Fds(nullptr) {}
   ~Fds() override;
-  explicit PROTOBUF_CONSTEXPR Fds(
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR Fds(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   Fds(const Fds& from);
-  Fds(Fds&& from) noexcept : Fds() { *this = ::std::move(from); }
+  Fds(Fds&& from) noexcept
+    : Fds() {
+    *this = ::std::move(from);
+  }
 
   inline Fds& operator=(const Fds& from) {
     CopyFrom(from);
@@ -446,9 +418,9 @@ class Fds final
   inline Fds& operator=(Fds&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
         && GetOwningArena() != nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
     ) {
       InternalSwap(&from);
     } else {
@@ -466,21 +438,27 @@ class Fds final
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const Fds& default_instance() { return *internal_default_instance(); }
-  static inline const Fds* internal_default_instance() {
-    return reinterpret_cast<const Fds*>(&_Fds_default_instance_);
+  static const Fds& default_instance() {
+    return *internal_default_instance();
   }
-  static constexpr int kIndexInFileMessages = 2;
+  static inline const Fds* internal_default_instance() {
+    return reinterpret_cast<const Fds*>(
+               &_Fds_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
 
-  friend void swap(Fds& a, Fds& b) { a.Swap(&b); }
+  friend void swap(Fds& a, Fds& b) {
+    a.Swap(&b);
+  }
   inline void Swap(Fds* other) {
     if (other == this) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
         GetOwningArena() == other->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() == other->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
       InternalSwap(other);
     } else {
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
@@ -500,44 +478,39 @@ class Fds final
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
   void CopyFrom(const Fds& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const Fds& from) { Fds::MergeImpl(*this, from); }
-
- private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                        const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-
- public:
+  void MergeFrom( const Fds& from) {
+    Fds::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
   size_t ByteSizeLong() const final;
-  const char* _InternalParse(
-      const char* ptr,
-      ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target,
-      ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
- private:
+  private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(Fds* other);
 
- private:
+  private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "generated.traces.Fds";
   }
-
- protected:
+  protected:
   explicit Fds(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-               bool is_message_owned = false);
+                       bool is_message_owned = false);
+  public:
 
- public:
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* GetClassData() const final;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
   ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
@@ -550,59 +523,55 @@ class Fds final
   };
   // repeated uint64 fds = 1;
   int fds_size() const;
-
- private:
+  private:
   int _internal_fds_size() const;
-
- public:
+  public:
   void clear_fds();
-
- private:
+  private:
   uint64_t _internal_fds(int index) const;
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>& _internal_fds() const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+      _internal_fds() const;
   void _internal_add_fds(uint64_t value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>* _internal_mutable_fds();
-
- public:
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+      _internal_mutable_fds();
+  public:
   uint64_t fds(int index) const;
   void set_fds(int index, uint64_t value);
   void add_fds(uint64_t value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>& fds() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>* mutable_fds();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+      fds() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+      mutable_fds();
 
   // @@protoc_insertion_point(class_scope:generated.traces.Fds)
  private:
   class _Internal;
 
-  template <typename T>
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t> fds_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t > fds_;
     mutable std::atomic<int> _fds_cached_byte_size_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
-  union {
-    Impl_ _impl_;
-  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_traces_2eproto;
 };
 // -------------------------------------------------------------------
 
-class Syscall final
-    : public ::PROTOBUF_NAMESPACE_ID::
-          Message /* @@protoc_insertion_point(class_definition:generated.traces.Syscall)
-                   */
-{
+class Syscall final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:generated.traces.Syscall) */ {
  public:
   inline Syscall() : Syscall(nullptr) {}
   ~Syscall() override;
-  explicit PROTOBUF_CONSTEXPR Syscall(
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR Syscall(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   Syscall(const Syscall& from);
-  Syscall(Syscall&& from) noexcept : Syscall() { *this = ::std::move(from); }
+  Syscall(Syscall&& from) noexcept
+    : Syscall() {
+    *this = ::std::move(from);
+  }
 
   inline Syscall& operator=(const Syscall& from) {
     CopyFrom(from);
@@ -611,9 +580,9 @@ class Syscall final
   inline Syscall& operator=(Syscall&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
         && GetOwningArena() != nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
     ) {
       InternalSwap(&from);
     } else {
@@ -644,19 +613,23 @@ class Syscall final
   };
 
   static inline const Syscall* internal_default_instance() {
-    return reinterpret_cast<const Syscall*>(&_Syscall_default_instance_);
+    return reinterpret_cast<const Syscall*>(
+               &_Syscall_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 3;
+  static constexpr int kIndexInFileMessages =
+    3;
 
-  friend void swap(Syscall& a, Syscall& b) { a.Swap(&b); }
+  friend void swap(Syscall& a, Syscall& b) {
+    a.Swap(&b);
+  }
   inline void Swap(Syscall* other) {
     if (other == this) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
         GetOwningArena() == other->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() == other->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
       InternalSwap(other);
     } else {
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
@@ -676,44 +649,39 @@ class Syscall final
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
   void CopyFrom(const Syscall& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const Syscall& from) { Syscall::MergeImpl(*this, from); }
-
- private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                        const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-
- public:
+  void MergeFrom( const Syscall& from) {
+    Syscall::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
   size_t ByteSizeLong() const final;
-  const char* _InternalParse(
-      const char* ptr,
-      ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target,
-      ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
- private:
+  private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(Syscall* other);
 
- private:
+  private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "generated.traces.Syscall";
   }
-
- protected:
+  protected:
   explicit Syscall(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                   bool is_message_owned = false);
+                       bool is_message_owned = false);
+  public:
 
- public:
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* GetClassData() const final;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
   ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
@@ -730,98 +698,82 @@ class Syscall final
   };
   // int64 return_with_code = 1;
   bool has_return_with_code() const;
-
- private:
+  private:
   bool _internal_has_return_with_code() const;
-
- public:
+  public:
   void clear_return_with_code();
   int64_t return_with_code() const;
   void set_return_with_code(int64_t value);
-
- private:
+  private:
   int64_t _internal_return_with_code() const;
   void _internal_set_return_with_code(int64_t value);
+  public:
 
- public:
   // uint64 success_output_data = 2;
   bool has_success_output_data() const;
-
- private:
+  private:
   bool _internal_has_success_output_data() const;
-
- public:
+  public:
   void clear_success_output_data();
   uint64_t success_output_data() const;
   void set_success_output_data(uint64_t value);
-
- private:
+  private:
   uint64_t _internal_success_output_data() const;
   void _internal_set_success_output_data(uint64_t value);
+  public:
 
- public:
   // .generated.traces.IoData io_data = 3;
   bool has_io_data() const;
-
- private:
+  private:
   bool _internal_has_io_data() const;
-
- public:
+  public:
   void clear_io_data();
   const ::generated::traces::IoData& io_data() const;
   PROTOBUF_NODISCARD ::generated::traces::IoData* release_io_data();
   ::generated::traces::IoData* mutable_io_data();
   void set_allocated_io_data(::generated::traces::IoData* io_data);
-
- private:
+  private:
   const ::generated::traces::IoData& _internal_io_data() const;
   ::generated::traces::IoData* _internal_mutable_io_data();
-
- public:
-  void unsafe_arena_set_allocated_io_data(::generated::traces::IoData* io_data);
+  public:
+  void unsafe_arena_set_allocated_io_data(
+      ::generated::traces::IoData* io_data);
   ::generated::traces::IoData* unsafe_arena_release_io_data();
 
   // .generated.traces.Terminated terminated = 4;
   bool has_terminated() const;
-
- private:
+  private:
   bool _internal_has_terminated() const;
-
- public:
+  public:
   void clear_terminated();
   const ::generated::traces::Terminated& terminated() const;
   PROTOBUF_NODISCARD ::generated::traces::Terminated* release_terminated();
   ::generated::traces::Terminated* mutable_terminated();
   void set_allocated_terminated(::generated::traces::Terminated* terminated);
-
- private:
+  private:
   const ::generated::traces::Terminated& _internal_terminated() const;
   ::generated::traces::Terminated* _internal_mutable_terminated();
-
- public:
+  public:
   void unsafe_arena_set_allocated_terminated(
       ::generated::traces::Terminated* terminated);
   ::generated::traces::Terminated* unsafe_arena_release_terminated();
 
   // .generated.traces.Fds fds = 5;
   bool has_fds() const;
-
- private:
+  private:
   bool _internal_has_fds() const;
-
- public:
+  public:
   void clear_fds();
   const ::generated::traces::Fds& fds() const;
   PROTOBUF_NODISCARD ::generated::traces::Fds* release_fds();
   ::generated::traces::Fds* mutable_fds();
   void set_allocated_fds(::generated::traces::Fds* fds);
-
- private:
+  private:
   const ::generated::traces::Fds& _internal_fds() const;
   ::generated::traces::Fds* _internal_mutable_fds();
-
- public:
-  void unsafe_arena_set_allocated_fds(::generated::traces::Fds* fds);
+  public:
+  void unsafe_arena_set_allocated_fds(
+      ::generated::traces::Fds* fds);
   ::generated::traces::Fds* unsafe_arena_release_fds();
 
   void clear_value();
@@ -838,14 +790,13 @@ class Syscall final
   inline bool has_value() const;
   inline void clear_has_value();
 
-  template <typename T>
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
     union ValueUnion {
       constexpr ValueUnion() : _constinit_{} {}
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized _constinit_;
+        ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized _constinit_;
       int64_t return_with_code_;
       uint64_t success_output_data_;
       ::generated::traces::IoData* io_data_;
@@ -854,27 +805,25 @@ class Syscall final
     } value_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     uint32_t _oneof_case_[1];
+
   };
-  union {
-    Impl_ _impl_;
-  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_traces_2eproto;
 };
 // -------------------------------------------------------------------
 
-class Syscalls final
-    : public ::PROTOBUF_NAMESPACE_ID::
-          Message /* @@protoc_insertion_point(class_definition:generated.traces.Syscalls)
-                   */
-{
+class Syscalls final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:generated.traces.Syscalls) */ {
  public:
   inline Syscalls() : Syscalls(nullptr) {}
   ~Syscalls() override;
-  explicit PROTOBUF_CONSTEXPR Syscalls(
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR Syscalls(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   Syscalls(const Syscalls& from);
-  Syscalls(Syscalls&& from) noexcept : Syscalls() { *this = ::std::move(from); }
+  Syscalls(Syscalls&& from) noexcept
+    : Syscalls() {
+    *this = ::std::move(from);
+  }
 
   inline Syscalls& operator=(const Syscalls& from) {
     CopyFrom(from);
@@ -883,9 +832,9 @@ class Syscalls final
   inline Syscalls& operator=(Syscalls&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
         && GetOwningArena() != nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
     ) {
       InternalSwap(&from);
     } else {
@@ -907,19 +856,23 @@ class Syscalls final
     return *internal_default_instance();
   }
   static inline const Syscalls* internal_default_instance() {
-    return reinterpret_cast<const Syscalls*>(&_Syscalls_default_instance_);
+    return reinterpret_cast<const Syscalls*>(
+               &_Syscalls_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 4;
+  static constexpr int kIndexInFileMessages =
+    4;
 
-  friend void swap(Syscalls& a, Syscalls& b) { a.Swap(&b); }
+  friend void swap(Syscalls& a, Syscalls& b) {
+    a.Swap(&b);
+  }
   inline void Swap(Syscalls* other) {
     if (other == this) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
         GetOwningArena() == other->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() == other->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
       InternalSwap(other);
     } else {
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
@@ -939,44 +892,39 @@ class Syscalls final
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
   void CopyFrom(const Syscalls& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const Syscalls& from) { Syscalls::MergeImpl(*this, from); }
-
- private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                        const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-
- public:
+  void MergeFrom( const Syscalls& from) {
+    Syscalls::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
   size_t ByteSizeLong() const final;
-  const char* _InternalParse(
-      const char* ptr,
-      ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target,
-      ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
- private:
+  private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(Syscalls* other);
 
- private:
+  private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "generated.traces.Syscalls";
   }
-
- protected:
+  protected:
   explicit Syscalls(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                    bool is_message_owned = false);
+                       bool is_message_owned = false);
+  public:
 
- public:
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* GetClassData() const final;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
   ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
@@ -990,33 +938,27 @@ class Syscalls final
   };
   // repeated .generated.traces.Syscall syscalls = 1;
   int syscalls_size() const;
-
- private:
+  private:
   int _internal_syscalls_size() const;
-
- public:
+  public:
   void clear_syscalls();
   ::generated::traces::Syscall* mutable_syscalls(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::generated::traces::Syscall>*
-  mutable_syscalls();
-
- private:
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::generated::traces::Syscall >*
+      mutable_syscalls();
+  private:
   const ::generated::traces::Syscall& _internal_syscalls(int index) const;
   ::generated::traces::Syscall* _internal_add_syscalls();
-
- public:
+  public:
   const ::generated::traces::Syscall& syscalls(int index) const;
   ::generated::traces::Syscall* add_syscalls();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::generated::traces::Syscall>&
-  syscalls() const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::generated::traces::Syscall >&
+      syscalls() const;
 
   // repeated bytes args = 2;
   int args_size() const;
-
- private:
+  private:
   int _internal_args_size() const;
-
- public:
+  public:
   void clear_args();
   const std::string& args(int index) const;
   std::string* mutable_args(int index);
@@ -1031,53 +973,43 @@ class Syscalls final
   void add_args(const void* value, size_t size);
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& args() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_args();
-
- private:
+  private:
   const std::string& _internal_args(int index) const;
   std::string* _internal_add_args();
+  public:
 
- public:
   // @@protoc_insertion_point(class_scope:generated.traces.Syscalls)
  private:
   class _Internal;
 
-  template <typename T>
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::generated::traces::Syscall>
-        syscalls_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::generated::traces::Syscall > syscalls_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> args_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
-  union {
-    Impl_ _impl_;
-  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_traces_2eproto;
 };
 // -------------------------------------------------------------------
 
-class Parts_ReadDataEntry_DoNotUse
-    : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<
-          Parts_ReadDataEntry_DoNotUse, uint64_t, std::string,
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BYTES> {
- public:
-  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<
-      Parts_ReadDataEntry_DoNotUse, uint64_t, std::string,
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BYTES>
-      SuperType;
+class Parts_ReadDataEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Parts_ReadDataEntry_DoNotUse, 
+    uint64_t, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BYTES> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<Parts_ReadDataEntry_DoNotUse, 
+    uint64_t, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BYTES> SuperType;
   Parts_ReadDataEntry_DoNotUse();
   explicit PROTOBUF_CONSTEXPR Parts_ReadDataEntry_DoNotUse(
       ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
   explicit Parts_ReadDataEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
   void MergeFrom(const Parts_ReadDataEntry_DoNotUse& other);
-  static const Parts_ReadDataEntry_DoNotUse* internal_default_instance() {
-    return reinterpret_cast<const Parts_ReadDataEntry_DoNotUse*>(
-        &_Parts_ReadDataEntry_DoNotUse_default_instance_);
-  }
+  static const Parts_ReadDataEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Parts_ReadDataEntry_DoNotUse*>(&_Parts_ReadDataEntry_DoNotUse_default_instance_); }
   static bool ValidateKey(void*) { return true; }
   static bool ValidateValue(void*) { return true; }
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
@@ -1087,19 +1019,18 @@ class Parts_ReadDataEntry_DoNotUse
 
 // -------------------------------------------------------------------
 
-class Parts final
-    : public ::PROTOBUF_NAMESPACE_ID::
-          Message /* @@protoc_insertion_point(class_definition:generated.traces.Parts)
-                   */
-{
+class Parts final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:generated.traces.Parts) */ {
  public:
   inline Parts() : Parts(nullptr) {}
   ~Parts() override;
-  explicit PROTOBUF_CONSTEXPR Parts(
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR Parts(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   Parts(const Parts& from);
-  Parts(Parts&& from) noexcept : Parts() { *this = ::std::move(from); }
+  Parts(Parts&& from) noexcept
+    : Parts() {
+    *this = ::std::move(from);
+  }
 
   inline Parts& operator=(const Parts& from) {
     CopyFrom(from);
@@ -1108,9 +1039,9 @@ class Parts final
   inline Parts& operator=(Parts&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
         && GetOwningArena() != nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
     ) {
       InternalSwap(&from);
     } else {
@@ -1132,19 +1063,23 @@ class Parts final
     return *internal_default_instance();
   }
   static inline const Parts* internal_default_instance() {
-    return reinterpret_cast<const Parts*>(&_Parts_default_instance_);
+    return reinterpret_cast<const Parts*>(
+               &_Parts_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 6;
+  static constexpr int kIndexInFileMessages =
+    6;
 
-  friend void swap(Parts& a, Parts& b) { a.Swap(&b); }
+  friend void swap(Parts& a, Parts& b) {
+    a.Swap(&b);
+  }
   inline void Swap(Parts* other) {
     if (other == this) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
         GetOwningArena() == other->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() == other->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
       InternalSwap(other);
     } else {
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
@@ -1164,51 +1099,46 @@ class Parts final
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
   void CopyFrom(const Parts& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const Parts& from) { Parts::MergeImpl(*this, from); }
-
- private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                        const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-
- public:
+  void MergeFrom( const Parts& from) {
+    Parts::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
   size_t ByteSizeLong() const final;
-  const char* _InternalParse(
-      const char* ptr,
-      ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target,
-      ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
- private:
+  private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(Parts* other);
 
- private:
+  private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "generated.traces.Parts";
   }
-
- protected:
+  protected:
   explicit Parts(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                 bool is_message_owned = false);
-
- private:
+                       bool is_message_owned = false);
+  private:
   static void ArenaDtor(void* object);
+  public:
 
- public:
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* GetClassData() const final;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
   ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
   // nested types ----------------------------------------------------
+
 
   // accessors -------------------------------------------------------
 
@@ -1223,11 +1153,9 @@ class Parts final
   };
   // repeated bytes input_cells = 2;
   int input_cells_size() const;
-
- private:
+  private:
   int _internal_input_cells_size() const;
-
- public:
+  public:
   void clear_input_cells();
   const std::string& input_cells(int index) const;
   std::string* mutable_input_cells(int index);
@@ -1240,22 +1168,18 @@ class Parts final
   void add_input_cells(std::string&& value);
   void add_input_cells(const char* value);
   void add_input_cells(const void* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& input_cells()
-      const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& input_cells() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_input_cells();
-
- private:
+  private:
   const std::string& _internal_input_cells(int index) const;
   std::string* _internal_add_input_cells();
+  public:
 
- public:
   // repeated bytes input_cell_data = 3;
   int input_cell_data_size() const;
-
- private:
+  private:
   int _internal_input_cell_data_size() const;
-
- public:
+  public:
   void clear_input_cell_data();
   const std::string& input_cell_data(int index) const;
   std::string* mutable_input_cell_data(int index);
@@ -1268,23 +1192,18 @@ class Parts final
   void add_input_cell_data(std::string&& value);
   void add_input_cell_data(const char* value);
   void add_input_cell_data(const void* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
-  input_cell_data() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
-  mutable_input_cell_data();
-
- private:
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& input_cell_data() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_input_cell_data();
+  private:
   const std::string& _internal_input_cell_data(int index) const;
   std::string* _internal_add_input_cell_data();
+  public:
 
- public:
   // repeated bytes witnesses = 4;
   int witnesses_size() const;
-
- private:
+  private:
   int _internal_witnesses_size() const;
-
- public:
+  public:
   void clear_witnesses();
   const std::string& witnesses(int index) const;
   std::string* mutable_witnesses(int index);
@@ -1297,57 +1216,51 @@ class Parts final
   void add_witnesses(std::string&& value);
   void add_witnesses(const char* value);
   void add_witnesses(const void* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& witnesses()
-      const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& witnesses() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_witnesses();
-
- private:
+  private:
   const std::string& _internal_witnesses(int index) const;
   std::string* _internal_add_witnesses();
+  public:
 
- public:
   // repeated uint64 inherited_fds = 5;
   int inherited_fds_size() const;
-
- private:
+  private:
   int _internal_inherited_fds_size() const;
-
- public:
+  public:
   void clear_inherited_fds();
-
- private:
+  private:
   uint64_t _internal_inherited_fds(int index) const;
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>&
-  _internal_inherited_fds() const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+      _internal_inherited_fds() const;
   void _internal_add_inherited_fds(uint64_t value);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>*
-  _internal_mutable_inherited_fds();
-
- public:
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+      _internal_mutable_inherited_fds();
+  public:
   uint64_t inherited_fds(int index) const;
   void set_inherited_fds(int index, uint64_t value);
   void add_inherited_fds(uint64_t value);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>& inherited_fds() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>* mutable_inherited_fds();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+      inherited_fds() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+      mutable_inherited_fds();
 
   // map<uint64, bytes> read_data = 6;
   int read_data_size() const;
-
- private:
+  private:
   int _internal_read_data_size() const;
-
- public:
+  public:
   void clear_read_data();
-
- private:
-  const ::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>&
-  _internal_read_data() const;
-  ::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>*
-  _internal_mutable_read_data();
-
- public:
-  const ::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>& read_data() const;
-  ::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>* mutable_read_data();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >&
+      _internal_read_data() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >*
+      _internal_mutable_read_data();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >&
+      read_data() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >*
+      mutable_read_data();
 
   // bytes tx_hash = 1;
   void clear_tx_hash();
@@ -1357,33 +1270,26 @@ class Parts final
   std::string* mutable_tx_hash();
   PROTOBUF_NODISCARD std::string* release_tx_hash();
   void set_allocated_tx_hash(std::string* tx_hash);
-
- private:
+  private:
   const std::string& _internal_tx_hash() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_tx_hash(
-      const std::string& value);
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_tx_hash(const std::string& value);
   std::string* _internal_mutable_tx_hash();
+  public:
 
- public:
   // .generated.traces.Syscalls other_syscalls = 7;
   bool has_other_syscalls() const;
-
- private:
+  private:
   bool _internal_has_other_syscalls() const;
-
- public:
+  public:
   void clear_other_syscalls();
   const ::generated::traces::Syscalls& other_syscalls() const;
   PROTOBUF_NODISCARD ::generated::traces::Syscalls* release_other_syscalls();
   ::generated::traces::Syscalls* mutable_other_syscalls();
-  void set_allocated_other_syscalls(
-      ::generated::traces::Syscalls* other_syscalls);
-
- private:
+  void set_allocated_other_syscalls(::generated::traces::Syscalls* other_syscalls);
+  private:
   const ::generated::traces::Syscalls& _internal_other_syscalls() const;
   ::generated::traces::Syscalls* _internal_mutable_other_syscalls();
-
- public:
+  public:
   void unsafe_arena_set_allocated_other_syscalls(
       ::generated::traces::Syscalls* other_syscalls);
   ::generated::traces::Syscalls* unsafe_arena_release_other_syscalls();
@@ -1392,45 +1298,41 @@ class Parts final
  private:
   class _Internal;
 
-  template <typename T>
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> input_cells_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> input_cell_data_;
     ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> witnesses_;
-    ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t> inherited_fds_;
+    ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t > inherited_fds_;
     mutable std::atomic<int> _inherited_fds_cached_byte_size_;
     ::PROTOBUF_NAMESPACE_ID::internal::MapField<
-        Parts_ReadDataEntry_DoNotUse, uint64_t, std::string,
+        Parts_ReadDataEntry_DoNotUse,
+        uint64_t, std::string,
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT64,
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BYTES>
-        read_data_;
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BYTES> read_data_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr tx_hash_;
     ::generated::traces::Syscalls* other_syscalls_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
-  union {
-    Impl_ _impl_;
-  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_traces_2eproto;
 };
 // -------------------------------------------------------------------
 
-class Root final
-    : public ::PROTOBUF_NAMESPACE_ID::
-          Message /* @@protoc_insertion_point(class_definition:generated.traces.Root)
-                   */
-{
+class Root final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:generated.traces.Root) */ {
  public:
   inline Root() : Root(nullptr) {}
   ~Root() override;
-  explicit PROTOBUF_CONSTEXPR Root(
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR Root(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
   Root(const Root& from);
-  Root(Root&& from) noexcept : Root() { *this = ::std::move(from); }
+  Root(Root&& from) noexcept
+    : Root() {
+    *this = ::std::move(from);
+  }
 
   inline Root& operator=(const Root& from) {
     CopyFrom(from);
@@ -1439,9 +1341,9 @@ class Root final
   inline Root& operator=(Root&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
         && GetOwningArena() != nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
     ) {
       InternalSwap(&from);
     } else {
@@ -1459,7 +1361,9 @@ class Root final
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const Root& default_instance() { return *internal_default_instance(); }
+  static const Root& default_instance() {
+    return *internal_default_instance();
+  }
   enum ValueCase {
     kParts = 1,
     kSyscalls = 3,
@@ -1467,19 +1371,23 @@ class Root final
   };
 
   static inline const Root* internal_default_instance() {
-    return reinterpret_cast<const Root*>(&_Root_default_instance_);
+    return reinterpret_cast<const Root*>(
+               &_Root_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 7;
+  static constexpr int kIndexInFileMessages =
+    7;
 
-  friend void swap(Root& a, Root& b) { a.Swap(&b); }
+  friend void swap(Root& a, Root& b) {
+    a.Swap(&b);
+  }
   inline void Swap(Root* other) {
     if (other == this) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
         GetOwningArena() == other->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() == other->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
       InternalSwap(other);
     } else {
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
@@ -1499,44 +1407,39 @@ class Root final
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
   void CopyFrom(const Root& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom(const Root& from) { Root::MergeImpl(*this, from); }
-
- private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                        const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-
- public:
+  void MergeFrom( const Root& from) {
+    Root::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
   PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final;
 
   size_t ByteSizeLong() const final;
-  const char* _InternalParse(
-      const char* ptr,
-      ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
   uint8_t* _InternalSerialize(
-      uint8_t* target,
-      ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
   int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
- private:
+  private:
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
   void InternalSwap(Root* other);
 
- private:
+  private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
     return "generated.traces.Root";
   }
-
- protected:
+  protected:
   explicit Root(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                bool is_message_owned = false);
+                       bool is_message_owned = false);
+  public:
 
- public:
   static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* GetClassData() const final;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
   ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
 
@@ -1550,43 +1453,36 @@ class Root final
   };
   // .generated.traces.Parts parts = 1;
   bool has_parts() const;
-
- private:
+  private:
   bool _internal_has_parts() const;
-
- public:
+  public:
   void clear_parts();
   const ::generated::traces::Parts& parts() const;
   PROTOBUF_NODISCARD ::generated::traces::Parts* release_parts();
   ::generated::traces::Parts* mutable_parts();
   void set_allocated_parts(::generated::traces::Parts* parts);
-
- private:
+  private:
   const ::generated::traces::Parts& _internal_parts() const;
   ::generated::traces::Parts* _internal_mutable_parts();
-
- public:
-  void unsafe_arena_set_allocated_parts(::generated::traces::Parts* parts);
+  public:
+  void unsafe_arena_set_allocated_parts(
+      ::generated::traces::Parts* parts);
   ::generated::traces::Parts* unsafe_arena_release_parts();
 
   // .generated.traces.Syscalls syscalls = 3;
   bool has_syscalls() const;
-
- private:
+  private:
   bool _internal_has_syscalls() const;
-
- public:
+  public:
   void clear_syscalls();
   const ::generated::traces::Syscalls& syscalls() const;
   PROTOBUF_NODISCARD ::generated::traces::Syscalls* release_syscalls();
   ::generated::traces::Syscalls* mutable_syscalls();
   void set_allocated_syscalls(::generated::traces::Syscalls* syscalls);
-
- private:
+  private:
   const ::generated::traces::Syscalls& _internal_syscalls() const;
   ::generated::traces::Syscalls* _internal_mutable_syscalls();
-
- public:
+  public:
   void unsafe_arena_set_allocated_syscalls(
       ::generated::traces::Syscalls* syscalls);
   ::generated::traces::Syscalls* unsafe_arena_release_syscalls();
@@ -1602,32 +1498,31 @@ class Root final
   inline bool has_value() const;
   inline void clear_has_value();
 
-  template <typename T>
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
     union ValueUnion {
       constexpr ValueUnion() : _constinit_{} {}
-      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized _constinit_;
+        ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized _constinit_;
       ::generated::traces::Parts* parts_;
       ::generated::traces::Syscalls* syscalls_;
     } value_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     uint32_t _oneof_case_[1];
+
   };
-  union {
-    Impl_ _impl_;
-  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_traces_2eproto;
 };
 // ===================================================================
 
+
 // ===================================================================
 
 #ifdef __GNUC__
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
 // Terminated
 
@@ -1644,10 +1539,10 @@ inline const std::string& IoData::available_data() const {
   return _internal_available_data();
 }
 template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE void IoData::set_available_data(ArgT0&& arg0,
-                                                              ArgT... args) {
-  _impl_.available_data_.SetBytes(static_cast<ArgT0&&>(arg0), args...,
-                                  GetArenaForAllocation());
+inline PROTOBUF_ALWAYS_INLINE
+void IoData::set_available_data(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.available_data_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:generated.traces.IoData.available_data)
 }
 inline std::string* IoData::mutable_available_data() {
@@ -1659,9 +1554,11 @@ inline const std::string& IoData::_internal_available_data() const {
   return _impl_.available_data_.Get();
 }
 inline void IoData::_internal_set_available_data(const std::string& value) {
+  
   _impl_.available_data_.Set(value, GetArenaForAllocation());
 }
 inline std::string* IoData::_internal_mutable_available_data() {
+  
   return _impl_.available_data_.Mutable(GetArenaForAllocation());
 }
 inline std::string* IoData::release_available_data() {
@@ -1670,14 +1567,16 @@ inline std::string* IoData::release_available_data() {
 }
 inline void IoData::set_allocated_available_data(std::string* available_data) {
   if (available_data != nullptr) {
+    
   } else {
+    
   }
   _impl_.available_data_.SetAllocated(available_data, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
   if (_impl_.available_data_.IsDefault()) {
     _impl_.available_data_.Set("", GetArenaForAllocation());
   }
-#endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:generated.traces.IoData.available_data)
 }
 
@@ -1693,6 +1592,7 @@ inline uint64_t IoData::additional_length() const {
   return _internal_additional_length();
 }
 inline void IoData::_internal_set_additional_length(uint64_t value) {
+  
   _impl_.additional_length_ = value;
 }
 inline void IoData::set_additional_length(uint64_t value) {
@@ -1705,9 +1605,15 @@ inline void IoData::set_additional_length(uint64_t value) {
 // Fds
 
 // repeated uint64 fds = 1;
-inline int Fds::_internal_fds_size() const { return _impl_.fds_.size(); }
-inline int Fds::fds_size() const { return _internal_fds_size(); }
-inline void Fds::clear_fds() { _impl_.fds_.Clear(); }
+inline int Fds::_internal_fds_size() const {
+  return _impl_.fds_.size();
+}
+inline int Fds::fds_size() const {
+  return _internal_fds_size();
+}
+inline void Fds::clear_fds() {
+  _impl_.fds_.Clear();
+}
 inline uint64_t Fds::_internal_fds(int index) const {
   return _impl_.fds_.Get(index);
 }
@@ -1719,25 +1625,28 @@ inline void Fds::set_fds(int index, uint64_t value) {
   _impl_.fds_.Set(index, value);
   // @@protoc_insertion_point(field_set:generated.traces.Fds.fds)
 }
-inline void Fds::_internal_add_fds(uint64_t value) { _impl_.fds_.Add(value); }
+inline void Fds::_internal_add_fds(uint64_t value) {
+  _impl_.fds_.Add(value);
+}
 inline void Fds::add_fds(uint64_t value) {
   _internal_add_fds(value);
   // @@protoc_insertion_point(field_add:generated.traces.Fds.fds)
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
 Fds::_internal_fds() const {
   return _impl_.fds_;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>& Fds::fds()
-    const {
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
+Fds::fds() const {
   // @@protoc_insertion_point(field_list:generated.traces.Fds.fds)
   return _internal_fds();
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
 Fds::_internal_mutable_fds() {
   return &_impl_.fds_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>* Fds::mutable_fds() {
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
+Fds::mutable_fds() {
   // @@protoc_insertion_point(field_mutable_list:generated.traces.Fds.fds)
   return _internal_mutable_fds();
 }
@@ -1826,8 +1735,12 @@ inline void Syscall::set_success_output_data(uint64_t value) {
 inline bool Syscall::_internal_has_io_data() const {
   return value_case() == kIoData;
 }
-inline bool Syscall::has_io_data() const { return _internal_has_io_data(); }
-inline void Syscall::set_has_io_data() { _impl_._oneof_case_[0] = kIoData; }
+inline bool Syscall::has_io_data() const {
+  return _internal_has_io_data();
+}
+inline void Syscall::set_has_io_data() {
+  _impl_._oneof_case_[0] = kIoData;
+}
 inline void Syscall::clear_io_data() {
   if (_internal_has_io_data()) {
     if (GetArenaForAllocation() == nullptr) {
@@ -1852,9 +1765,8 @@ inline ::generated::traces::IoData* Syscall::release_io_data() {
 }
 inline const ::generated::traces::IoData& Syscall::_internal_io_data() const {
   return _internal_has_io_data()
-             ? *_impl_.value_.io_data_
-             : reinterpret_cast<::generated::traces::IoData&>(
-                   ::generated::traces::_IoData_default_instance_);
+      ? *_impl_.value_.io_data_
+      : reinterpret_cast< ::generated::traces::IoData&>(::generated::traces::_IoData_default_instance_);
 }
 inline const ::generated::traces::IoData& Syscall::io_data() const {
   // @@protoc_insertion_point(field_get:generated.traces.Syscall.io_data)
@@ -1871,8 +1783,7 @@ inline ::generated::traces::IoData* Syscall::unsafe_arena_release_io_data() {
     return nullptr;
   }
 }
-inline void Syscall::unsafe_arena_set_allocated_io_data(
-    ::generated::traces::IoData* io_data) {
+inline void Syscall::unsafe_arena_set_allocated_io_data(::generated::traces::IoData* io_data) {
   clear_value();
   if (io_data) {
     set_has_io_data();
@@ -1884,8 +1795,7 @@ inline ::generated::traces::IoData* Syscall::_internal_mutable_io_data() {
   if (!_internal_has_io_data()) {
     clear_value();
     set_has_io_data();
-    _impl_.value_.io_data_ = CreateMaybeMessage<::generated::traces::IoData>(
-        GetArenaForAllocation());
+    _impl_.value_.io_data_ = CreateMaybeMessage< ::generated::traces::IoData >(GetArenaForAllocation());
   }
   return _impl_.value_.io_data_;
 }
@@ -1927,19 +1837,16 @@ inline ::generated::traces::Terminated* Syscall::release_terminated() {
     return nullptr;
   }
 }
-inline const ::generated::traces::Terminated& Syscall::_internal_terminated()
-    const {
+inline const ::generated::traces::Terminated& Syscall::_internal_terminated() const {
   return _internal_has_terminated()
-             ? *_impl_.value_.terminated_
-             : reinterpret_cast<::generated::traces::Terminated&>(
-                   ::generated::traces::_Terminated_default_instance_);
+      ? *_impl_.value_.terminated_
+      : reinterpret_cast< ::generated::traces::Terminated&>(::generated::traces::_Terminated_default_instance_);
 }
 inline const ::generated::traces::Terminated& Syscall::terminated() const {
   // @@protoc_insertion_point(field_get:generated.traces.Syscall.terminated)
   return _internal_terminated();
 }
-inline ::generated::traces::Terminated*
-Syscall::unsafe_arena_release_terminated() {
+inline ::generated::traces::Terminated* Syscall::unsafe_arena_release_terminated() {
   // @@protoc_insertion_point(field_unsafe_arena_release:generated.traces.Syscall.terminated)
   if (_internal_has_terminated()) {
     clear_has_value();
@@ -1950,8 +1857,7 @@ Syscall::unsafe_arena_release_terminated() {
     return nullptr;
   }
 }
-inline void Syscall::unsafe_arena_set_allocated_terminated(
-    ::generated::traces::Terminated* terminated) {
+inline void Syscall::unsafe_arena_set_allocated_terminated(::generated::traces::Terminated* terminated) {
   clear_value();
   if (terminated) {
     set_has_terminated();
@@ -1959,14 +1865,11 @@ inline void Syscall::unsafe_arena_set_allocated_terminated(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:generated.traces.Syscall.terminated)
 }
-inline ::generated::traces::Terminated*
-Syscall::_internal_mutable_terminated() {
+inline ::generated::traces::Terminated* Syscall::_internal_mutable_terminated() {
   if (!_internal_has_terminated()) {
     clear_value();
     set_has_terminated();
-    _impl_.value_.terminated_ =
-        CreateMaybeMessage<::generated::traces::Terminated>(
-            GetArenaForAllocation());
+    _impl_.value_.terminated_ = CreateMaybeMessage< ::generated::traces::Terminated >(GetArenaForAllocation());
   }
   return _impl_.value_.terminated_;
 }
@@ -1977,9 +1880,15 @@ inline ::generated::traces::Terminated* Syscall::mutable_terminated() {
 }
 
 // .generated.traces.Fds fds = 5;
-inline bool Syscall::_internal_has_fds() const { return value_case() == kFds; }
-inline bool Syscall::has_fds() const { return _internal_has_fds(); }
-inline void Syscall::set_has_fds() { _impl_._oneof_case_[0] = kFds; }
+inline bool Syscall::_internal_has_fds() const {
+  return value_case() == kFds;
+}
+inline bool Syscall::has_fds() const {
+  return _internal_has_fds();
+}
+inline void Syscall::set_has_fds() {
+  _impl_._oneof_case_[0] = kFds;
+}
 inline void Syscall::clear_fds() {
   if (_internal_has_fds()) {
     if (GetArenaForAllocation() == nullptr) {
@@ -2003,9 +1912,9 @@ inline ::generated::traces::Fds* Syscall::release_fds() {
   }
 }
 inline const ::generated::traces::Fds& Syscall::_internal_fds() const {
-  return _internal_has_fds() ? *_impl_.value_.fds_
-                             : reinterpret_cast<::generated::traces::Fds&>(
-                                   ::generated::traces::_Fds_default_instance_);
+  return _internal_has_fds()
+      ? *_impl_.value_.fds_
+      : reinterpret_cast< ::generated::traces::Fds&>(::generated::traces::_Fds_default_instance_);
 }
 inline const ::generated::traces::Fds& Syscall::fds() const {
   // @@protoc_insertion_point(field_get:generated.traces.Syscall.fds)
@@ -2022,8 +1931,7 @@ inline ::generated::traces::Fds* Syscall::unsafe_arena_release_fds() {
     return nullptr;
   }
 }
-inline void Syscall::unsafe_arena_set_allocated_fds(
-    ::generated::traces::Fds* fds) {
+inline void Syscall::unsafe_arena_set_allocated_fds(::generated::traces::Fds* fds) {
   clear_value();
   if (fds) {
     set_has_fds();
@@ -2035,8 +1943,7 @@ inline ::generated::traces::Fds* Syscall::_internal_mutable_fds() {
   if (!_internal_has_fds()) {
     clear_value();
     set_has_fds();
-    _impl_.value_.fds_ =
-        CreateMaybeMessage<::generated::traces::Fds>(GetArenaForAllocation());
+    _impl_.value_.fds_ = CreateMaybeMessage< ::generated::traces::Fds >(GetArenaForAllocation());
   }
   return _impl_.value_.fds_;
 }
@@ -2046,7 +1953,9 @@ inline ::generated::traces::Fds* Syscall::mutable_fds() {
   return _msg;
 }
 
-inline bool Syscall::has_value() const { return value_case() != VALUE_NOT_SET; }
+inline bool Syscall::has_value() const {
+  return value_case() != VALUE_NOT_SET;
+}
 inline void Syscall::clear_has_value() {
   _impl_._oneof_case_[0] = VALUE_NOT_SET;
 }
@@ -2061,19 +1970,22 @@ inline Syscall::ValueCase Syscall::value_case() const {
 inline int Syscalls::_internal_syscalls_size() const {
   return _impl_.syscalls_.size();
 }
-inline int Syscalls::syscalls_size() const { return _internal_syscalls_size(); }
-inline void Syscalls::clear_syscalls() { _impl_.syscalls_.Clear(); }
+inline int Syscalls::syscalls_size() const {
+  return _internal_syscalls_size();
+}
+inline void Syscalls::clear_syscalls() {
+  _impl_.syscalls_.Clear();
+}
 inline ::generated::traces::Syscall* Syscalls::mutable_syscalls(int index) {
   // @@protoc_insertion_point(field_mutable:generated.traces.Syscalls.syscalls)
   return _impl_.syscalls_.Mutable(index);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<::generated::traces::Syscall>*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::generated::traces::Syscall >*
 Syscalls::mutable_syscalls() {
   // @@protoc_insertion_point(field_mutable_list:generated.traces.Syscalls.syscalls)
   return &_impl_.syscalls_;
 }
-inline const ::generated::traces::Syscall& Syscalls::_internal_syscalls(
-    int index) const {
+inline const ::generated::traces::Syscall& Syscalls::_internal_syscalls(int index) const {
   return _impl_.syscalls_.Get(index);
 }
 inline const ::generated::traces::Syscall& Syscalls::syscalls(int index) const {
@@ -2088,17 +2000,22 @@ inline ::generated::traces::Syscall* Syscalls::add_syscalls() {
   // @@protoc_insertion_point(field_add:generated.traces.Syscalls.syscalls)
   return _add;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<
-    ::generated::traces::Syscall>&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::generated::traces::Syscall >&
 Syscalls::syscalls() const {
   // @@protoc_insertion_point(field_list:generated.traces.Syscalls.syscalls)
   return _impl_.syscalls_;
 }
 
 // repeated bytes args = 2;
-inline int Syscalls::_internal_args_size() const { return _impl_.args_.size(); }
-inline int Syscalls::args_size() const { return _internal_args_size(); }
-inline void Syscalls::clear_args() { _impl_.args_.Clear(); }
+inline int Syscalls::_internal_args_size() const {
+  return _impl_.args_.size();
+}
+inline int Syscalls::args_size() const {
+  return _internal_args_size();
+}
+inline void Syscalls::clear_args() {
+  _impl_.args_.Clear();
+}
 inline std::string* Syscalls::add_args() {
   std::string* _s = _internal_add_args();
   // @@protoc_insertion_point(field_add_mutable:generated.traces.Syscalls.args)
@@ -2129,8 +2046,8 @@ inline void Syscalls::set_args(int index, const char* value) {
   // @@protoc_insertion_point(field_set_char:generated.traces.Syscalls.args)
 }
 inline void Syscalls::set_args(int index, const void* value, size_t size) {
-  _impl_.args_.Mutable(index)->assign(reinterpret_cast<const char*>(value),
-                                      size);
+  _impl_.args_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:generated.traces.Syscalls.args)
 }
 inline std::string* Syscalls::_internal_add_args() {
@@ -2171,16 +2088,18 @@ Syscalls::mutable_args() {
 // Parts
 
 // bytes tx_hash = 1;
-inline void Parts::clear_tx_hash() { _impl_.tx_hash_.ClearToEmpty(); }
+inline void Parts::clear_tx_hash() {
+  _impl_.tx_hash_.ClearToEmpty();
+}
 inline const std::string& Parts::tx_hash() const {
   // @@protoc_insertion_point(field_get:generated.traces.Parts.tx_hash)
   return _internal_tx_hash();
 }
 template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE void Parts::set_tx_hash(ArgT0&& arg0,
-                                                      ArgT... args) {
-  _impl_.tx_hash_.SetBytes(static_cast<ArgT0&&>(arg0), args...,
-                           GetArenaForAllocation());
+inline PROTOBUF_ALWAYS_INLINE
+void Parts::set_tx_hash(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.tx_hash_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:generated.traces.Parts.tx_hash)
 }
 inline std::string* Parts::mutable_tx_hash() {
@@ -2192,9 +2111,11 @@ inline const std::string& Parts::_internal_tx_hash() const {
   return _impl_.tx_hash_.Get();
 }
 inline void Parts::_internal_set_tx_hash(const std::string& value) {
+  
   _impl_.tx_hash_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Parts::_internal_mutable_tx_hash() {
+  
   return _impl_.tx_hash_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Parts::release_tx_hash() {
@@ -2203,14 +2124,16 @@ inline std::string* Parts::release_tx_hash() {
 }
 inline void Parts::set_allocated_tx_hash(std::string* tx_hash) {
   if (tx_hash != nullptr) {
+    
   } else {
+    
   }
   _impl_.tx_hash_.SetAllocated(tx_hash, GetArenaForAllocation());
 #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
   if (_impl_.tx_hash_.IsDefault()) {
     _impl_.tx_hash_.Set("", GetArenaForAllocation());
   }
-#endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:generated.traces.Parts.tx_hash)
 }
 
@@ -2221,7 +2144,9 @@ inline int Parts::_internal_input_cells_size() const {
 inline int Parts::input_cells_size() const {
   return _internal_input_cells_size();
 }
-inline void Parts::clear_input_cells() { _impl_.input_cells_.Clear(); }
+inline void Parts::clear_input_cells() {
+  _impl_.input_cells_.Clear();
+}
 inline std::string* Parts::add_input_cells() {
   std::string* _s = _internal_add_input_cells();
   // @@protoc_insertion_point(field_add_mutable:generated.traces.Parts.input_cells)
@@ -2253,7 +2178,7 @@ inline void Parts::set_input_cells(int index, const char* value) {
 }
 inline void Parts::set_input_cells(int index, const void* value, size_t size) {
   _impl_.input_cells_.Mutable(index)->assign(
-      reinterpret_cast<const char*>(value), size);
+    reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:generated.traces.Parts.input_cells)
 }
 inline std::string* Parts::_internal_add_input_cells() {
@@ -2294,7 +2219,9 @@ inline int Parts::_internal_input_cell_data_size() const {
 inline int Parts::input_cell_data_size() const {
   return _internal_input_cell_data_size();
 }
-inline void Parts::clear_input_cell_data() { _impl_.input_cell_data_.Clear(); }
+inline void Parts::clear_input_cell_data() {
+  _impl_.input_cell_data_.Clear();
+}
 inline std::string* Parts::add_input_cell_data() {
   std::string* _s = _internal_add_input_cell_data();
   // @@protoc_insertion_point(field_add_mutable:generated.traces.Parts.input_cell_data)
@@ -2324,10 +2251,9 @@ inline void Parts::set_input_cell_data(int index, const char* value) {
   _impl_.input_cell_data_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:generated.traces.Parts.input_cell_data)
 }
-inline void Parts::set_input_cell_data(int index, const void* value,
-                                       size_t size) {
+inline void Parts::set_input_cell_data(int index, const void* value, size_t size) {
   _impl_.input_cell_data_.Mutable(index)->assign(
-      reinterpret_cast<const char*>(value), size);
+    reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:generated.traces.Parts.input_cell_data)
 }
 inline std::string* Parts::_internal_add_input_cell_data() {
@@ -2347,8 +2273,7 @@ inline void Parts::add_input_cell_data(const char* value) {
   // @@protoc_insertion_point(field_add_char:generated.traces.Parts.input_cell_data)
 }
 inline void Parts::add_input_cell_data(const void* value, size_t size) {
-  _impl_.input_cell_data_.Add()->assign(reinterpret_cast<const char*>(value),
-                                        size);
+  _impl_.input_cell_data_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:generated.traces.Parts.input_cell_data)
 }
 inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
@@ -2366,8 +2291,12 @@ Parts::mutable_input_cell_data() {
 inline int Parts::_internal_witnesses_size() const {
   return _impl_.witnesses_.size();
 }
-inline int Parts::witnesses_size() const { return _internal_witnesses_size(); }
-inline void Parts::clear_witnesses() { _impl_.witnesses_.Clear(); }
+inline int Parts::witnesses_size() const {
+  return _internal_witnesses_size();
+}
+inline void Parts::clear_witnesses() {
+  _impl_.witnesses_.Clear();
+}
 inline std::string* Parts::add_witnesses() {
   std::string* _s = _internal_add_witnesses();
   // @@protoc_insertion_point(field_add_mutable:generated.traces.Parts.witnesses)
@@ -2398,8 +2327,8 @@ inline void Parts::set_witnesses(int index, const char* value) {
   // @@protoc_insertion_point(field_set_char:generated.traces.Parts.witnesses)
 }
 inline void Parts::set_witnesses(int index, const void* value, size_t size) {
-  _impl_.witnesses_.Mutable(index)->assign(reinterpret_cast<const char*>(value),
-                                           size);
+  _impl_.witnesses_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:generated.traces.Parts.witnesses)
 }
 inline std::string* Parts::_internal_add_witnesses() {
@@ -2440,7 +2369,9 @@ inline int Parts::_internal_inherited_fds_size() const {
 inline int Parts::inherited_fds_size() const {
   return _internal_inherited_fds_size();
 }
-inline void Parts::clear_inherited_fds() { _impl_.inherited_fds_.Clear(); }
+inline void Parts::clear_inherited_fds() {
+  _impl_.inherited_fds_.Clear();
+}
 inline uint64_t Parts::_internal_inherited_fds(int index) const {
   return _impl_.inherited_fds_.Get(index);
 }
@@ -2459,20 +2390,20 @@ inline void Parts::add_inherited_fds(uint64_t value) {
   _internal_add_inherited_fds(value);
   // @@protoc_insertion_point(field_add:generated.traces.Parts.inherited_fds)
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
 Parts::_internal_inherited_fds() const {
   return _impl_.inherited_fds_;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>&
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >&
 Parts::inherited_fds() const {
   // @@protoc_insertion_point(field_list:generated.traces.Parts.inherited_fds)
   return _internal_inherited_fds();
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
 Parts::_internal_mutable_inherited_fds() {
   return &_impl_.inherited_fds_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<uint64_t>*
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< uint64_t >*
 Parts::mutable_inherited_fds() {
   // @@protoc_insertion_point(field_mutable_list:generated.traces.Parts.inherited_fds)
   return _internal_mutable_inherited_fds();
@@ -2482,22 +2413,26 @@ Parts::mutable_inherited_fds() {
 inline int Parts::_internal_read_data_size() const {
   return _impl_.read_data_.size();
 }
-inline int Parts::read_data_size() const { return _internal_read_data_size(); }
-inline void Parts::clear_read_data() { _impl_.read_data_.Clear(); }
-inline const ::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>&
+inline int Parts::read_data_size() const {
+  return _internal_read_data_size();
+}
+inline void Parts::clear_read_data() {
+  _impl_.read_data_.Clear();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >&
 Parts::_internal_read_data() const {
   return _impl_.read_data_.GetMap();
 }
-inline const ::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>&
+inline const ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >&
 Parts::read_data() const {
   // @@protoc_insertion_point(field_map:generated.traces.Parts.read_data)
   return _internal_read_data();
 }
-inline ::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>*
+inline ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >*
 Parts::_internal_mutable_read_data() {
   return _impl_.read_data_.MutableMap();
 }
-inline ::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>*
+inline ::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >*
 Parts::mutable_read_data() {
   // @@protoc_insertion_point(field_mutable_map:generated.traces.Parts.read_data)
   return _internal_mutable_read_data();
@@ -2505,8 +2440,7 @@ Parts::mutable_read_data() {
 
 // .generated.traces.Syscalls other_syscalls = 7;
 inline bool Parts::_internal_has_other_syscalls() const {
-  return this != internal_default_instance() &&
-         _impl_.other_syscalls_ != nullptr;
+  return this != internal_default_instance() && _impl_.other_syscalls_ != nullptr;
 }
 inline bool Parts::has_other_syscalls() const {
   return _internal_has_other_syscalls();
@@ -2517,12 +2451,10 @@ inline void Parts::clear_other_syscalls() {
   }
   _impl_.other_syscalls_ = nullptr;
 }
-inline const ::generated::traces::Syscalls& Parts::_internal_other_syscalls()
-    const {
+inline const ::generated::traces::Syscalls& Parts::_internal_other_syscalls() const {
   const ::generated::traces::Syscalls* p = _impl_.other_syscalls_;
-  return p != nullptr ? *p
-                      : reinterpret_cast<const ::generated::traces::Syscalls&>(
-                            ::generated::traces::_Syscalls_default_instance_);
+  return p != nullptr ? *p : reinterpret_cast<const ::generated::traces::Syscalls&>(
+      ::generated::traces::_Syscalls_default_instance_);
 }
 inline const ::generated::traces::Syscalls& Parts::other_syscalls() const {
   // @@protoc_insertion_point(field_get:generated.traces.Parts.other_syscalls)
@@ -2531,44 +2463,42 @@ inline const ::generated::traces::Syscalls& Parts::other_syscalls() const {
 inline void Parts::unsafe_arena_set_allocated_other_syscalls(
     ::generated::traces::Syscalls* other_syscalls) {
   if (GetArenaForAllocation() == nullptr) {
-    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(
-        _impl_.other_syscalls_);
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.other_syscalls_);
   }
   _impl_.other_syscalls_ = other_syscalls;
   if (other_syscalls) {
+    
   } else {
+    
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:generated.traces.Parts.other_syscalls)
 }
 inline ::generated::traces::Syscalls* Parts::release_other_syscalls() {
+  
   ::generated::traces::Syscalls* temp = _impl_.other_syscalls_;
   _impl_.other_syscalls_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
-  auto* old = reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
   temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
-  if (GetArenaForAllocation() == nullptr) {
-    delete old;
-  }
-#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
   if (GetArenaForAllocation() != nullptr) {
     temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
   }
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::generated::traces::Syscalls*
-Parts::unsafe_arena_release_other_syscalls() {
+inline ::generated::traces::Syscalls* Parts::unsafe_arena_release_other_syscalls() {
   // @@protoc_insertion_point(field_release:generated.traces.Parts.other_syscalls)
-
+  
   ::generated::traces::Syscalls* temp = _impl_.other_syscalls_;
   _impl_.other_syscalls_ = nullptr;
   return temp;
 }
-inline ::generated::traces::Syscalls*
-Parts::_internal_mutable_other_syscalls() {
+inline ::generated::traces::Syscalls* Parts::_internal_mutable_other_syscalls() {
+  
   if (_impl_.other_syscalls_ == nullptr) {
-    auto* p = CreateMaybeMessage<::generated::traces::Syscalls>(
-        GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::generated::traces::Syscalls>(GetArenaForAllocation());
     _impl_.other_syscalls_ = p;
   }
   return _impl_.other_syscalls_;
@@ -2578,8 +2508,7 @@ inline ::generated::traces::Syscalls* Parts::mutable_other_syscalls() {
   // @@protoc_insertion_point(field_mutable:generated.traces.Parts.other_syscalls)
   return _msg;
 }
-inline void Parts::set_allocated_other_syscalls(
-    ::generated::traces::Syscalls* other_syscalls) {
+inline void Parts::set_allocated_other_syscalls(::generated::traces::Syscalls* other_syscalls) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.other_syscalls_;
@@ -2591,8 +2520,9 @@ inline void Parts::set_allocated_other_syscalls(
       other_syscalls = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, other_syscalls, submessage_arena);
     }
-
+    
   } else {
+    
   }
   _impl_.other_syscalls_ = other_syscalls;
   // @@protoc_insertion_point(field_set_allocated:generated.traces.Parts.other_syscalls)
@@ -2603,9 +2533,15 @@ inline void Parts::set_allocated_other_syscalls(
 // Root
 
 // .generated.traces.Parts parts = 1;
-inline bool Root::_internal_has_parts() const { return value_case() == kParts; }
-inline bool Root::has_parts() const { return _internal_has_parts(); }
-inline void Root::set_has_parts() { _impl_._oneof_case_[0] = kParts; }
+inline bool Root::_internal_has_parts() const {
+  return value_case() == kParts;
+}
+inline bool Root::has_parts() const {
+  return _internal_has_parts();
+}
+inline void Root::set_has_parts() {
+  _impl_._oneof_case_[0] = kParts;
+}
 inline void Root::clear_parts() {
   if (_internal_has_parts()) {
     if (GetArenaForAllocation() == nullptr) {
@@ -2630,9 +2566,8 @@ inline ::generated::traces::Parts* Root::release_parts() {
 }
 inline const ::generated::traces::Parts& Root::_internal_parts() const {
   return _internal_has_parts()
-             ? *_impl_.value_.parts_
-             : reinterpret_cast<::generated::traces::Parts&>(
-                   ::generated::traces::_Parts_default_instance_);
+      ? *_impl_.value_.parts_
+      : reinterpret_cast< ::generated::traces::Parts&>(::generated::traces::_Parts_default_instance_);
 }
 inline const ::generated::traces::Parts& Root::parts() const {
   // @@protoc_insertion_point(field_get:generated.traces.Root.parts)
@@ -2649,8 +2584,7 @@ inline ::generated::traces::Parts* Root::unsafe_arena_release_parts() {
     return nullptr;
   }
 }
-inline void Root::unsafe_arena_set_allocated_parts(
-    ::generated::traces::Parts* parts) {
+inline void Root::unsafe_arena_set_allocated_parts(::generated::traces::Parts* parts) {
   clear_value();
   if (parts) {
     set_has_parts();
@@ -2662,8 +2596,7 @@ inline ::generated::traces::Parts* Root::_internal_mutable_parts() {
   if (!_internal_has_parts()) {
     clear_value();
     set_has_parts();
-    _impl_.value_.parts_ =
-        CreateMaybeMessage<::generated::traces::Parts>(GetArenaForAllocation());
+    _impl_.value_.parts_ = CreateMaybeMessage< ::generated::traces::Parts >(GetArenaForAllocation());
   }
   return _impl_.value_.parts_;
 }
@@ -2677,8 +2610,12 @@ inline ::generated::traces::Parts* Root::mutable_parts() {
 inline bool Root::_internal_has_syscalls() const {
   return value_case() == kSyscalls;
 }
-inline bool Root::has_syscalls() const { return _internal_has_syscalls(); }
-inline void Root::set_has_syscalls() { _impl_._oneof_case_[0] = kSyscalls; }
+inline bool Root::has_syscalls() const {
+  return _internal_has_syscalls();
+}
+inline void Root::set_has_syscalls() {
+  _impl_._oneof_case_[0] = kSyscalls;
+}
 inline void Root::clear_syscalls() {
   if (_internal_has_syscalls()) {
     if (GetArenaForAllocation() == nullptr) {
@@ -2703,9 +2640,8 @@ inline ::generated::traces::Syscalls* Root::release_syscalls() {
 }
 inline const ::generated::traces::Syscalls& Root::_internal_syscalls() const {
   return _internal_has_syscalls()
-             ? *_impl_.value_.syscalls_
-             : reinterpret_cast<::generated::traces::Syscalls&>(
-                   ::generated::traces::_Syscalls_default_instance_);
+      ? *_impl_.value_.syscalls_
+      : reinterpret_cast< ::generated::traces::Syscalls&>(::generated::traces::_Syscalls_default_instance_);
 }
 inline const ::generated::traces::Syscalls& Root::syscalls() const {
   // @@protoc_insertion_point(field_get:generated.traces.Root.syscalls)
@@ -2722,8 +2658,7 @@ inline ::generated::traces::Syscalls* Root::unsafe_arena_release_syscalls() {
     return nullptr;
   }
 }
-inline void Root::unsafe_arena_set_allocated_syscalls(
-    ::generated::traces::Syscalls* syscalls) {
+inline void Root::unsafe_arena_set_allocated_syscalls(::generated::traces::Syscalls* syscalls) {
   clear_value();
   if (syscalls) {
     set_has_syscalls();
@@ -2735,8 +2670,7 @@ inline ::generated::traces::Syscalls* Root::_internal_mutable_syscalls() {
   if (!_internal_has_syscalls()) {
     clear_value();
     set_has_syscalls();
-    _impl_.value_.syscalls_ = CreateMaybeMessage<::generated::traces::Syscalls>(
-        GetArenaForAllocation());
+    _impl_.value_.syscalls_ = CreateMaybeMessage< ::generated::traces::Syscalls >(GetArenaForAllocation());
   }
   return _impl_.value_.syscalls_;
 }
@@ -2746,13 +2680,17 @@ inline ::generated::traces::Syscalls* Root::mutable_syscalls() {
   return _msg;
 }
 
-inline bool Root::has_value() const { return value_case() != VALUE_NOT_SET; }
-inline void Root::clear_has_value() { _impl_._oneof_case_[0] = VALUE_NOT_SET; }
+inline bool Root::has_value() const {
+  return value_case() != VALUE_NOT_SET;
+}
+inline void Root::clear_has_value() {
+  _impl_._oneof_case_[0] = VALUE_NOT_SET;
+}
 inline Root::ValueCase Root::value_case() const {
   return Root::ValueCase(_impl_._oneof_case_[0]);
 }
 #ifdef __GNUC__
-#pragma GCC diagnostic pop
+  #pragma GCC diagnostic pop
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
@@ -2767,6 +2705,7 @@ inline Root::ValueCase Root::value_case() const {
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -2897,7 +2836,8 @@ namespace _pbi = _pb::internal;
 
 namespace generated {
 namespace traces {
-PROTOBUF_CONSTEXPR Terminated::Terminated(::_pbi::ConstantInitialized) {}
+PROTOBUF_CONSTEXPR Terminated::Terminated(
+    ::_pbi::ConstantInitialized) {}
 struct TerminatedDefaultTypeInternal {
   PROTOBUF_CONSTEXPR TerminatedDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -2906,15 +2846,12 @@ struct TerminatedDefaultTypeInternal {
     Terminated _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TerminatedDefaultTypeInternal
-        _Terminated_default_instance_;
-PROTOBUF_CONSTEXPR IoData::IoData(::_pbi::ConstantInitialized)
-    : _impl_{/*decltype(_impl_.available_data_)*/ {
-                 &::_pbi::fixed_address_empty_string,
-                 ::_pbi::ConstantInitialized{}},
-             /*decltype(_impl_.additional_length_)*/ uint64_t{0u},
-             /*decltype(_impl_._cached_size_)*/ {}} {}
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TerminatedDefaultTypeInternal _Terminated_default_instance_;
+PROTOBUF_CONSTEXPR IoData::IoData(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.available_data_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.additional_length_)*/uint64_t{0u}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct IoDataDefaultTypeInternal {
   PROTOBUF_CONSTEXPR IoDataDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -2923,13 +2860,12 @@ struct IoDataDefaultTypeInternal {
     IoData _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 IoDataDefaultTypeInternal
-        _IoData_default_instance_;
-PROTOBUF_CONSTEXPR Fds::Fds(::_pbi::ConstantInitialized)
-    : _impl_{/*decltype(_impl_.fds_)*/ {},
-             /*decltype(_impl_._fds_cached_byte_size_)*/ {0},
-             /*decltype(_impl_._cached_size_)*/ {}} {}
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 IoDataDefaultTypeInternal _IoData_default_instance_;
+PROTOBUF_CONSTEXPR Fds::Fds(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.fds_)*/{}
+  , /*decltype(_impl_._fds_cached_byte_size_)*/{0}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct FdsDefaultTypeInternal {
   PROTOBUF_CONSTEXPR FdsDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -2938,13 +2874,12 @@ struct FdsDefaultTypeInternal {
     Fds _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FdsDefaultTypeInternal
-        _Fds_default_instance_;
-PROTOBUF_CONSTEXPR Syscall::Syscall(::_pbi::ConstantInitialized)
-    : _impl_{/*decltype(_impl_.value_)*/ {},
-             /*decltype(_impl_._cached_size_)*/ {},
-             /*decltype(_impl_._oneof_case_)*/ {}} {}
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FdsDefaultTypeInternal _Fds_default_instance_;
+PROTOBUF_CONSTEXPR Syscall::Syscall(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.value_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_._oneof_case_)*/{}} {}
 struct SyscallDefaultTypeInternal {
   PROTOBUF_CONSTEXPR SyscallDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -2953,12 +2888,12 @@ struct SyscallDefaultTypeInternal {
     Syscall _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SyscallDefaultTypeInternal
-        _Syscall_default_instance_;
-PROTOBUF_CONSTEXPR Syscalls::Syscalls(::_pbi::ConstantInitialized)
-    : _impl_{/*decltype(_impl_.syscalls_)*/ {}, /*decltype(_impl_.args_)*/ {},
-             /*decltype(_impl_._cached_size_)*/ {}} {}
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SyscallDefaultTypeInternal _Syscall_default_instance_;
+PROTOBUF_CONSTEXPR Syscalls::Syscalls(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.syscalls_)*/{}
+  , /*decltype(_impl_.args_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct SyscallsDefaultTypeInternal {
   PROTOBUF_CONSTEXPR SyscallsDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -2967,9 +2902,7 @@ struct SyscallsDefaultTypeInternal {
     Syscalls _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SyscallsDefaultTypeInternal
-        _Syscalls_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SyscallsDefaultTypeInternal _Syscalls_default_instance_;
 PROTOBUF_CONSTEXPR Parts_ReadDataEntry_DoNotUse::Parts_ReadDataEntry_DoNotUse(
     ::_pbi::ConstantInitialized) {}
 struct Parts_ReadDataEntry_DoNotUseDefaultTypeInternal {
@@ -2980,22 +2913,18 @@ struct Parts_ReadDataEntry_DoNotUseDefaultTypeInternal {
     Parts_ReadDataEntry_DoNotUse _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-        Parts_ReadDataEntry_DoNotUseDefaultTypeInternal
-            _Parts_ReadDataEntry_DoNotUse_default_instance_;
-PROTOBUF_CONSTEXPR Parts::Parts(::_pbi::ConstantInitialized)
-    : _impl_{
-          /*decltype(_impl_.input_cells_)*/ {},
-          /*decltype(_impl_.input_cell_data_)*/ {},
-          /*decltype(_impl_.witnesses_)*/ {},
-          /*decltype(_impl_.inherited_fds_)*/ {},
-          /*decltype(_impl_._inherited_fds_cached_byte_size_)*/ {0},
-          /*decltype(_impl_.read_data_)*/ {::_pbi::ConstantInitialized()},
-          /*decltype(_impl_.tx_hash_)*/
-          {&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}},
-          /*decltype(_impl_.other_syscalls_)*/ nullptr,
-          /*decltype(_impl_._cached_size_)*/ {}} {}
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Parts_ReadDataEntry_DoNotUseDefaultTypeInternal _Parts_ReadDataEntry_DoNotUse_default_instance_;
+PROTOBUF_CONSTEXPR Parts::Parts(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.input_cells_)*/{}
+  , /*decltype(_impl_.input_cell_data_)*/{}
+  , /*decltype(_impl_.witnesses_)*/{}
+  , /*decltype(_impl_.inherited_fds_)*/{}
+  , /*decltype(_impl_._inherited_fds_cached_byte_size_)*/{0}
+  , /*decltype(_impl_.read_data_)*/{::_pbi::ConstantInitialized()}
+  , /*decltype(_impl_.tx_hash_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.other_syscalls_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct PartsDefaultTypeInternal {
   PROTOBUF_CONSTEXPR PartsDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -3004,13 +2933,12 @@ struct PartsDefaultTypeInternal {
     Parts _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PartsDefaultTypeInternal
-        _Parts_default_instance_;
-PROTOBUF_CONSTEXPR Root::Root(::_pbi::ConstantInitialized)
-    : _impl_{/*decltype(_impl_.value_)*/ {},
-             /*decltype(_impl_._cached_size_)*/ {},
-             /*decltype(_impl_._oneof_case_)*/ {}} {}
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PartsDefaultTypeInternal _Parts_default_instance_;
+PROTOBUF_CONSTEXPR Root::Root(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.value_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_._oneof_case_)*/{}} {}
 struct RootDefaultTypeInternal {
   PROTOBUF_CONSTEXPR RootDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -3019,178 +2947,148 @@ struct RootDefaultTypeInternal {
     Root _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RootDefaultTypeInternal
-        _Root_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RootDefaultTypeInternal _Root_default_instance_;
 }  // namespace traces
 }  // namespace generated
 static ::_pb::Metadata file_level_metadata_traces_2eproto[8];
-static constexpr ::_pb::EnumDescriptor const**
-    file_level_enum_descriptors_traces_2eproto = nullptr;
-static constexpr ::_pb::ServiceDescriptor const**
-    file_level_service_descriptors_traces_2eproto = nullptr;
+static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_traces_2eproto = nullptr;
+static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_traces_2eproto = nullptr;
 
-const uint32_t TableStruct_traces_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
-    protodesc_cold) = {
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Terminated, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::IoData, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::IoData, _impl_.available_data_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::IoData,
-                          _impl_.additional_length_),
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Fds, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Fds, _impl_.fds_),
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Syscall, _internal_metadata_),
-    ~0u,  // no _extensions_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Syscall, _impl_._oneof_case_[0]),
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ::_pbi::kInvalidFieldOffsetTag,
-    ::_pbi::kInvalidFieldOffsetTag,
-    ::_pbi::kInvalidFieldOffsetTag,
-    ::_pbi::kInvalidFieldOffsetTag,
-    ::_pbi::kInvalidFieldOffsetTag,
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Syscall, _impl_.value_),
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Syscalls, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Syscalls, _impl_.syscalls_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Syscalls, _impl_.args_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts_ReadDataEntry_DoNotUse,
-                          _has_bits_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts_ReadDataEntry_DoNotUse,
-                          _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts_ReadDataEntry_DoNotUse,
-                          key_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts_ReadDataEntry_DoNotUse,
-                          value_),
-    0,
-    1,
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.tx_hash_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.input_cells_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.input_cell_data_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.witnesses_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.inherited_fds_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.read_data_),
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.other_syscalls_),
-    ~0u,  // no _has_bits_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Root, _internal_metadata_),
-    ~0u,  // no _extensions_
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Root, _impl_._oneof_case_[0]),
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    ::_pbi::kInvalidFieldOffsetTag,
-    ::_pbi::kInvalidFieldOffsetTag,
-    PROTOBUF_FIELD_OFFSET(::generated::traces::Root, _impl_.value_),
+const uint32_t TableStruct_traces_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Terminated, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::IoData, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::IoData, _impl_.available_data_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::IoData, _impl_.additional_length_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Fds, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Fds, _impl_.fds_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Syscall, _internal_metadata_),
+  ~0u,  // no _extensions_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Syscall, _impl_._oneof_case_[0]),
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  ::_pbi::kInvalidFieldOffsetTag,
+  ::_pbi::kInvalidFieldOffsetTag,
+  ::_pbi::kInvalidFieldOffsetTag,
+  ::_pbi::kInvalidFieldOffsetTag,
+  ::_pbi::kInvalidFieldOffsetTag,
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Syscall, _impl_.value_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Syscalls, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Syscalls, _impl_.syscalls_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Syscalls, _impl_.args_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts_ReadDataEntry_DoNotUse, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts_ReadDataEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts_ReadDataEntry_DoNotUse, key_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts_ReadDataEntry_DoNotUse, value_),
+  0,
+  1,
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.tx_hash_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.input_cells_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.input_cell_data_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.witnesses_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.inherited_fds_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.read_data_),
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Parts, _impl_.other_syscalls_),
+  ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Root, _internal_metadata_),
+  ~0u,  // no _extensions_
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Root, _impl_._oneof_case_[0]),
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  ::_pbi::kInvalidFieldOffsetTag,
+  ::_pbi::kInvalidFieldOffsetTag,
+  PROTOBUF_FIELD_OFFSET(::generated::traces::Root, _impl_.value_),
 };
-static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(
-    protodesc_cold) = {
-    {0, -1, -1, sizeof(::generated::traces::Terminated)},
-    {6, -1, -1, sizeof(::generated::traces::IoData)},
-    {14, -1, -1, sizeof(::generated::traces::Fds)},
-    {21, -1, -1, sizeof(::generated::traces::Syscall)},
-    {33, -1, -1, sizeof(::generated::traces::Syscalls)},
-    {41, 49, -1, sizeof(::generated::traces::Parts_ReadDataEntry_DoNotUse)},
-    {51, -1, -1, sizeof(::generated::traces::Parts)},
-    {64, -1, -1, sizeof(::generated::traces::Root)},
+static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  { 0, -1, -1, sizeof(::generated::traces::Terminated)},
+  { 6, -1, -1, sizeof(::generated::traces::IoData)},
+  { 14, -1, -1, sizeof(::generated::traces::Fds)},
+  { 21, -1, -1, sizeof(::generated::traces::Syscall)},
+  { 33, -1, -1, sizeof(::generated::traces::Syscalls)},
+  { 41, 49, -1, sizeof(::generated::traces::Parts_ReadDataEntry_DoNotUse)},
+  { 51, -1, -1, sizeof(::generated::traces::Parts)},
+  { 64, -1, -1, sizeof(::generated::traces::Root)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-    &::generated::traces::_Terminated_default_instance_._instance,
-    &::generated::traces::_IoData_default_instance_._instance,
-    &::generated::traces::_Fds_default_instance_._instance,
-    &::generated::traces::_Syscall_default_instance_._instance,
-    &::generated::traces::_Syscalls_default_instance_._instance,
-    &::generated::traces::_Parts_ReadDataEntry_DoNotUse_default_instance_
-         ._instance,
-    &::generated::traces::_Parts_default_instance_._instance,
-    &::generated::traces::_Root_default_instance_._instance,
+  &::generated::traces::_Terminated_default_instance_._instance,
+  &::generated::traces::_IoData_default_instance_._instance,
+  &::generated::traces::_Fds_default_instance_._instance,
+  &::generated::traces::_Syscall_default_instance_._instance,
+  &::generated::traces::_Syscalls_default_instance_._instance,
+  &::generated::traces::_Parts_ReadDataEntry_DoNotUse_default_instance_._instance,
+  &::generated::traces::_Parts_default_instance_._instance,
+  &::generated::traces::_Root_default_instance_._instance,
 };
 
-const char descriptor_table_protodef_traces_2eproto[] PROTOBUF_SECTION_VARIABLE(
-    protodesc_cold) =
-    "\n\014traces.proto\022\020generated.traces\"\014\n\nTerm"
-    "inated\";\n\006IoData\022\026\n\016available_data\030\001 \001(\014"
-    "\022\031\n\021additional_length\030\002 "
-    "\001(\004\"\022\n\003Fds\022\013\n\003fd"
-    "s\030\001 "
-    "\003(\004\"\324\001\n\007Syscall\022\032\n\020return_with_code\030"
-    "\001 \001(\003H\000\022\035\n\023success_output_data\030\002 "
-    "\001(\004H\000\022+"
-    "\n\007io_data\030\003 \001(\0132\030.generated.traces.IoDat"
-    "aH\000\0222\n\nterminated\030\004 \001(\0132\034.generated.trac"
-    "es.TerminatedH\000\022$\n\003fds\030\005 \001(\0132\025.generated"
-    ".traces.FdsH\000B\007\n\005value\"E\n\010Syscalls\022+\n\010sy"
-    "scalls\030\001 \003(\0132\031.generated.traces.Syscall\022"
-    "\014\n\004args\030\002 "
-    "\003(\014\"\217\002\n\005Parts\022\017\n\007tx_hash\030\001 \001(\014"
-    "\022\023\n\013input_cells\030\002 \003(\014\022\027\n\017input_cell_data"
-    "\030\003 \003(\014\022\021\n\twitnesses\030\004 "
-    "\003(\014\022\025\n\rinherited_f"
-    "ds\030\005 \003(\004\0228\n\tread_data\030\006 \003(\0132%.generated."
-    "traces.Parts.ReadDataEntry\0222\n\016other_sysc"
-    "alls\030\007 \001(\0132\032.generated.traces.Syscalls\032/"
-    "\n\rReadDataEntry\022\013\n\003key\030\001 "
-    "\001(\004\022\r\n\005value\030\002 "
-    "\001(\014:\0028\001\"i\n\004Root\022(\n\005parts\030\001 "
-    "\001(\0132\027.generat"
-    "ed.traces.PartsH\000\022.\n\010syscalls\030\003 \001(\0132\032.ge"
-    "nerated.traces.SyscallsH\000B\007\n\005valueb\006prot"
-    "o3";
+const char descriptor_table_protodef_traces_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+  "\n\014traces.proto\022\020generated.traces\"\014\n\nTerm"
+  "inated\";\n\006IoData\022\026\n\016available_data\030\001 \001(\014"
+  "\022\031\n\021additional_length\030\002 \001(\004\"\022\n\003Fds\022\013\n\003fd"
+  "s\030\001 \003(\004\"\324\001\n\007Syscall\022\032\n\020return_with_code\030"
+  "\001 \001(\003H\000\022\035\n\023success_output_data\030\002 \001(\004H\000\022+"
+  "\n\007io_data\030\003 \001(\0132\030.generated.traces.IoDat"
+  "aH\000\0222\n\nterminated\030\004 \001(\0132\034.generated.trac"
+  "es.TerminatedH\000\022$\n\003fds\030\005 \001(\0132\025.generated"
+  ".traces.FdsH\000B\007\n\005value\"E\n\010Syscalls\022+\n\010sy"
+  "scalls\030\001 \003(\0132\031.generated.traces.Syscall\022"
+  "\014\n\004args\030\002 \003(\014\"\217\002\n\005Parts\022\017\n\007tx_hash\030\001 \001(\014"
+  "\022\023\n\013input_cells\030\002 \003(\014\022\027\n\017input_cell_data"
+  "\030\003 \003(\014\022\021\n\twitnesses\030\004 \003(\014\022\025\n\rinherited_f"
+  "ds\030\005 \003(\004\0228\n\tread_data\030\006 \003(\0132%.generated."
+  "traces.Parts.ReadDataEntry\0222\n\016other_sysc"
+  "alls\030\007 \001(\0132\032.generated.traces.Syscalls\032/"
+  "\n\rReadDataEntry\022\013\n\003key\030\001 \001(\004\022\r\n\005value\030\002 "
+  "\001(\014:\0028\001\"i\n\004Root\022(\n\005parts\030\001 \001(\0132\027.generat"
+  "ed.traces.PartsH\000\022.\n\010syscalls\030\003 \001(\0132\032.ge"
+  "nerated.traces.SyscallsH\000B\007\n\005valueb\006prot"
+  "o3"
+  ;
 static ::_pbi::once_flag descriptor_table_traces_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_traces_2eproto = {
-    false,
-    false,
-    802,
-    descriptor_table_protodef_traces_2eproto,
+    false, false, 802, descriptor_table_protodef_traces_2eproto,
     "traces.proto",
-    &descriptor_table_traces_2eproto_once,
-    nullptr,
-    0,
-    8,
-    schemas,
-    file_default_instances,
-    TableStruct_traces_2eproto::offsets,
-    file_level_metadata_traces_2eproto,
-    file_level_enum_descriptors_traces_2eproto,
+    &descriptor_table_traces_2eproto_once, nullptr, 0, 8,
+    schemas, file_default_instances, TableStruct_traces_2eproto::offsets,
+    file_level_metadata_traces_2eproto, file_level_enum_descriptors_traces_2eproto,
     file_level_service_descriptors_traces_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable*
-descriptor_table_traces_2eproto_getter() {
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_traces_2eproto_getter() {
   return &descriptor_table_traces_2eproto;
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner
-    dynamic_init_dummy_traces_2eproto(&descriptor_table_traces_2eproto);
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_traces_2eproto(&descriptor_table_traces_2eproto);
 namespace generated {
 namespace traces {
 
@@ -3201,33 +3099,37 @@ class Terminated::_Internal {
 };
 
 Terminated::Terminated(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned)
-    : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena,
-                                                        is_message_owned) {
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
   // @@protoc_insertion_point(arena_constructor:generated.traces.Terminated)
 }
 Terminated::Terminated(const Terminated& from)
-    : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
-  Terminated* const _this = this;
-  (void)_this;
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
+  Terminated* const _this = this; (void)_this;
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:generated.traces.Terminated)
 }
+
+
+
+
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Terminated::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
     ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* Terminated::GetClassData()
-    const {
-  return &_class_data_;
-}
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Terminated::GetClassData() const { return &_class_data_; }
+
+
+
+
+
+
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Terminated::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(&descriptor_table_traces_2eproto_getter,
-                                   &descriptor_table_traces_2eproto_once,
-                                   file_level_metadata_traces_2eproto[0]);
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_traces_2eproto_getter, &descriptor_table_traces_2eproto_once,
+      file_level_metadata_traces_2eproto[0]);
 }
 
 // ===================================================================
@@ -3236,50 +3138,52 @@ class IoData::_Internal {
  public:
 };
 
-IoData::IoData(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned)
-    : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+IoData::IoData(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:generated.traces.IoData)
 }
-IoData::IoData(const IoData& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
-  IoData* const _this = this;
-  (void)_this;
-  new (&_impl_) Impl_{decltype(_impl_.available_data_){},
-                      decltype(_impl_.additional_length_){},
-                      /*decltype(_impl_._cached_size_)*/ {}};
+IoData::IoData(const IoData& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  IoData* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.available_data_){}
+    , decltype(_impl_.additional_length_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.available_data_.InitDefault();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.available_data_.Set("", GetArenaForAllocation());
-#endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.available_data_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_available_data().empty()) {
-    _this->_impl_.available_data_.Set(from._internal_available_data(),
-                                      _this->GetArenaForAllocation());
+    _this->_impl_.available_data_.Set(from._internal_available_data(), 
+      _this->GetArenaForAllocation());
   }
   _this->_impl_.additional_length_ = from._impl_.additional_length_;
   // @@protoc_insertion_point(copy_constructor:generated.traces.IoData)
 }
 
-inline void IoData::SharedCtor(::_pb::Arena* arena, bool is_message_owned) {
+inline void IoData::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
-  new (&_impl_) Impl_{decltype(_impl_.available_data_){},
-                      decltype(_impl_.additional_length_){uint64_t{0u}},
-                      /*decltype(_impl_._cached_size_)*/ {}};
+  new (&_impl_) Impl_{
+      decltype(_impl_.available_data_){}
+    , decltype(_impl_.additional_length_){uint64_t{0u}}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
   _impl_.available_data_.InitDefault();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.available_data_.Set("", GetArenaForAllocation());
-#endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.available_data_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 IoData::~IoData() {
   // @@protoc_insertion_point(destructor:generated.traces.IoData)
-  if (auto* arena =
-          _internal_metadata_
-              .DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-    (void)arena;
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
     return;
   }
   SharedDtor();
@@ -3290,13 +3194,15 @@ inline void IoData::SharedDtor() {
   _impl_.available_data_.Destroy();
 }
 
-void IoData::SetCachedSize(int size) const { _impl_._cached_size_.Set(size); }
+void IoData::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
 
 void IoData::Clear() {
-  // @@protoc_insertion_point(message_clear_start:generated.traces.IoData)
+// @@protoc_insertion_point(message_clear_start:generated.traces.IoData)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   _impl_.available_data_.ClearToEmpty();
   _impl_.additional_length_ = uint64_t{0u};
@@ -3304,8 +3210,7 @@ void IoData::Clear() {
 }
 
 const char* IoData::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) \
-  if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
@@ -3322,8 +3227,7 @@ const char* IoData::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
       // uint64 additional_length = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.additional_length_ =
-              ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          _impl_.additional_length_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -3339,8 +3243,7 @@ const char* IoData::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_
-            .mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -3353,75 +3256,68 @@ failure:
 }
 
 uint8_t* IoData::_InternalSerialize(
-    uint8_t* target,
-    ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:generated.traces.IoData)
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // bytes available_data = 1;
   if (!this->_internal_available_data().empty()) {
-    target = stream->WriteBytesMaybeAliased(1, this->_internal_available_data(),
-                                            target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_available_data(), target);
   }
 
   // uint64 additional_length = 2;
   if (this->_internal_additional_length() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-        2, this->_internal_additional_length(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_additional_length(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_
-            .unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance),
-        target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:generated.traces.IoData)
   return target;
 }
 
 size_t IoData::ByteSizeLong() const {
-  // @@protoc_insertion_point(message_byte_size_start:generated.traces.IoData)
+// @@protoc_insertion_point(message_byte_size_start:generated.traces.IoData)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // bytes available_data = 1;
   if (!this->_internal_available_data().empty()) {
-    total_size +=
-        1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-                this->_internal_available_data());
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_available_data());
   }
 
   // uint64 additional_length = 2;
   if (this->_internal_additional_length() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-        this->_internal_additional_length());
+    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_additional_length());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData IoData::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck, IoData::MergeImpl};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* IoData::GetClassData()
-    const {
-  return &_class_data_;
-}
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    IoData::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*IoData::GetClassData() const { return &_class_data_; }
 
-void IoData::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                       const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+
+void IoData::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<IoData*>(&to_msg);
   auto& from = static_cast<const IoData&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:generated.traces.IoData)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   if (!from._internal_available_data().empty()) {
     _this->_internal_set_available_data(from._internal_available_data());
@@ -3429,19 +3325,19 @@ void IoData::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
   if (from._internal_additional_length() != 0) {
     _this->_internal_set_additional_length(from._internal_additional_length());
   }
-  _this->_internal_metadata_
-      .MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-          from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void IoData::CopyFrom(const IoData& from) {
-  // @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.IoData)
+// @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.IoData)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool IoData::IsInitialized() const { return true; }
+bool IoData::IsInitialized() const {
+  return true;
+}
 
 void IoData::InternalSwap(IoData* other) {
   using std::swap;
@@ -3449,15 +3345,16 @@ void IoData::InternalSwap(IoData* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.available_data_, lhs_arena, &other->_impl_.available_data_,
-      rhs_arena);
+      &_impl_.available_data_, lhs_arena,
+      &other->_impl_.available_data_, rhs_arena
+  );
   swap(_impl_.additional_length_, other->_impl_.additional_length_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata IoData::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(&descriptor_table_traces_2eproto_getter,
-                                   &descriptor_table_traces_2eproto_once,
-                                   file_level_metadata_traces_2eproto[1]);
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_traces_2eproto_getter, &descriptor_table_traces_2eproto_once,
+      file_level_metadata_traces_2eproto[1]);
 }
 
 // ===================================================================
@@ -3466,37 +3363,39 @@ class Fds::_Internal {
  public:
 };
 
-Fds::Fds(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned)
-    : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+Fds::Fds(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:generated.traces.Fds)
 }
-Fds::Fds(const Fds& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
-  Fds* const _this = this;
-  (void)_this;
-  new (&_impl_) Impl_{decltype(_impl_.fds_){from._impl_.fds_},
-                      /*decltype(_impl_._fds_cached_byte_size_)*/ {0},
-                      /*decltype(_impl_._cached_size_)*/ {}};
+Fds::Fds(const Fds& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  Fds* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.fds_){from._impl_.fds_}
+    , /*decltype(_impl_._fds_cached_byte_size_)*/{0}
+    , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:generated.traces.Fds)
 }
 
-inline void Fds::SharedCtor(::_pb::Arena* arena, bool is_message_owned) {
+inline void Fds::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
-  new (&_impl_) Impl_{decltype(_impl_.fds_){arena},
-                      /*decltype(_impl_._fds_cached_byte_size_)*/ {0},
-                      /*decltype(_impl_._cached_size_)*/ {}};
+  new (&_impl_) Impl_{
+      decltype(_impl_.fds_){arena}
+    , /*decltype(_impl_._fds_cached_byte_size_)*/{0}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
 }
 
 Fds::~Fds() {
   // @@protoc_insertion_point(destructor:generated.traces.Fds)
-  if (auto* arena =
-          _internal_metadata_
-              .DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-    (void)arena;
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
     return;
   }
   SharedDtor();
@@ -3507,21 +3406,22 @@ inline void Fds::SharedDtor() {
   _impl_.fds_.~RepeatedField();
 }
 
-void Fds::SetCachedSize(int size) const { _impl_._cached_size_.Set(size); }
+void Fds::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
 
 void Fds::Clear() {
-  // @@protoc_insertion_point(message_clear_start:generated.traces.Fds)
+// @@protoc_insertion_point(message_clear_start:generated.traces.Fds)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   _impl_.fds_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Fds::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) \
-  if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
@@ -3529,12 +3429,10 @@ const char* Fds::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
       // repeated uint64 fds = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedUInt64Parser(
-              _internal_mutable_fds(), ptr, ctx);
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedUInt64Parser(_internal_mutable_fds(), ptr, ctx);
           CHK_(ptr);
         } else if (static_cast<uint8_t>(tag) == 8) {
-          _internal_add_fds(
-              ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
+          _internal_add_fds(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -3550,8 +3448,7 @@ const char* Fds::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_
-            .mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -3564,49 +3461,47 @@ failure:
 }
 
 uint8_t* Fds::_InternalSerialize(
-    uint8_t* target,
-    ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:generated.traces.Fds)
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // repeated uint64 fds = 1;
   {
-    int byte_size =
-        _impl_._fds_cached_byte_size_.load(std::memory_order_relaxed);
+    int byte_size = _impl_._fds_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
-      target = stream->WriteUInt64Packed(1, _internal_fds(), byte_size, target);
+      target = stream->WriteUInt64Packed(
+          1, _internal_fds(), byte_size, target);
     }
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_
-            .unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance),
-        target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:generated.traces.Fds)
   return target;
 }
 
 size_t Fds::ByteSizeLong() const {
-  // @@protoc_insertion_point(message_byte_size_start:generated.traces.Fds)
+// @@protoc_insertion_point(message_byte_size_start:generated.traces.Fds)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // repeated uint64 fds = 1;
   {
-    size_t data_size = ::_pbi::WireFormatLite::UInt64Size(this->_impl_.fds_);
+    size_t data_size = ::_pbi::WireFormatLite::
+      UInt64Size(this->_impl_.fds_);
     if (data_size > 0) {
-      total_size += 1 + ::_pbi::WireFormatLite::Int32Size(
-                            static_cast<int32_t>(data_size));
+      total_size += 1 +
+        ::_pbi::WireFormatLite::Int32Size(static_cast<int32_t>(data_size));
     }
     int cached_size = ::_pbi::ToCachedSize(data_size);
-    _impl_._fds_cached_byte_size_.store(cached_size, std::memory_order_relaxed);
+    _impl_._fds_cached_byte_size_.store(cached_size,
+                                    std::memory_order_relaxed);
     total_size += data_size;
   }
 
@@ -3614,34 +3509,34 @@ size_t Fds::ByteSizeLong() const {
 }
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Fds::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck, Fds::MergeImpl};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* Fds::GetClassData() const {
-  return &_class_data_;
-}
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    Fds::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Fds::GetClassData() const { return &_class_data_; }
 
-void Fds::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                    const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+
+void Fds::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Fds*>(&to_msg);
   auto& from = static_cast<const Fds&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:generated.traces.Fds)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   _this->_impl_.fds_.MergeFrom(from._impl_.fds_);
-  _this->_internal_metadata_
-      .MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-          from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Fds::CopyFrom(const Fds& from) {
-  // @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Fds)
+// @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Fds)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Fds::IsInitialized() const { return true; }
+bool Fds::IsInitialized() const {
+  return true;
+}
 
 void Fds::InternalSwap(Fds* other) {
   using std::swap;
@@ -3650,9 +3545,9 @@ void Fds::InternalSwap(Fds* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Fds::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(&descriptor_table_traces_2eproto_getter,
-                                   &descriptor_table_traces_2eproto_once,
-                                   file_level_metadata_traces_2eproto[2]);
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_traces_2eproto_getter, &descriptor_table_traces_2eproto_once,
+      file_level_metadata_traces_2eproto[2]);
 }
 
 // ===================================================================
@@ -3664,15 +3559,16 @@ class Syscall::_Internal {
   static const ::generated::traces::Fds& fds(const Syscall* msg);
 };
 
-const ::generated::traces::IoData& Syscall::_Internal::io_data(
-    const Syscall* msg) {
+const ::generated::traces::IoData&
+Syscall::_Internal::io_data(const Syscall* msg) {
   return *msg->_impl_.value_.io_data_;
 }
-const ::generated::traces::Terminated& Syscall::_Internal::terminated(
-    const Syscall* msg) {
+const ::generated::traces::Terminated&
+Syscall::_Internal::terminated(const Syscall* msg) {
   return *msg->_impl_.value_.terminated_;
 }
-const ::generated::traces::Fds& Syscall::_Internal::fds(const Syscall* msg) {
+const ::generated::traces::Fds&
+Syscall::_Internal::fds(const Syscall* msg) {
   return *msg->_impl_.value_.fds_;
 }
 void Syscall::set_allocated_io_data(::generated::traces::IoData* io_data) {
@@ -3680,7 +3576,7 @@ void Syscall::set_allocated_io_data(::generated::traces::IoData* io_data) {
   clear_value();
   if (io_data) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(io_data);
+      ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(io_data);
     if (message_arena != submessage_arena) {
       io_data = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, io_data, submessage_arena);
@@ -3690,13 +3586,12 @@ void Syscall::set_allocated_io_data(::generated::traces::IoData* io_data) {
   }
   // @@protoc_insertion_point(field_set_allocated:generated.traces.Syscall.io_data)
 }
-void Syscall::set_allocated_terminated(
-    ::generated::traces::Terminated* terminated) {
+void Syscall::set_allocated_terminated(::generated::traces::Terminated* terminated) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   clear_value();
   if (terminated) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(terminated);
+      ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(terminated);
     if (message_arena != submessage_arena) {
       terminated = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, terminated, submessage_arena);
@@ -3711,7 +3606,7 @@ void Syscall::set_allocated_fds(::generated::traces::Fds* fds) {
   clear_value();
   if (fds) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(fds);
+      ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(fds);
     if (message_arena != submessage_arena) {
       fds = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, fds, submessage_arena);
@@ -3721,20 +3616,21 @@ void Syscall::set_allocated_fds(::generated::traces::Fds* fds) {
   }
   // @@protoc_insertion_point(field_set_allocated:generated.traces.Syscall.fds)
 }
-Syscall::Syscall(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned)
-    : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+Syscall::Syscall(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:generated.traces.Syscall)
 }
-Syscall::Syscall(const Syscall& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
-  Syscall* const _this = this;
-  (void)_this;
-  new (&_impl_)
-      Impl_{decltype(_impl_.value_){}, /*decltype(_impl_._cached_size_)*/ {},
-            /*decltype(_impl_._oneof_case_)*/ {}};
+Syscall::Syscall(const Syscall& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  Syscall* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.value_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_._oneof_case_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   clear_has_value();
   switch (from.value_case()) {
     case kReturnWithCode: {
@@ -3742,19 +3638,17 @@ Syscall::Syscall(const Syscall& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
       break;
     }
     case kSuccessOutputData: {
-      _this->_internal_set_success_output_data(
-          from._internal_success_output_data());
+      _this->_internal_set_success_output_data(from._internal_success_output_data());
       break;
     }
     case kIoData: {
-      _this->_internal_mutable_io_data()
-          ->::generated::traces::IoData::MergeFrom(from._internal_io_data());
+      _this->_internal_mutable_io_data()->::generated::traces::IoData::MergeFrom(
+          from._internal_io_data());
       break;
     }
     case kTerminated: {
-      _this->_internal_mutable_terminated()
-          ->::generated::traces::Terminated::MergeFrom(
-              from._internal_terminated());
+      _this->_internal_mutable_terminated()->::generated::traces::Terminated::MergeFrom(
+          from._internal_terminated());
       break;
     }
     case kFds: {
@@ -3769,21 +3663,22 @@ Syscall::Syscall(const Syscall& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
   // @@protoc_insertion_point(copy_constructor:generated.traces.Syscall)
 }
 
-inline void Syscall::SharedCtor(::_pb::Arena* arena, bool is_message_owned) {
+inline void Syscall::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
-  new (&_impl_)
-      Impl_{decltype(_impl_.value_){}, /*decltype(_impl_._cached_size_)*/ {},
-            /*decltype(_impl_._oneof_case_)*/ {}};
+  new (&_impl_) Impl_{
+      decltype(_impl_.value_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_._oneof_case_)*/{}
+  };
   clear_has_value();
 }
 
 Syscall::~Syscall() {
   // @@protoc_insertion_point(destructor:generated.traces.Syscall)
-  if (auto* arena =
-          _internal_metadata_
-              .DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-    (void)arena;
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
     return;
   }
   SharedDtor();
@@ -3796,10 +3691,12 @@ inline void Syscall::SharedDtor() {
   }
 }
 
-void Syscall::SetCachedSize(int size) const { _impl_._cached_size_.Set(size); }
+void Syscall::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
 
 void Syscall::clear_value() {
-  // @@protoc_insertion_point(one_of_clear_start:generated.traces.Syscall)
+// @@protoc_insertion_point(one_of_clear_start:generated.traces.Syscall)
   switch (value_case()) {
     case kReturnWithCode: {
       // No need to clear
@@ -3834,20 +3731,19 @@ void Syscall::clear_value() {
   _impl_._oneof_case_[0] = VALUE_NOT_SET;
 }
 
+
 void Syscall::Clear() {
-  // @@protoc_insertion_point(message_clear_start:generated.traces.Syscall)
+// @@protoc_insertion_point(message_clear_start:generated.traces.Syscall)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   clear_value();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* Syscall::_InternalParse(const char* ptr,
-                                    ::_pbi::ParseContext* ctx) {
-#define CHK_(x) \
-  if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+const char* Syscall::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
@@ -3855,8 +3751,7 @@ const char* Syscall::_InternalParse(const char* ptr,
       // int64 return_with_code = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _internal_set_return_with_code(
-              ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
+          _internal_set_return_with_code(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -3864,8 +3759,7 @@ const char* Syscall::_InternalParse(const char* ptr,
       // uint64 success_output_data = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _internal_set_success_output_data(
-              ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
+          _internal_set_success_output_data(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -3905,8 +3799,7 @@ const char* Syscall::_InternalParse(const char* ptr,
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_
-            .mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -3919,101 +3812,90 @@ failure:
 }
 
 uint8_t* Syscall::_InternalSerialize(
-    uint8_t* target,
-    ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:generated.traces.Syscall)
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // int64 return_with_code = 1;
   if (_internal_has_return_with_code()) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
-        1, this->_internal_return_with_code(), target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(1, this->_internal_return_with_code(), target);
   }
 
   // uint64 success_output_data = 2;
   if (_internal_has_success_output_data()) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(
-        2, this->_internal_success_output_data(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_success_output_data(), target);
   }
 
   // .generated.traces.IoData io_data = 3;
   if (_internal_has_io_data()) {
-    target =
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::InternalWriteMessage(
-            3, _Internal::io_data(this),
-            _Internal::io_data(this).GetCachedSize(), target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, _Internal::io_data(this),
+        _Internal::io_data(this).GetCachedSize(), target, stream);
   }
 
   // .generated.traces.Terminated terminated = 4;
   if (_internal_has_terminated()) {
-    target =
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::InternalWriteMessage(
-            4, _Internal::terminated(this),
-            _Internal::terminated(this).GetCachedSize(), target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(4, _Internal::terminated(this),
+        _Internal::terminated(this).GetCachedSize(), target, stream);
   }
 
   // .generated.traces.Fds fds = 5;
   if (_internal_has_fds()) {
-    target =
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::InternalWriteMessage(
-            5, _Internal::fds(this), _Internal::fds(this).GetCachedSize(),
-            target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(5, _Internal::fds(this),
+        _Internal::fds(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_
-            .unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance),
-        target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:generated.traces.Syscall)
   return target;
 }
 
 size_t Syscall::ByteSizeLong() const {
-  // @@protoc_insertion_point(message_byte_size_start:generated.traces.Syscall)
+// @@protoc_insertion_point(message_byte_size_start:generated.traces.Syscall)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   switch (value_case()) {
     // int64 return_with_code = 1;
     case kReturnWithCode: {
-      total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(
-          this->_internal_return_with_code());
+      total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_return_with_code());
       break;
     }
     // uint64 success_output_data = 2;
     case kSuccessOutputData: {
-      total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(
-          this->_internal_success_output_data());
+      total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_success_output_data());
       break;
     }
     // .generated.traces.IoData io_data = 3;
     case kIoData: {
-      total_size +=
-          1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                  *_impl_.value_.io_data_);
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *_impl_.value_.io_data_);
       break;
     }
     // .generated.traces.Terminated terminated = 4;
     case kTerminated: {
-      total_size +=
-          1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                  *_impl_.value_.terminated_);
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *_impl_.value_.terminated_);
       break;
     }
     // .generated.traces.Fds fds = 5;
     case kFds: {
-      total_size +=
-          1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                  *_impl_.value_.fds_);
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *_impl_.value_.fds_);
       break;
     }
     case VALUE_NOT_SET: {
@@ -4024,20 +3906,19 @@ size_t Syscall::ByteSizeLong() const {
 }
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Syscall::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck, Syscall::MergeImpl};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* Syscall::GetClassData()
-    const {
-  return &_class_data_;
-}
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    Syscall::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Syscall::GetClassData() const { return &_class_data_; }
 
-void Syscall::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                        const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+
+void Syscall::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Syscall*>(&to_msg);
   auto& from = static_cast<const Syscall&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:generated.traces.Syscall)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   switch (from.value_case()) {
     case kReturnWithCode: {
@@ -4045,19 +3926,17 @@ void Syscall::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
       break;
     }
     case kSuccessOutputData: {
-      _this->_internal_set_success_output_data(
-          from._internal_success_output_data());
+      _this->_internal_set_success_output_data(from._internal_success_output_data());
       break;
     }
     case kIoData: {
-      _this->_internal_mutable_io_data()
-          ->::generated::traces::IoData::MergeFrom(from._internal_io_data());
+      _this->_internal_mutable_io_data()->::generated::traces::IoData::MergeFrom(
+          from._internal_io_data());
       break;
     }
     case kTerminated: {
-      _this->_internal_mutable_terminated()
-          ->::generated::traces::Terminated::MergeFrom(
-              from._internal_terminated());
+      _this->_internal_mutable_terminated()->::generated::traces::Terminated::MergeFrom(
+          from._internal_terminated());
       break;
     }
     case kFds: {
@@ -4069,19 +3948,19 @@ void Syscall::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
       break;
     }
   }
-  _this->_internal_metadata_
-      .MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-          from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Syscall::CopyFrom(const Syscall& from) {
-  // @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Syscall)
+// @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Syscall)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Syscall::IsInitialized() const { return true; }
+bool Syscall::IsInitialized() const {
+  return true;
+}
 
 void Syscall::InternalSwap(Syscall* other) {
   using std::swap;
@@ -4091,9 +3970,9 @@ void Syscall::InternalSwap(Syscall* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Syscall::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(&descriptor_table_traces_2eproto_getter,
-                                   &descriptor_table_traces_2eproto_once,
-                                   file_level_metadata_traces_2eproto[3]);
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_traces_2eproto_getter, &descriptor_table_traces_2eproto_once,
+      file_level_metadata_traces_2eproto[3]);
 }
 
 // ===================================================================
@@ -4102,37 +3981,39 @@ class Syscalls::_Internal {
  public:
 };
 
-Syscalls::Syscalls(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned)
-    : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+Syscalls::Syscalls(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:generated.traces.Syscalls)
 }
-Syscalls::Syscalls(const Syscalls& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
-  Syscalls* const _this = this;
-  (void)_this;
-  new (&_impl_) Impl_{decltype(_impl_.syscalls_){from._impl_.syscalls_},
-                      decltype(_impl_.args_){from._impl_.args_},
-                      /*decltype(_impl_._cached_size_)*/ {}};
+Syscalls::Syscalls(const Syscalls& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  Syscalls* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.syscalls_){from._impl_.syscalls_}
+    , decltype(_impl_.args_){from._impl_.args_}
+    , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:generated.traces.Syscalls)
 }
 
-inline void Syscalls::SharedCtor(::_pb::Arena* arena, bool is_message_owned) {
+inline void Syscalls::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
-  new (&_impl_)
-      Impl_{decltype(_impl_.syscalls_){arena}, decltype(_impl_.args_){arena},
-            /*decltype(_impl_._cached_size_)*/ {}};
+  new (&_impl_) Impl_{
+      decltype(_impl_.syscalls_){arena}
+    , decltype(_impl_.args_){arena}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
 }
 
 Syscalls::~Syscalls() {
   // @@protoc_insertion_point(destructor:generated.traces.Syscalls)
-  if (auto* arena =
-          _internal_metadata_
-              .DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-    (void)arena;
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
     return;
   }
   SharedDtor();
@@ -4144,23 +4025,23 @@ inline void Syscalls::SharedDtor() {
   _impl_.args_.~RepeatedPtrField();
 }
 
-void Syscalls::SetCachedSize(int size) const { _impl_._cached_size_.Set(size); }
+void Syscalls::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
 
 void Syscalls::Clear() {
-  // @@protoc_insertion_point(message_clear_start:generated.traces.Syscalls)
+// @@protoc_insertion_point(message_clear_start:generated.traces.Syscalls)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   _impl_.syscalls_.Clear();
   _impl_.args_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* Syscalls::_InternalParse(const char* ptr,
-                                     ::_pbi::ParseContext* ctx) {
-#define CHK_(x) \
-  if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+const char* Syscalls::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
@@ -4203,8 +4084,7 @@ const char* Syscalls::_InternalParse(const char* ptr,
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_
-            .mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -4217,20 +4097,17 @@ failure:
 }
 
 uint8_t* Syscalls::_InternalSerialize(
-    uint8_t* target,
-    ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:generated.traces.Syscalls)
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // repeated .generated.traces.Syscall syscalls = 1;
   for (unsigned i = 0,
-                n = static_cast<unsigned>(this->_internal_syscalls_size());
-       i < n; i++) {
+      n = static_cast<unsigned>(this->_internal_syscalls_size()); i < n; i++) {
     const auto& repfield = this->_internal_syscalls(i);
-    target =
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::InternalWriteMessage(
-            1, repfield, repfield.GetCachedSize(), target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // repeated bytes args = 2;
@@ -4241,72 +4118,68 @@ uint8_t* Syscalls::_InternalSerialize(
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_
-            .unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance),
-        target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:generated.traces.Syscalls)
   return target;
 }
 
 size_t Syscalls::ByteSizeLong() const {
-  // @@protoc_insertion_point(message_byte_size_start:generated.traces.Syscalls)
+// @@protoc_insertion_point(message_byte_size_start:generated.traces.Syscalls)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // repeated .generated.traces.Syscall syscalls = 1;
   total_size += 1UL * this->_internal_syscalls_size();
   for (const auto& msg : this->_impl_.syscalls_) {
     total_size +=
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // repeated bytes args = 2;
-  total_size +=
-      1 * ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.args_.size());
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.args_.size());
   for (int i = 0, n = _impl_.args_.size(); i < n; i++) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-        _impl_.args_.Get(i));
+      _impl_.args_.Get(i));
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Syscalls::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck, Syscalls::MergeImpl};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* Syscalls::GetClassData()
-    const {
-  return &_class_data_;
-}
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    Syscalls::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Syscalls::GetClassData() const { return &_class_data_; }
 
-void Syscalls::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                         const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+
+void Syscalls::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Syscalls*>(&to_msg);
   auto& from = static_cast<const Syscalls&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:generated.traces.Syscalls)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   _this->_impl_.syscalls_.MergeFrom(from._impl_.syscalls_);
   _this->_impl_.args_.MergeFrom(from._impl_.args_);
-  _this->_internal_metadata_
-      .MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-          from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Syscalls::CopyFrom(const Syscalls& from) {
-  // @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Syscalls)
+// @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Syscalls)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Syscalls::IsInitialized() const { return true; }
+bool Syscalls::IsInitialized() const {
+  return true;
+}
 
 void Syscalls::InternalSwap(Syscalls* other) {
   using std::swap;
@@ -4316,26 +4189,23 @@ void Syscalls::InternalSwap(Syscalls* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Syscalls::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(&descriptor_table_traces_2eproto_getter,
-                                   &descriptor_table_traces_2eproto_once,
-                                   file_level_metadata_traces_2eproto[4]);
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_traces_2eproto_getter, &descriptor_table_traces_2eproto_once,
+      file_level_metadata_traces_2eproto[4]);
 }
 
 // ===================================================================
 
 Parts_ReadDataEntry_DoNotUse::Parts_ReadDataEntry_DoNotUse() {}
-Parts_ReadDataEntry_DoNotUse::Parts_ReadDataEntry_DoNotUse(
-    ::PROTOBUF_NAMESPACE_ID::Arena* arena)
+Parts_ReadDataEntry_DoNotUse::Parts_ReadDataEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
     : SuperType(arena) {}
-void Parts_ReadDataEntry_DoNotUse::MergeFrom(
-    const Parts_ReadDataEntry_DoNotUse& other) {
+void Parts_ReadDataEntry_DoNotUse::MergeFrom(const Parts_ReadDataEntry_DoNotUse& other) {
   MergeFromInternal(other);
 }
-::PROTOBUF_NAMESPACE_ID::Metadata Parts_ReadDataEntry_DoNotUse::GetMetadata()
-    const {
-  return ::_pbi::AssignDescriptors(&descriptor_table_traces_2eproto_getter,
-                                   &descriptor_table_traces_2eproto_once,
-                                   file_level_metadata_traces_2eproto[5]);
+::PROTOBUF_NAMESPACE_ID::Metadata Parts_ReadDataEntry_DoNotUse::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_traces_2eproto_getter, &descriptor_table_traces_2eproto_once,
+      file_level_metadata_traces_2eproto[5]);
 }
 
 // ===================================================================
@@ -4345,75 +4215,74 @@ class Parts::_Internal {
   static const ::generated::traces::Syscalls& other_syscalls(const Parts* msg);
 };
 
-const ::generated::traces::Syscalls& Parts::_Internal::other_syscalls(
-    const Parts* msg) {
+const ::generated::traces::Syscalls&
+Parts::_Internal::other_syscalls(const Parts* msg) {
   return *msg->_impl_.other_syscalls_;
 }
-Parts::Parts(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned)
-    : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+Parts::Parts(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   if (arena != nullptr && !is_message_owned) {
     arena->OwnCustomDestructor(this, &Parts::ArenaDtor);
   }
   // @@protoc_insertion_point(arena_constructor:generated.traces.Parts)
 }
-Parts::Parts(const Parts& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
-  Parts* const _this = this;
-  (void)_this;
-  new (&_impl_)
-      Impl_{decltype(_impl_.input_cells_){from._impl_.input_cells_},
-            decltype(_impl_.input_cell_data_){from._impl_.input_cell_data_},
-            decltype(_impl_.witnesses_){from._impl_.witnesses_},
-            decltype(_impl_.inherited_fds_){from._impl_.inherited_fds_},
-            /*decltype(_impl_._inherited_fds_cached_byte_size_)*/ {0},
-            /*decltype(_impl_.read_data_)*/ {},
-            decltype(_impl_.tx_hash_){},
-            decltype(_impl_.other_syscalls_){nullptr},
-            /*decltype(_impl_._cached_size_)*/ {}};
+Parts::Parts(const Parts& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  Parts* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.input_cells_){from._impl_.input_cells_}
+    , decltype(_impl_.input_cell_data_){from._impl_.input_cell_data_}
+    , decltype(_impl_.witnesses_){from._impl_.witnesses_}
+    , decltype(_impl_.inherited_fds_){from._impl_.inherited_fds_}
+    , /*decltype(_impl_._inherited_fds_cached_byte_size_)*/{0}
+    , /*decltype(_impl_.read_data_)*/{}
+    , decltype(_impl_.tx_hash_){}
+    , decltype(_impl_.other_syscalls_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.read_data_.MergeFrom(from._impl_.read_data_);
   _impl_.tx_hash_.InitDefault();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.tx_hash_.Set("", GetArenaForAllocation());
-#endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.tx_hash_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_tx_hash().empty()) {
-    _this->_impl_.tx_hash_.Set(from._internal_tx_hash(),
-                               _this->GetArenaForAllocation());
+    _this->_impl_.tx_hash_.Set(from._internal_tx_hash(), 
+      _this->GetArenaForAllocation());
   }
   if (from._internal_has_other_syscalls()) {
-    _this->_impl_.other_syscalls_ =
-        new ::generated::traces::Syscalls(*from._impl_.other_syscalls_);
+    _this->_impl_.other_syscalls_ = new ::generated::traces::Syscalls(*from._impl_.other_syscalls_);
   }
   // @@protoc_insertion_point(copy_constructor:generated.traces.Parts)
 }
 
-inline void Parts::SharedCtor(::_pb::Arena* arena, bool is_message_owned) {
+inline void Parts::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
-  new (&_impl_)
-      Impl_{decltype(_impl_.input_cells_){arena},
-            decltype(_impl_.input_cell_data_){arena},
-            decltype(_impl_.witnesses_){arena},
-            decltype(_impl_.inherited_fds_){arena},
-            /*decltype(_impl_._inherited_fds_cached_byte_size_)*/ {0},
-            /*decltype(_impl_.read_data_)*/ {::_pbi::ArenaInitialized(), arena},
-            decltype(_impl_.tx_hash_){},
-            decltype(_impl_.other_syscalls_){nullptr},
-            /*decltype(_impl_._cached_size_)*/ {}};
+  new (&_impl_) Impl_{
+      decltype(_impl_.input_cells_){arena}
+    , decltype(_impl_.input_cell_data_){arena}
+    , decltype(_impl_.witnesses_){arena}
+    , decltype(_impl_.inherited_fds_){arena}
+    , /*decltype(_impl_._inherited_fds_cached_byte_size_)*/{0}
+    , /*decltype(_impl_.read_data_)*/{::_pbi::ArenaInitialized(), arena}
+    , decltype(_impl_.tx_hash_){}
+    , decltype(_impl_.other_syscalls_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
   _impl_.tx_hash_.InitDefault();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  _impl_.tx_hash_.Set("", GetArenaForAllocation());
-#endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.tx_hash_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 Parts::~Parts() {
   // @@protoc_insertion_point(destructor:generated.traces.Parts)
-  if (auto* arena =
-          _internal_metadata_
-              .DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-    (void)arena;
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
     ArenaDtor(this);
     return;
   }
@@ -4433,16 +4302,18 @@ inline void Parts::SharedDtor() {
 }
 
 void Parts::ArenaDtor(void* object) {
-  Parts* _this = reinterpret_cast<Parts*>(object);
+  Parts* _this = reinterpret_cast< Parts* >(object);
   _this->_impl_.read_data_.Destruct();
 }
-void Parts::SetCachedSize(int size) const { _impl_._cached_size_.Set(size); }
+void Parts::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
 
 void Parts::Clear() {
-  // @@protoc_insertion_point(message_clear_start:generated.traces.Parts)
+// @@protoc_insertion_point(message_clear_start:generated.traces.Parts)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   _impl_.input_cells_.Clear();
   _impl_.input_cell_data_.Clear();
@@ -4458,8 +4329,7 @@ void Parts::Clear() {
 }
 
 const char* Parts::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) \
-  if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
@@ -4518,12 +4388,10 @@ const char* Parts::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
       // repeated uint64 inherited_fds = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedUInt64Parser(
-              _internal_mutable_inherited_fds(), ptr, ctx);
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedUInt64Parser(_internal_mutable_inherited_fds(), ptr, ctx);
           CHK_(ptr);
         } else if (static_cast<uint8_t>(tag) == 40) {
-          _internal_add_inherited_fds(
-              ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
+          _internal_add_inherited_fds(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -4560,8 +4428,7 @@ const char* Parts::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_
-            .mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -4574,16 +4441,15 @@ failure:
 }
 
 uint8_t* Parts::_InternalSerialize(
-    uint8_t* target,
-    ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:generated.traces.Parts)
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // bytes tx_hash = 1;
   if (!this->_internal_tx_hash().empty()) {
-    target =
-        stream->WriteBytesMaybeAliased(1, this->_internal_tx_hash(), target);
+    target = stream->WriteBytesMaybeAliased(
+        1, this->_internal_tx_hash(), target);
   }
 
   // repeated bytes input_cells = 2;
@@ -4606,11 +4472,10 @@ uint8_t* Parts::_InternalSerialize(
 
   // repeated uint64 inherited_fds = 5;
   {
-    int byte_size =
-        _impl_._inherited_fds_cached_byte_size_.load(std::memory_order_relaxed);
+    int byte_size = _impl_._inherited_fds_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
-      target = stream->WriteUInt64Packed(5, _internal_inherited_fds(),
-                                         byte_size, target);
+      target = stream->WriteUInt64Packed(
+          5, _internal_inherited_fds(), byte_size, target);
     }
   }
 
@@ -4622,123 +4487,116 @@ uint8_t* Parts::_InternalSerialize(
 
     if (stream->IsSerializationDeterministic() && map_field.size() > 1) {
       for (const auto& entry : ::_pbi::MapSorterFlat<MapType>(map_field)) {
-        target = WireHelper::InternalSerialize(6, entry.first, entry.second,
-                                               target, stream);
+        target = WireHelper::InternalSerialize(6, entry.first, entry.second, target, stream);
       }
     } else {
       for (const auto& entry : map_field) {
-        target = WireHelper::InternalSerialize(6, entry.first, entry.second,
-                                               target, stream);
+        target = WireHelper::InternalSerialize(6, entry.first, entry.second, target, stream);
       }
     }
   }
 
   // .generated.traces.Syscalls other_syscalls = 7;
   if (this->_internal_has_other_syscalls()) {
-    target =
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::InternalWriteMessage(
-            7, _Internal::other_syscalls(this),
-            _Internal::other_syscalls(this).GetCachedSize(), target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(7, _Internal::other_syscalls(this),
+        _Internal::other_syscalls(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_
-            .unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance),
-        target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:generated.traces.Parts)
   return target;
 }
 
 size_t Parts::ByteSizeLong() const {
-  // @@protoc_insertion_point(message_byte_size_start:generated.traces.Parts)
+// @@protoc_insertion_point(message_byte_size_start:generated.traces.Parts)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // repeated bytes input_cells = 2;
-  total_size += 1 * ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(
-                        _impl_.input_cells_.size());
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.input_cells_.size());
   for (int i = 0, n = _impl_.input_cells_.size(); i < n; i++) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-        _impl_.input_cells_.Get(i));
+      _impl_.input_cells_.Get(i));
   }
 
   // repeated bytes input_cell_data = 3;
-  total_size += 1 * ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(
-                        _impl_.input_cell_data_.size());
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.input_cell_data_.size());
   for (int i = 0, n = _impl_.input_cell_data_.size(); i < n; i++) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-        _impl_.input_cell_data_.Get(i));
+      _impl_.input_cell_data_.Get(i));
   }
 
   // repeated bytes witnesses = 4;
-  total_size += 1 * ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(
-                        _impl_.witnesses_.size());
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.witnesses_.size());
   for (int i = 0, n = _impl_.witnesses_.size(); i < n; i++) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-        _impl_.witnesses_.Get(i));
+      _impl_.witnesses_.Get(i));
   }
 
   // repeated uint64 inherited_fds = 5;
   {
-    size_t data_size =
-        ::_pbi::WireFormatLite::UInt64Size(this->_impl_.inherited_fds_);
+    size_t data_size = ::_pbi::WireFormatLite::
+      UInt64Size(this->_impl_.inherited_fds_);
     if (data_size > 0) {
-      total_size += 1 + ::_pbi::WireFormatLite::Int32Size(
-                            static_cast<int32_t>(data_size));
+      total_size += 1 +
+        ::_pbi::WireFormatLite::Int32Size(static_cast<int32_t>(data_size));
     }
     int cached_size = ::_pbi::ToCachedSize(data_size);
     _impl_._inherited_fds_cached_byte_size_.store(cached_size,
-                                                  std::memory_order_relaxed);
+                                    std::memory_order_relaxed);
     total_size += data_size;
   }
 
   // map<uint64, bytes> read_data = 6;
-  total_size += 1 * ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(
-                        this->_internal_read_data_size());
-  for (::PROTOBUF_NAMESPACE_ID::Map<uint64_t, std::string>::const_iterator it =
-           this->_internal_read_data().begin();
-       it != this->_internal_read_data().end(); ++it) {
-    total_size += Parts_ReadDataEntry_DoNotUse::Funcs::ByteSizeLong(it->first,
-                                                                    it->second);
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_read_data_size());
+  for (::PROTOBUF_NAMESPACE_ID::Map< uint64_t, std::string >::const_iterator
+      it = this->_internal_read_data().begin();
+      it != this->_internal_read_data().end(); ++it) {
+    total_size += Parts_ReadDataEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
   }
 
   // bytes tx_hash = 1;
   if (!this->_internal_tx_hash().empty()) {
-    total_size +=
-        1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-                this->_internal_tx_hash());
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+        this->_internal_tx_hash());
   }
 
   // .generated.traces.Syscalls other_syscalls = 7;
   if (this->_internal_has_other_syscalls()) {
-    total_size +=
-        1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                *_impl_.other_syscalls_);
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.other_syscalls_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Parts::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck, Parts::MergeImpl};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* Parts::GetClassData() const {
-  return &_class_data_;
-}
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    Parts::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Parts::GetClassData() const { return &_class_data_; }
 
-void Parts::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                      const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+
+void Parts::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Parts*>(&to_msg);
   auto& from = static_cast<const Parts&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:generated.traces.Parts)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   _this->_impl_.input_cells_.MergeFrom(from._impl_.input_cells_);
   _this->_impl_.input_cell_data_.MergeFrom(from._impl_.input_cell_data_);
@@ -4749,23 +4607,22 @@ void Parts::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
     _this->_internal_set_tx_hash(from._internal_tx_hash());
   }
   if (from._internal_has_other_syscalls()) {
-    _this->_internal_mutable_other_syscalls()
-        ->::generated::traces::Syscalls::MergeFrom(
-            from._internal_other_syscalls());
+    _this->_internal_mutable_other_syscalls()->::generated::traces::Syscalls::MergeFrom(
+        from._internal_other_syscalls());
   }
-  _this->_internal_metadata_
-      .MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-          from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Parts::CopyFrom(const Parts& from) {
-  // @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Parts)
+// @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Parts)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Parts::IsInitialized() const { return true; }
+bool Parts::IsInitialized() const {
+  return true;
+}
 
 void Parts::InternalSwap(Parts* other) {
   using std::swap;
@@ -4778,14 +4635,16 @@ void Parts::InternalSwap(Parts* other) {
   _impl_.inherited_fds_.InternalSwap(&other->_impl_.inherited_fds_);
   _impl_.read_data_.InternalSwap(&other->_impl_.read_data_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.tx_hash_, lhs_arena, &other->_impl_.tx_hash_, rhs_arena);
+      &_impl_.tx_hash_, lhs_arena,
+      &other->_impl_.tx_hash_, rhs_arena
+  );
   swap(_impl_.other_syscalls_, other->_impl_.other_syscalls_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Parts::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(&descriptor_table_traces_2eproto_getter,
-                                   &descriptor_table_traces_2eproto_once,
-                                   file_level_metadata_traces_2eproto[6]);
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_traces_2eproto_getter, &descriptor_table_traces_2eproto_once,
+      file_level_metadata_traces_2eproto[6]);
 }
 
 // ===================================================================
@@ -4796,11 +4655,12 @@ class Root::_Internal {
   static const ::generated::traces::Syscalls& syscalls(const Root* msg);
 };
 
-const ::generated::traces::Parts& Root::_Internal::parts(const Root* msg) {
+const ::generated::traces::Parts&
+Root::_Internal::parts(const Root* msg) {
   return *msg->_impl_.value_.parts_;
 }
-const ::generated::traces::Syscalls& Root::_Internal::syscalls(
-    const Root* msg) {
+const ::generated::traces::Syscalls&
+Root::_Internal::syscalls(const Root* msg) {
   return *msg->_impl_.value_.syscalls_;
 }
 void Root::set_allocated_parts(::generated::traces::Parts* parts) {
@@ -4808,7 +4668,7 @@ void Root::set_allocated_parts(::generated::traces::Parts* parts) {
   clear_value();
   if (parts) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(parts);
+      ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(parts);
     if (message_arena != submessage_arena) {
       parts = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, parts, submessage_arena);
@@ -4823,7 +4683,7 @@ void Root::set_allocated_syscalls(::generated::traces::Syscalls* syscalls) {
   clear_value();
   if (syscalls) {
     ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
-        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(syscalls);
+      ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(syscalls);
     if (message_arena != submessage_arena) {
       syscalls = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, syscalls, submessage_arena);
@@ -4833,20 +4693,21 @@ void Root::set_allocated_syscalls(::generated::traces::Syscalls* syscalls) {
   }
   // @@protoc_insertion_point(field_set_allocated:generated.traces.Root.syscalls)
 }
-Root::Root(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned)
-    : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+Root::Root(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:generated.traces.Root)
 }
-Root::Root(const Root& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
-  Root* const _this = this;
-  (void)_this;
-  new (&_impl_)
-      Impl_{decltype(_impl_.value_){}, /*decltype(_impl_._cached_size_)*/ {},
-            /*decltype(_impl_._oneof_case_)*/ {}};
+Root::Root(const Root& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  Root* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.value_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_._oneof_case_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-      from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   clear_has_value();
   switch (from.value_case()) {
     case kParts: {
@@ -4855,8 +4716,8 @@ Root::Root(const Root& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
       break;
     }
     case kSyscalls: {
-      _this->_internal_mutable_syscalls()
-          ->::generated::traces::Syscalls::MergeFrom(from._internal_syscalls());
+      _this->_internal_mutable_syscalls()->::generated::traces::Syscalls::MergeFrom(
+          from._internal_syscalls());
       break;
     }
     case VALUE_NOT_SET: {
@@ -4866,21 +4727,22 @@ Root::Root(const Root& from) : ::PROTOBUF_NAMESPACE_ID::Message() {
   // @@protoc_insertion_point(copy_constructor:generated.traces.Root)
 }
 
-inline void Root::SharedCtor(::_pb::Arena* arena, bool is_message_owned) {
+inline void Root::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
-  new (&_impl_)
-      Impl_{decltype(_impl_.value_){}, /*decltype(_impl_._cached_size_)*/ {},
-            /*decltype(_impl_._oneof_case_)*/ {}};
+  new (&_impl_) Impl_{
+      decltype(_impl_.value_){}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , /*decltype(_impl_._oneof_case_)*/{}
+  };
   clear_has_value();
 }
 
 Root::~Root() {
   // @@protoc_insertion_point(destructor:generated.traces.Root)
-  if (auto* arena =
-          _internal_metadata_
-              .DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-    (void)arena;
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
     return;
   }
   SharedDtor();
@@ -4893,10 +4755,12 @@ inline void Root::SharedDtor() {
   }
 }
 
-void Root::SetCachedSize(int size) const { _impl_._cached_size_.Set(size); }
+void Root::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
 
 void Root::clear_value() {
-  // @@protoc_insertion_point(one_of_clear_start:generated.traces.Root)
+// @@protoc_insertion_point(one_of_clear_start:generated.traces.Root)
   switch (value_case()) {
     case kParts: {
       if (GetArenaForAllocation() == nullptr) {
@@ -4917,19 +4781,19 @@ void Root::clear_value() {
   _impl_._oneof_case_[0] = VALUE_NOT_SET;
 }
 
+
 void Root::Clear() {
-  // @@protoc_insertion_point(message_clear_start:generated.traces.Root)
+// @@protoc_insertion_point(message_clear_start:generated.traces.Root)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   clear_value();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Root::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) \
-  if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
@@ -4961,8 +4825,7 @@ const char* Root::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_
-            .mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -4975,60 +4838,54 @@ failure:
 }
 
 uint8_t* Root::_InternalSerialize(
-    uint8_t* target,
-    ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:generated.traces.Root)
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   // .generated.traces.Parts parts = 1;
   if (_internal_has_parts()) {
-    target =
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::InternalWriteMessage(
-            1, _Internal::parts(this), _Internal::parts(this).GetCachedSize(),
-            target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::parts(this),
+        _Internal::parts(this).GetCachedSize(), target, stream);
   }
 
   // .generated.traces.Syscalls syscalls = 3;
   if (_internal_has_syscalls()) {
-    target =
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::InternalWriteMessage(
-            3, _Internal::syscalls(this),
-            _Internal::syscalls(this).GetCachedSize(), target, stream);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(3, _Internal::syscalls(this),
+        _Internal::syscalls(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_
-            .unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-                ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance),
-        target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:generated.traces.Root)
   return target;
 }
 
 size_t Root::ByteSizeLong() const {
-  // @@protoc_insertion_point(message_byte_size_start:generated.traces.Root)
+// @@protoc_insertion_point(message_byte_size_start:generated.traces.Root)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   switch (value_case()) {
     // .generated.traces.Parts parts = 1;
     case kParts: {
-      total_size +=
-          1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                  *_impl_.value_.parts_);
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *_impl_.value_.parts_);
       break;
     }
     // .generated.traces.Syscalls syscalls = 3;
     case kSyscalls: {
-      total_size +=
-          1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-                  *_impl_.value_.syscalls_);
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *_impl_.value_.syscalls_);
       break;
     }
     case VALUE_NOT_SET: {
@@ -5039,19 +4896,19 @@ size_t Root::ByteSizeLong() const {
 }
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Root::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck, Root::MergeImpl};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData* Root::GetClassData() const {
-  return &_class_data_;
-}
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    Root::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Root::GetClassData() const { return &_class_data_; }
 
-void Root::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
-                     const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+
+void Root::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Root*>(&to_msg);
   auto& from = static_cast<const Root&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:generated.traces.Root)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
+  (void) cached_has_bits;
 
   switch (from.value_case()) {
     case kParts: {
@@ -5060,27 +4917,27 @@ void Root::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
       break;
     }
     case kSyscalls: {
-      _this->_internal_mutable_syscalls()
-          ->::generated::traces::Syscalls::MergeFrom(from._internal_syscalls());
+      _this->_internal_mutable_syscalls()->::generated::traces::Syscalls::MergeFrom(
+          from._internal_syscalls());
       break;
     }
     case VALUE_NOT_SET: {
       break;
     }
   }
-  _this->_internal_metadata_
-      .MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(
-          from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Root::CopyFrom(const Root& from) {
-  // @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Root)
+// @@protoc_insertion_point(class_specific_copy_from_start:generated.traces.Root)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Root::IsInitialized() const { return true; }
+bool Root::IsInitialized() const {
+  return true;
+}
 
 void Root::InternalSwap(Root* other) {
   using std::swap;
@@ -5090,56 +4947,46 @@ void Root::InternalSwap(Root* other) {
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata Root::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(&descriptor_table_traces_2eproto_getter,
-                                   &descriptor_table_traces_2eproto_once,
-                                   file_level_metadata_traces_2eproto[7]);
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_traces_2eproto_getter, &descriptor_table_traces_2eproto_once,
+      file_level_metadata_traces_2eproto[7]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace traces
 }  // namespace generated
 PROTOBUF_NAMESPACE_OPEN
-template <>
-PROTOBUF_NOINLINE ::generated::traces::Terminated*
-Arena::CreateMaybeMessage<::generated::traces::Terminated>(Arena* arena) {
-  return Arena::CreateMessageInternal<::generated::traces::Terminated>(arena);
+template<> PROTOBUF_NOINLINE ::generated::traces::Terminated*
+Arena::CreateMaybeMessage< ::generated::traces::Terminated >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::generated::traces::Terminated >(arena);
 }
-template <>
-PROTOBUF_NOINLINE ::generated::traces::IoData*
-Arena::CreateMaybeMessage<::generated::traces::IoData>(Arena* arena) {
-  return Arena::CreateMessageInternal<::generated::traces::IoData>(arena);
+template<> PROTOBUF_NOINLINE ::generated::traces::IoData*
+Arena::CreateMaybeMessage< ::generated::traces::IoData >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::generated::traces::IoData >(arena);
 }
-template <>
-PROTOBUF_NOINLINE ::generated::traces::Fds*
-Arena::CreateMaybeMessage<::generated::traces::Fds>(Arena* arena) {
-  return Arena::CreateMessageInternal<::generated::traces::Fds>(arena);
+template<> PROTOBUF_NOINLINE ::generated::traces::Fds*
+Arena::CreateMaybeMessage< ::generated::traces::Fds >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::generated::traces::Fds >(arena);
 }
-template <>
-PROTOBUF_NOINLINE ::generated::traces::Syscall*
-Arena::CreateMaybeMessage<::generated::traces::Syscall>(Arena* arena) {
-  return Arena::CreateMessageInternal<::generated::traces::Syscall>(arena);
+template<> PROTOBUF_NOINLINE ::generated::traces::Syscall*
+Arena::CreateMaybeMessage< ::generated::traces::Syscall >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::generated::traces::Syscall >(arena);
 }
-template <>
-PROTOBUF_NOINLINE ::generated::traces::Syscalls*
-Arena::CreateMaybeMessage<::generated::traces::Syscalls>(Arena* arena) {
-  return Arena::CreateMessageInternal<::generated::traces::Syscalls>(arena);
+template<> PROTOBUF_NOINLINE ::generated::traces::Syscalls*
+Arena::CreateMaybeMessage< ::generated::traces::Syscalls >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::generated::traces::Syscalls >(arena);
 }
-template <>
-PROTOBUF_NOINLINE ::generated::traces::Parts_ReadDataEntry_DoNotUse*
-Arena::CreateMaybeMessage<::generated::traces::Parts_ReadDataEntry_DoNotUse>(
-    Arena* arena) {
-  return Arena::CreateMessageInternal<
-      ::generated::traces::Parts_ReadDataEntry_DoNotUse>(arena);
+template<> PROTOBUF_NOINLINE ::generated::traces::Parts_ReadDataEntry_DoNotUse*
+Arena::CreateMaybeMessage< ::generated::traces::Parts_ReadDataEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::generated::traces::Parts_ReadDataEntry_DoNotUse >(arena);
 }
-template <>
-PROTOBUF_NOINLINE ::generated::traces::Parts*
-Arena::CreateMaybeMessage<::generated::traces::Parts>(Arena* arena) {
-  return Arena::CreateMessageInternal<::generated::traces::Parts>(arena);
+template<> PROTOBUF_NOINLINE ::generated::traces::Parts*
+Arena::CreateMaybeMessage< ::generated::traces::Parts >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::generated::traces::Parts >(arena);
 }
-template <>
-PROTOBUF_NOINLINE ::generated::traces::Root*
-Arena::CreateMaybeMessage<::generated::traces::Root>(Arena* arena) {
-  return Arena::CreateMessageInternal<::generated::traces::Root>(arena);
+template<> PROTOBUF_NOINLINE ::generated::traces::Root*
+Arena::CreateMaybeMessage< ::generated::traces::Root >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::generated::traces::Root >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 
