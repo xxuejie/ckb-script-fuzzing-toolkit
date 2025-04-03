@@ -25,6 +25,8 @@ jobs:
     - name: Install deps
       run: sudo apt update && sudo apt install -y clang llvm clang-format protobuf-compiler pkg-config
     - uses: actions-rust-lang/setup-rust-toolchain@v1
+    - name: fmt
+      run: make fmt && git diff --exit-code
     - name: Clone deps
       run: |
         git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
@@ -37,9 +39,7 @@ jobs:
     - name: make
       run: |
         make CKB_C_STDLIB=ci_deps/ckb-c-stdlib LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
-          gen-proto fmt flatten test-build
-    - name: git diff
-      run: git diff --exit-code
+          gen-proto flatten test-build
 
   macos-build:
 
@@ -52,6 +52,8 @@ jobs:
     - name: Install deps
       run: brew install llvm protobuf pkgconfig
     - uses: actions-rust-lang/setup-rust-toolchain@v1
+    - name: fmt
+      run: make fmt && git diff --exit-code
     - name: Clone deps
       run: |
         git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
@@ -66,6 +68,4 @@ jobs:
         make \
           CKB_C_STDLIB=ci_deps/ckb-c-stdlib \
           LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
-          fmt test-build
-    - name: git diff
-      run: git diff --exit-code
+          gen-proto flatten test-build
