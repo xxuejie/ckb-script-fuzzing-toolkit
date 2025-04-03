@@ -1,3 +1,0 @@
-[submodule "deps/libprotobuf-mutator"]
-	path = deps/libprotobuf-mutator
-	url = https://github.com/google/libprotobuf-mutator
