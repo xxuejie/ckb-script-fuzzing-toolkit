@@ -5,8 +5,7 @@ CLANG := $(shell $(TOP)/scripts/find_clang)
 CLANG_FORMAT := $(subst clang,clang-format,$(CLANG))
 
 CKB_C_STDLIB := $(cur_dir)/deps/ckb-c-stdlib
-
-all: fmt flatten
+LIBPROTOBUF_MUTATOR := $(cur_dir)/deps/libprotobuf-mutator
 
 fmt:
 	$(CLANG_FORMAT) --style='{BasedOnStyle: google, SortIncludes: false}' -i \
@@ -18,4 +17,10 @@ flatten:
 		-o amalgamated/fuzzing_syscalls_all_in_one.h \
 		mock_syscalls $(CKB_C_STDLIB)
 
-.PHONY: fmt
+test-build:
+	clang++-18 -g -Wall -O3 -c test/test.cc -o test.o \
+		-I mock_syscalls -I $(CKB_C_STDLIB) -I $(LIBPROTOBUF_MUTATOR)
+	clang++-18 -g -Wall -O3 -c test/test.cc -o test_amalgamated.o \
+		-I amalgamated -I $(CKB_C_STDLIB) -I $(LIBPROTOBUF_MUTATOR)
+
+.PHONY: flatten fmt test-build
