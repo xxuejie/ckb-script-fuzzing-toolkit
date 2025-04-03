@@ -30,8 +30,8 @@ jobs:
         git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
         cd ci_deps/ckb-c-stdlib
         git checkout 7245b6268ef623f204501dc2beb6b3ae7d7b3cf4
-    - name: make CKB_C_STDLIB=ci_deps/ckb-c-sdlib
-      run: make
+    - name: make
+      run: make CKB_C_STDLIB=ci_deps/ckb-c-stdlib
     - name: git diff
       run: git diff --exit-code
 
@@ -46,7 +46,12 @@ jobs:
     - name: Install latest llvm
       run: brew install llvm
     - uses: actions-rust-lang/setup-rust-toolchain@v1
+    - name: Clone deps
+      run: |
+        git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
+        cd ci_deps/ckb-c-stdlib
+        git checkout 7245b6268ef623f204501dc2beb6b3ae7d7b3cf4
     - name: make
-      run: make
+      run: make CKB_C_STDLIB=ci_deps/ckb-c-stdlib
     - name: git diff
       run: git diff --exit-code
