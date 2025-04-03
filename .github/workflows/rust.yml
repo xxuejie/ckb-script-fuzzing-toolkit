@@ -71,6 +71,6 @@ jobs:
           PROTOC=$PROTOBUF_PATH/bin/protoc
           CKB_C_STDLIB=ci_deps/ckb-c-stdlib \
           LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
-          gen-proto fmt flatten test-build
+          fmt test-build
     - name: git diff
       run: git diff --exit-code
