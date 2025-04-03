@@ -25,3 +25,9 @@ $ make flatten
 ```
 
 Then just copy `amalgamated/fuzzing_syscalls_all_in_one.h` anywhere you like and just get rid of the whole toolkit repo. You will be good to go.
+
+Or you can use our one-liner build script:
+
+```
+$ curl -sSf https://raw.githubusercontent.com/xxuejie/ckb-script-fuzzing-toolkit/refs/heads/main/build_single_header.sh | sh
+```
