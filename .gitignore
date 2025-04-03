@@ -1,2 +1,4 @@
 /*.o
 /ci_deps/
+mock_syscalls/traces.pb.h
+mock_syscalls/traces.pb.cc
