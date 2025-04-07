@@ -1,7 +1,12 @@
-#ifndef CKB_FUZZING_MOCK_SYSCALLS_H_
-#define CKB_FUZZING_MOCK_SYSCALLS_H_
+#ifndef CKB_FUZZING_SYSCALLS_H_
+#define CKB_FUZZING_SYSCALLS_H_
 
-#ifdef CKB_C_STDLIB_CKB_SYSCALLS_H_
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#if defined(CKB_C_STDLIB_CKB_SYSCALLS_H_) || \
+    defined(CKB_C_STDLIB_CKB_RAW_SYSCALLS_H_)
 #error \
     "fuzzing_syscalls.h cannot be used with ckb_syscalls.h, please use ckb_syscall_apis.h instead."
 #endif
@@ -16,22 +21,10 @@
 #define CKB_FUZZING_UNEXPECTED 19
 #endif
 
-/* Forward declarations required by C / C++ */
-
-#include "traces.pb.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "ckb_consts.h"
+#include "ckb_syscall_apis.h"
 
 extern int CKB_FUZZING_ENTRYPOINT(int argc, char* argv[]);
-
-int ckb_fuzzing_start_syscall_flavor(
-    const generated::traces::Syscalls* syscalls);
-
-#ifdef __cplusplus
-}
-#endif
 
 /*
  * !!!!!!!!!!!!!!!!!!!!!!!IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -40,4 +33,8 @@ int ckb_fuzzing_start_syscall_flavor(
  */
 #define main CKB_FUZZING_ENTRYPOINT
 
-#endif /* CKB_FUZZING_MOCK_SYSCALLS_H_ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* CKB_FUZZING_SYSCALLS_H_ */

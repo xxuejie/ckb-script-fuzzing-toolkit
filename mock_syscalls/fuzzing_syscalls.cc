@@ -2,7 +2,7 @@
  * Mock syscall implementations in fuzzing
  */
 
-#include "fuzzing_syscalls.h"
+#include "fuzzing_syscalls_internal.h"
 
 #include <assert.h>
 #include <setjmp.h>
@@ -11,9 +11,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-
-#include "ckb_consts.h"
-#include "ckb_syscall_apis.h"
 
 typedef enum {
   _CKB_FUZZING_SYSCALL_FLAVOR = 1,

@@ -6,7 +6,7 @@
  */
 
 #include "traces.pb.h"
-#include "fuzzing_syscalls.h"
+#include "fuzzing_syscalls_internal.h"
 
 #include <fstream>
 #include <iostream>

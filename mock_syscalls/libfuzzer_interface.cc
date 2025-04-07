@@ -4,7 +4,7 @@
  * https://github.com/google/libprotobuf-mutator
  */
 
-#include "fuzzing_syscalls.h"
+#include "fuzzing_syscalls_internal.h"
 
 #include <src/libfuzzer/libfuzzer_macro.h>
 
