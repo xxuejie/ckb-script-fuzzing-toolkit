@@ -245,7 +245,19 @@ extern int CKB_FUZZING_ENTRYPOINT(int argc, char* argv[]);
 #endif /* CKB_FUZZING_SYSCALLS_H_ */
 /* End of fuzzing_syscalls.h */
 
+/*
+ * Actual implementations, macros are provided to tweak single header
+ * behaviors. Some like it, but some do not.
+ */
+#ifdef CKB_FUZZING_SINGLE_HEADER_MODE
+#define CKB_FUZZING_INCLUDE_PROTOBUF_IMPL
+#define CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL
+#endif
+
 /* Internal definitions, this must live outside any ifdefs */
+#if defined(CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL) ||    \
+    defined(CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE) || \
+    defined(CKB_FUZZING_DEFINE_FILENAME_INTERFACE)
 /* Start of fuzzing_syscalls_internal.h */
 #ifndef CKB_FUZZING_SYSCALLS_INTERNAL_H_
 #define CKB_FUZZING_SYSCALLS_INTERNAL_H_
@@ -2952,66 +2964,10 @@ int ckb_fuzzing_start_syscall_flavor(
 
 #endif /* CKB_FUZZING_SYSCALLS_INTERNAL_H_ */
 /* End of fuzzing_syscalls_internal.h */
-
-/* Fuzzer interfaces */
-#ifdef CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE
-/* Start of libfuzzer_interface.cc */
-/*
- * Entrypoint for LLVM libfuzzer, it requires libprotobuf-mutator:
- *
- * https://github.com/google/libprotobuf-mutator
- */
-
-/* fuzzing_syscalls_internal.h has already been included. */
-
-#include <src/libfuzzer/libfuzzer_macro.h>
-
-DEFINE_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
-  ckb_fuzzing_start_syscall_flavor(&syscalls);
-}
-/* End of libfuzzer_interface.cc */
-#endif /* CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE */
-
-#ifdef CKB_FUZZING_DEFINE_FILENAME_INTERFACE
-/* Start of file_interface.cc */
-/*
- * A standard entrypoint interface that builds the code into a binary,
- * which then reads from a file for fuzzing input data.
- *
- * This interface should fit honggfuzz, AFL and other traditional fuzzers.
- */
-
-/* traces.pb.h has already been included. */
-/* fuzzing_syscalls_internal.h has already been included. */
-
-#include <fstream>
-#include <iostream>
-using namespace std;
-
-#undef main
-int main(int argc, char* argv[]) {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  if (argc != 2) {
-    printf("Usage: %s <INPUT FILE>\n", argv[0]);
-    return 1;
-  }
-
-  generated::traces::Syscalls syscalls;
-  {
-    fstream input(argv[1], ios::in | ios::binary);
-    if (!syscalls.ParseFromIstream(&input)) {
-      return -1;
-    }
-  }
-
-  return ckb_fuzzing_start_syscall_flavor(&syscalls);
-}
-#define main CKB_FUZZING_ENTRYPOINT
-/* End of file_interface.cc */
-#endif /* CKB_FUZZING_DEFINE_FILENAME_INTERFACE */
+#endif /* CKB_FUZZING_INCLUDE_INTERNAL_DEFS */
 
 /* Extra syscall utilities that can be handy */
+#ifdef CKB_FUZZING_INCLUDE_SYSCALL_UTILS
 /* Start of ckb_syscall_utils.h */
 #ifndef CKB_C_STDLIB_CKB_SYSCALL_UTILS_H_
 #define CKB_C_STDLIB_CKB_SYSCALL_UTILS_H_
@@ -3248,16 +3204,7 @@ int ckb_spawn_cell(const uint8_t* code_hash, uint8_t hash_type, uint32_t offset,
 
 #endif /* CKB_C_STDLIB_CKB_SYSCALL_UTILS_H_ */
 /* End of ckb_syscall_utils.h */
-
-/*
- * Actual implementations, macros are provided to tweak single header
- * behaviors. Some like it, but some do not.
- */
-
-#ifdef CKB_FUZZING_SINGLE_HEADER_MODE
-#define CKB_FUZZING_INCLUDE_PROTOBUF_IMPL
-#define CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL
-#endif
+#endif /* CKB_FUZZING_INCLUDE_SYSCALL_UTILS */
 
 #ifdef CKB_FUZZING_INCLUDE_PROTOBUF_IMPL
 /* Start of traces.pb.cc */
@@ -5881,5 +5828,63 @@ int ckb_load_block_extension(void* addr, uint64_t* len, size_t offset,
 #undef FETCH_SYSCALL
 /* End of fuzzing_syscalls.cc */
 #endif /* CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL */
+
+/* Fuzzer interfaces */
+#ifdef CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE
+/* Start of libfuzzer_interface.cc */
+/*
+ * Entrypoint for LLVM libfuzzer, it requires libprotobuf-mutator:
+ *
+ * https://github.com/google/libprotobuf-mutator
+ */
+
+/* fuzzing_syscalls_internal.h has already been included. */
+
+#include <src/libfuzzer/libfuzzer_macro.h>
+
+DEFINE_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
+  ckb_fuzzing_start_syscall_flavor(&syscalls);
+}
+/* End of libfuzzer_interface.cc */
+#endif /* CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE */
+
+#ifdef CKB_FUZZING_DEFINE_FILENAME_INTERFACE
+/* Start of file_interface.cc */
+/*
+ * A standard entrypoint interface that builds the code into a binary,
+ * which then reads from a file for fuzzing input data.
+ *
+ * This interface should fit honggfuzz, AFL and other traditional fuzzers.
+ */
+
+/* traces.pb.h has already been included. */
+/* fuzzing_syscalls_internal.h has already been included. */
+
+#include <fstream>
+#include <iostream>
+using namespace std;
+
+#undef main
+int main(int argc, char* argv[]) {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  if (argc != 2) {
+    printf("Usage: %s <INPUT FILE>\n", argv[0]);
+    return 1;
+  }
+
+  generated::traces::Syscalls syscalls;
+  {
+    fstream input(argv[1], ios::in | ios::binary);
+    if (!syscalls.ParseFromIstream(&input)) {
+      return -1;
+    }
+  }
+
+  return ckb_fuzzing_start_syscall_flavor(&syscalls);
+}
+#define main CKB_FUZZING_ENTRYPOINT
+/* End of file_interface.cc */
+#endif /* CKB_FUZZING_DEFINE_FILENAME_INTERFACE */
 
 #endif /* CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_ */
