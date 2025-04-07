@@ -1,10 +1,13 @@
 #ifndef CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_
 #define CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_
 
+/* CKB script visible fuzzing APIs */
 #include "fuzzing_syscalls.h"
 
-/* Fuzzer interfaces */
+/* Internal definitions, this must live outside any ifdefs */
+#include "fuzzing_syscalls_internal.h"
 
+/* Fuzzer interfaces */
 #ifdef CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE
 #include "libfuzzer_interface.cc"
 #endif /* CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE */

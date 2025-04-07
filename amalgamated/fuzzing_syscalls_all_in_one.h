@@ -1,6 +1,7 @@
 #ifndef CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_
 #define CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_
 
+/* CKB script visible fuzzing APIs */
 /* Start of fuzzing_syscalls.h */
 #ifndef CKB_FUZZING_SYSCALLS_H_
 #define CKB_FUZZING_SYSCALLS_H_
@@ -244,16 +245,7 @@ extern int CKB_FUZZING_ENTRYPOINT(int argc, char* argv[]);
 #endif /* CKB_FUZZING_SYSCALLS_H_ */
 /* End of fuzzing_syscalls.h */
 
-/* Fuzzer interfaces */
-
-#ifdef CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE
-/* Start of libfuzzer_interface.cc */
-/*
- * Entrypoint for LLVM libfuzzer, it requires libprotobuf-mutator:
- *
- * https://github.com/google/libprotobuf-mutator
- */
-
+/* Internal definitions, this must live outside any ifdefs */
 /* Start of fuzzing_syscalls_internal.h */
 #ifndef CKB_FUZZING_SYSCALLS_INTERNAL_H_
 #define CKB_FUZZING_SYSCALLS_INTERNAL_H_
@@ -2960,6 +2952,17 @@ int ckb_fuzzing_start_syscall_flavor(
 
 #endif /* CKB_FUZZING_SYSCALLS_INTERNAL_H_ */
 /* End of fuzzing_syscalls_internal.h */
+
+/* Fuzzer interfaces */
+#ifdef CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE
+/* Start of libfuzzer_interface.cc */
+/*
+ * Entrypoint for LLVM libfuzzer, it requires libprotobuf-mutator:
+ *
+ * https://github.com/google/libprotobuf-mutator
+ */
+
+/* fuzzing_syscalls_internal.h has already been included. */
 
 #include <src/libfuzzer/libfuzzer_macro.h>
 
