@@ -5840,7 +5840,7 @@ int ckb_load_block_extension(void* addr, uint64_t* len, size_t offset,
 
 #include <src/libfuzzer/libfuzzer_macro.h>
 
-DEFINE_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
+DEFINE_BINARY_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
   ckb_fuzzing_start_syscall_flavor(&syscalls);
 }
 /* End of libfuzzer_interface.cc */
