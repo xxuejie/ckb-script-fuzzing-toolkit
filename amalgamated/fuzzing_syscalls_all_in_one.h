@@ -5857,7 +5857,6 @@ DEFINE_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
  * This interface should fit honggfuzz, AFL and other traditional fuzzers.
  */
 
-/* traces.pb.h has already been included. */
 /* fuzzing_syscalls_internal.h has already been included. */
 
 #include <fstream>

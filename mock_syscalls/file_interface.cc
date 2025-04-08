@@ -5,7 +5,6 @@
  * This interface should fit honggfuzz, AFL and other traditional fuzzers.
  */
 
-#include "traces.pb.h"
 #include "fuzzing_syscalls_internal.h"
 
 #include <fstream>
