@@ -34,4 +34,9 @@ RUN git clone https://github.com/AFLplusplus/AFLplusplus /tmp/aflpp && \
   cd / && \
   rm -rf /tmp/aflpp
 
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
+  -y --default-toolchain 1.85.0 --target riscv64imac-unknown-none-elf
+ENV PATH "${PATH}:/root/.cargo/bin"
+
+RUN mkdir /code
 WORKDIR /code
