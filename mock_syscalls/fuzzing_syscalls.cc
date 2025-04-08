@@ -45,7 +45,7 @@ int _ckb_fuzzing_start(const generated::traces::Syscalls* syscalls) {
 
   // Flatten args in protobuf to plain array
   // At the start, each argv item requires a pointer, plus a NULL pointer
-  size_t offset = syscalls->args_size() * sizeof(size_t) + 1;
+  size_t offset = (syscalls->args_size() + 1) * sizeof(size_t);
   size_t argv_len = offset;
   for (int i = 0; i < syscalls->args_size(); i++) {
     // Each argv is aligned by 8 bytes.
