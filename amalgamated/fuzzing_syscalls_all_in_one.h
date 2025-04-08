@@ -5508,7 +5508,9 @@ int _ckb_fuzzing_io_data(void* addr, uint64_t* len,
     }
     read = io_data.available_data().length();
   }
-  memcpy(addr, io_data.available_data().data(), read);
+  if (read > 0) {
+    memcpy(addr, io_data.available_data().data(), read);
+  }
   *len = io_data.available_data().length() + io_data.additional_length();
 
   *counter += 1;
