@@ -5427,9 +5427,7 @@ void _ckb_fuzzing_cleanup() {
     if (_CKB_FUZZING_GCONTEXT->traces != NULL) {
       assert(_CKB_FUZZING_GCONTEXT->flavor == _CKB_FUZZING_SYSCALL_FLAVOR);
 
-      const generated::traces::Syscalls* syscalls =
-          (const generated::traces::Syscalls*)_CKB_FUZZING_GCONTEXT->traces;
-      delete syscalls;
+      // traces is passed as a parameter, it should be cleaned up outside
       _CKB_FUZZING_GCONTEXT->traces = NULL;
     }
     free(_CKB_FUZZING_GCONTEXT);
