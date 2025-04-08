@@ -41,8 +41,6 @@ void _ckb_fuzzing_cleanup() {
 }
 
 int _ckb_fuzzing_start(const generated::traces::Syscalls* syscalls) {
-  _ckb_fuzzing_cleanup();
-
   // Flatten args in protobuf to plain array
   // At the start, each argv item requires a pointer, plus a NULL pointer
   size_t offset = (syscalls->args_size() + 1) * sizeof(size_t);
@@ -76,6 +74,8 @@ int _ckb_fuzzing_start(const generated::traces::Syscalls* syscalls) {
 
 int ckb_fuzzing_start_syscall_flavor(
     const generated::traces::Syscalls* syscalls) {
+  _ckb_fuzzing_cleanup();
+
   _CKB_FUZZING_GCONTEXT =
       (_ckb_fuzzing_context_t*)malloc(sizeof(_ckb_fuzzing_context_t));
   _CKB_FUZZING_GCONTEXT->flavor = _CKB_FUZZING_SYSCALL_FLAVOR;
