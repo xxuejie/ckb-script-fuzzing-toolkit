@@ -38,5 +38,10 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
   -y --default-toolchain 1.85.0 --target riscv64imac-unknown-none-elf
 ENV PATH "${PATH}:/root/.cargo/bin"
 
+RUN cargo install \
+  --git https://github.com/xxuejie/ckb-standalone-debugger \
+  --rev cf9cd084ff7d202a30ade676147e52495c7bd6b1 \
+  ckb-vm-syscall-tracer
+
 RUN mkdir /code
 WORKDIR /code
