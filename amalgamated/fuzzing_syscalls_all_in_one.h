@@ -5842,7 +5842,11 @@ int ckb_load_block_extension(void* addr, uint64_t* len, size_t offset,
 
 #include <src/libfuzzer/libfuzzer_macro.h>
 
+#ifdef CKB_FUZZING_USE_TEXT_PROTO
+DEFINE_TEXT_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
+#else
 DEFINE_BINARY_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
+#endif
   ckb_fuzzing_start_syscall_flavor(&syscalls);
 }
 /* End of libfuzzer_interface.cc */
@@ -5860,6 +5864,7 @@ DEFINE_BINARY_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
 
 /* fuzzing_syscalls_internal.h has already been included. */
 
+#include <google/protobuf/text_format.h>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -5876,7 +5881,12 @@ int main(int argc, char* argv[]) {
   generated::traces::Syscalls syscalls;
   {
     fstream input(argv[1], ios::in | ios::binary);
-    if (!syscalls.ParseFromIstream(&input)) {
+    google::protobuf::io::IstreamInputStream zinput(&input);
+#ifdef CKB_FUZZING_USE_TEXT_PROTO
+    if (!google::protobuf::TextFormat::Parse(&zinput, &syscalls)) {
+#else
+    if (!syscalls.ParseFromZeroCopyStream(&zinput)) {
+#endif
       return -1;
     }
   }
@@ -5895,6 +5905,7 @@ int main(int argc, char* argv[]) {
 
 /* fuzzing_syscalls_internal.h has already been included. */
 
+#include <google/protobuf/text_format.h>
 #include <unistd.h>
 
 __AFL_FUZZ_INIT();
@@ -5913,7 +5924,13 @@ int main() {
 
     {
       generated::traces::Syscalls syscalls;
-      if (syscalls.ParseFromArray(buf, len)) {
+      google::protobuf::io::ArrayInputStream zinput(buf, len);
+
+#ifdef CKB_FUZZING_USE_TEXT_PROTO
+      if (!google::protobuf::TextFormat::Parse(&zinput, &syscalls)) {
+#else
+      if (syscalls.ParseFromZeroCopyStream(&zinput)) {
+#endif
         ckb_fuzzing_start_syscall_flavor(&syscalls);
       }
     }
@@ -5933,6 +5950,7 @@ int main() {
  * as a component of the toolkit.
  */
 /* fuzzing_syscalls_internal.h has already been included. */
+
 #include <google/protobuf/text_format.h>
 #include <assert.h>
 #include <fstream>
@@ -5969,8 +5987,8 @@ int main(int argc, char* argv[]) {
   }
 
   string output;
-  assert(google::protobuf::TextFormat::PrintToString(syscalls, &output));
-  cout << output;
+  google::protobuf::io::OstreamOutputStream out(&cout);
+  assert(google::protobuf::TextFormat::Print(syscalls, &out));
   return 0;
 }
 #define main CKB_FUZZING_ENTRYPOINT

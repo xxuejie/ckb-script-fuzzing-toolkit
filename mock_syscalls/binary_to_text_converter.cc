@@ -4,6 +4,7 @@
  * as a component of the toolkit.
  */
 #include "fuzzing_syscalls_internal.h"
+
 #include <google/protobuf/text_format.h>
 #include <assert.h>
 #include <fstream>
@@ -40,8 +41,8 @@ int main(int argc, char* argv[]) {
   }
 
   string output;
-  assert(google::protobuf::TextFormat::PrintToString(syscalls, &output));
-  cout << output;
+  google::protobuf::io::OstreamOutputStream out(&cout);
+  assert(google::protobuf::TextFormat::Print(syscalls, &out));
   return 0;
 }
 #define main CKB_FUZZING_ENTRYPOINT

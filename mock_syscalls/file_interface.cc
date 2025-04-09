@@ -8,6 +8,7 @@
 
 #include "fuzzing_syscalls_internal.h"
 
+#include <google/protobuf/text_format.h>
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -24,7 +25,12 @@ int main(int argc, char* argv[]) {
   generated::traces::Syscalls syscalls;
   {
     fstream input(argv[1], ios::in | ios::binary);
-    if (!syscalls.ParseFromIstream(&input)) {
+    google::protobuf::io::IstreamInputStream zinput(&input);
+#ifdef CKB_FUZZING_USE_TEXT_PROTO
+    if (!google::protobuf::TextFormat::Parse(&zinput, &syscalls)) {
+#else
+    if (!syscalls.ParseFromZeroCopyStream(&zinput)) {
+#endif
       return -1;
     }
   }

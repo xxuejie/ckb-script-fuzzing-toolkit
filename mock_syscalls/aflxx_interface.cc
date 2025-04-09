@@ -4,6 +4,7 @@
 
 #include "fuzzing_syscalls_internal.h"
 
+#include <google/protobuf/text_format.h>
 #include <unistd.h>
 
 __AFL_FUZZ_INIT();
@@ -22,7 +23,13 @@ int main() {
 
     {
       generated::traces::Syscalls syscalls;
-      if (syscalls.ParseFromArray(buf, len)) {
+      google::protobuf::io::ArrayInputStream zinput(buf, len);
+
+#ifdef CKB_FUZZING_USE_TEXT_PROTO
+      if (!google::protobuf::TextFormat::Parse(&zinput, &syscalls)) {
+#else
+      if (syscalls.ParseFromZeroCopyStream(&zinput)) {
+#endif
         ckb_fuzzing_start_syscall_flavor(&syscalls);
       }
     }
