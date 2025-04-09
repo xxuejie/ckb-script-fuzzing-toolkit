@@ -46,4 +46,8 @@
 #include "aflxx_interface.cc"
 #endif /* CKB_FUZZING_DEFINE_AFLXX_INTERFACE */
 
+#ifdef CKB_FUZZING_DEFINE_BINARY_TO_TEXT_CONVERTER
+#include "binary_to_text_converter.cc"
+#endif /* CKB_FUZZING_DEFINE_BINARY_TO_TEXT_CONVERTER */
+
 #endif /* CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_ */
