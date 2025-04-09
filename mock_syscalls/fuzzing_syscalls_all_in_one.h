@@ -42,4 +42,8 @@
 #include "file_interface.cc"
 #endif /* CKB_FUZZING_DEFINE_FILENAME_INTERFACE */
 
+#ifdef CKB_FUZZING_DEFINE_AFLXX_INTERFACE
+#include "aflxx_interface.cc"
+#endif /* CKB_FUZZING_DEFINE_AFLXX_INTERFACE */
+
 #endif /* CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_ */

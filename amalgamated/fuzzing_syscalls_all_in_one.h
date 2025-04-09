@@ -5854,7 +5854,8 @@ DEFINE_BINARY_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
  * A standard entrypoint interface that builds the code into a binary,
  * which then reads from a file for fuzzing input data.
  *
- * This interface should fit honggfuzz, AFL and other traditional fuzzers.
+ * This interface should fit honggfuzz, and possibly other fuzzers that
+ * only require external tweaking.
  */
 
 /* fuzzing_syscalls_internal.h has already been included. */
@@ -5885,5 +5886,43 @@ int main(int argc, char* argv[]) {
 #define main CKB_FUZZING_ENTRYPOINT
 /* End of file_interface.cc */
 #endif /* CKB_FUZZING_DEFINE_FILENAME_INTERFACE */
+
+#ifdef CKB_FUZZING_DEFINE_AFLXX_INTERFACE
+/* Start of aflxx_interface.cc */
+/*
+ * Entrypoint for AFLplusplus fuzzer
+ */
+
+/* fuzzing_syscalls_internal.h has already been included. */
+
+#include <unistd.h>
+
+__AFL_FUZZ_INIT();
+
+#undef main
+int main() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#ifdef __AFL_HAVE_MANUAL_CONTROL
+  __AFL_INIT();
+#endif
+  unsigned char *buf = __AFL_FUZZ_TESTCASE_BUF;
+
+  while (__AFL_LOOP(10000)) {
+    int len = __AFL_FUZZ_TESTCASE_LEN;
+
+    {
+      generated::traces::Syscalls syscalls;
+      if (syscalls.ParseFromArray(buf, len)) {
+        ckb_fuzzing_start_syscall_flavor(&syscalls);
+      }
+    }
+  }
+
+  return 0;
+}
+#define main CKB_FUZZING_ENTRYPOINT
+/* End of aflxx_interface.cc */
+#endif /* CKB_FUZZING_DEFINE_AFLXX_INTERFACE */
 
 #endif /* CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_ */

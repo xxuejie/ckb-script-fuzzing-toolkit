@@ -2,7 +2,8 @@
  * A standard entrypoint interface that builds the code into a binary,
  * which then reads from a file for fuzzing input data.
  *
- * This interface should fit honggfuzz, AFL and other traditional fuzzers.
+ * This interface should fit honggfuzz, and possibly other fuzzers that
+ * only require external tweaking.
  */
 
 #include "fuzzing_syscalls_internal.h"
