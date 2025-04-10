@@ -40,7 +40,7 @@ ENV PATH "${PATH}:/root/.cargo/bin"
 
 RUN cargo install \
   --git https://github.com/xxuejie/ckb-standalone-debugger \
-  --rev cf9cd084ff7d202a30ade676147e52495c7bd6b1 \
+  --rev ac77ef1d3cf9322e486a1d741e59f6acf462d2c1 \
   ckb-vm-syscall-tracer
 
 RUN mkdir /code
