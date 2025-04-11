@@ -323,6 +323,7 @@ int ckb_spawn(size_t index, size_t source, size_t place, size_t bounds,
   ASSERT_SYSCALL_FLAVOR;
 
   if (syscall.has_success_output_data()) {
+    _CKB_FUZZING_GCONTEXT->counter += 1;
     *spawn_args->process_id = syscall.success_output_data();
     return CKB_SUCCESS;
   }
@@ -334,6 +335,7 @@ int ckb_wait(uint64_t pid, int8_t* exit_code) {
   ASSERT_SYSCALL_FLAVOR;
 
   if (syscall.has_success_output_data()) {
+    _CKB_FUZZING_GCONTEXT->counter += 1;
     *exit_code = (int8_t)syscall.success_output_data();
     return CKB_SUCCESS;
   }
@@ -355,6 +357,7 @@ int ckb_pipe(uint64_t out_fds[2]) {
     if (fds.fds_size() != 2) {
       return CKB_FUZZING_UNEXPECTED;
     }
+    _CKB_FUZZING_GCONTEXT->counter += 1;
     out_fds[0] = fds.fds(0);
     out_fds[1] = fds.fds(1);
     return CKB_SUCCESS;
@@ -380,6 +383,7 @@ int ckb_write(uint64_t fd, const void* buffer, size_t* length) {
   ASSERT_SYSCALL_FLAVOR;
 
   if (syscall.has_success_output_data()) {
+    _CKB_FUZZING_GCONTEXT->counter += 1;
     *length = (int8_t)syscall.success_output_data();
     return CKB_SUCCESS;
   }
@@ -403,6 +407,7 @@ int ckb_inherited_fds(uint64_t* out_fds, size_t* length) {
       out_fds[i] = fds.fds(i);
     }
     *length = count;
+    _CKB_FUZZING_GCONTEXT->counter += 1;
     return CKB_SUCCESS;
   }
 
