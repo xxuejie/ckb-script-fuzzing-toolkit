@@ -2,7 +2,7 @@
  * Mock syscall implementations in fuzzing
  */
 
-#include "fuzzing_syscalls_internal.h"
+#include "syscalls/protobuf.h"
 
 #include <assert.h>
 #include <setjmp.h>
@@ -11,6 +11,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+#include <google/protobuf/text_format.h>
 
 typedef enum {
   _CKB_FUZZING_SYSCALL_FLAVOR = 1,
@@ -27,7 +29,9 @@ typedef struct {
 
 _ckb_fuzzing_context_t* _CKB_FUZZING_GCONTEXT = NULL;
 
-void _ckb_fuzzing_cleanup() {
+int ckb_fuzzing_start_with_protobuf(
+    const generated::traces::Syscalls* syscalls) {
+  // Cleanup work first
   if (_CKB_FUZZING_GCONTEXT != NULL) {
     if (_CKB_FUZZING_GCONTEXT->traces != NULL) {
       assert(_CKB_FUZZING_GCONTEXT->flavor == _CKB_FUZZING_SYSCALL_FLAVOR);
@@ -38,9 +42,13 @@ void _ckb_fuzzing_cleanup() {
     free(_CKB_FUZZING_GCONTEXT);
     _CKB_FUZZING_GCONTEXT = NULL;
   }
-}
 
-int _ckb_fuzzing_start(const generated::traces::Syscalls* syscalls) {
+  _CKB_FUZZING_GCONTEXT =
+      (_ckb_fuzzing_context_t*)malloc(sizeof(_ckb_fuzzing_context_t));
+  _CKB_FUZZING_GCONTEXT->flavor = _CKB_FUZZING_SYSCALL_FLAVOR;
+  _CKB_FUZZING_GCONTEXT->traces = syscalls;
+  _CKB_FUZZING_GCONTEXT->counter = 0;
+
   // Flatten args in protobuf to plain array
   // At the start, each argv item requires a pointer, plus a NULL pointer
   size_t offset = (syscalls->args_size() + 1) * sizeof(size_t);
@@ -72,17 +80,22 @@ int _ckb_fuzzing_start(const generated::traces::Syscalls* syscalls) {
   return _CKB_FUZZING_GCONTEXT->exit_code;
 }
 
-int ckb_fuzzing_start_syscall_flavor(
-    const generated::traces::Syscalls* syscalls) {
-  _ckb_fuzzing_cleanup();
+int ckb_fuzzing_start(const uint8_t* data, size_t length) {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  _CKB_FUZZING_GCONTEXT =
-      (_ckb_fuzzing_context_t*)malloc(sizeof(_ckb_fuzzing_context_t));
-  _CKB_FUZZING_GCONTEXT->flavor = _CKB_FUZZING_SYSCALL_FLAVOR;
-  _CKB_FUZZING_GCONTEXT->traces = syscalls;
-  _CKB_FUZZING_GCONTEXT->counter = 0;
-
-  return _ckb_fuzzing_start(syscalls);
+  generated::traces::Syscalls syscalls;
+  google::protobuf::io::ArrayInputStream zinput(data, length);
+  bool parsed = false;
+#ifdef CKB_FUZZING_USE_TEXT_PROTO
+  parsed = google::protobuf::TextFormat::Parse(&zinput, &syscalls);
+#else
+  parsed = syscalls.ParseFromZeroCopyStream(&zinput);
+#endif
+  if (parsed) {
+    return ckb_fuzzing_start_with_protobuf(&syscalls);
+  } else {
+    return CKB_FUZZING_UNEXPECTED;
+  }
 }
 
 #define FETCH_SYSCALL(syscalls, counter)          \

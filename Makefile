@@ -4,35 +4,71 @@ TOP := $(cur_dir)
 CLANG := $(shell $(TOP)/scripts/find_clang)
 CLANG_FORMAT := $(subst clang,clang-format,$(CLANG))
 CLANGXX := $(subst clang,clang++,$(CLANG))
+LLVM_AR := $(subst clang,llvm-ar,$(CLANG))
+
+HFUZZ_CLANGXX := hfuzz-clang++
+AFLXX_CLANGXX := afl-clang-fast++
 
 PROTOC := protoc
 PKGCONFIG := pkg-config
-PROTOBUF_CFLAGS := $(shell $(PKGCONFIG) --cflags protobuf)
 
 CKB_C_STDLIB := $(cur_dir)/deps/ckb-c-stdlib
-LIBPROTOBUF_MUTATOR := $(cur_dir)/deps/libprotobuf-mutator
+CUSTOM_CFLAGS := -I $(CKB_C_STDLIB) \
+	$(shell $(PKGCONFIG) --cflags libprotobuf-mutator) \
+	$(shell $(PKGCONFIG) --cflags protobuf)
 
-SOURCES := $(shell find mock_syscalls -type f -name "*.h" -o -name "*.cc" | grep -v \.pb\.)
+CFLAGS := $(CUSTOM_CFLAGS) -g -Wall -O3 -I include -I src -I protos
 
-gen-proto:
-	cd mock_syscalls && $(PROTOC) --cpp_out=. traces.proto
+SRCS := $(shell find src -name "*.cc")
+HDRS := $(shell find src include -name "*.h")
+PROTO_SRCS := protos/traces.pb.cc
+
+all: libfuzzer hfuzz aflxx
+
+libfuzzer: obj/libckb-fuzzing-libfuzzer-protobuf.a
+hfuzz: obj/libckb-fuzzing-hfuzz-protobuf.a
+aflxx: obj/libckb-fuzzing-aflxx-protobuf.a
+
+obj/libckb-fuzzing-libfuzzer-protobuf.a: obj/libfuzzer/src/interfaces/libfuzzer.o \
+	obj/libfuzzer/src/syscalls/protobuf.o obj/libfuzzer/protos/traces.pb.o
+obj/libckb-fuzzing-aflxx-protobuf.a: obj/aflxx/src/interfaces/aflxx.o \
+	obj/aflxx/src/syscalls/protobuf.o obj/aflxx/protos/traces.pb.o
+obj/libckb-fuzzing-hfuzz-protobuf.a: obj/hfuzz/src/interfaces/file.o \
+	obj/hfuzz/src/syscalls/protobuf.o obj/hfuzz/protos/traces.pb.o
+
+obj/libfuzzer/%.o: %.cc $(HDRS) $(PROTO_SRCS)
+	mkdir -p $(dir $@)
+	$(CLANGXX) $(CFLAGS) -c $< -o $@
+
+obj/hfuzz/%.o: %.cc $(HDRS) $(PROTO_SRCS)
+	mkdir -p $(dir $@)
+	$(HFUZZ_CLANGXX) $(CFLAGS) -c $< -o $@
+
+obj/aflxx/%.o: %.cc $(HDRS) $(PROTO_SRCS)
+	mkdir -p $(dir $@)
+	$(AFLXX_CLANGXX) $(CFLAGS) -c $< -o $@
+
+obj/%.a:
+	mkdir -p $(dir $@)
+	$(LLVM_AR) -rc $@ $^
+
+# For simplicity, we are only dealing with traces.pb.cc in this makefile,
+# we will just assume traces.pb.h will be generated together with traces.pb.cc
+protos/traces.pb.cc: protos/traces.proto
+	cd protos && $(PROTOC) --cpp_out=. traces.proto
+
+clean:
+	rm -rf obj protos/*.pb.*
+	cargo clean --manifest-path tools/flattener/Cargo.toml
 
 fmt:
 	$(CLANG_FORMAT) --style='{BasedOnStyle: google, SortIncludes: false}' -i \
-		$(SOURCES)
+		$(SRCS) $(HDRS)
 
-flatten: gen-proto
+flatten: $(PROTO_SRCS)
 	cargo run --manifest-path tools/flattener/Cargo.toml -- \
-		-i mock_syscalls/fuzzing_syscalls_all_in_one.h \
+		-i amalgamated/index.h \
 		-o amalgamated/fuzzing_syscalls_all_in_one.h \
-		mock_syscalls $(CKB_C_STDLIB)
+		src include protos $(CKB_C_STDLIB)
 
-test-build: flatten gen-proto
-	$(CLANGXX) -g -Wall -O3 -c test/test.cc -o test.o \
-		$(PROTOBUF_CFLAGS) \
-		-I mock_syscalls -I $(CKB_C_STDLIB) -I $(LIBPROTOBUF_MUTATOR)
-	$(CLANGXX) -g -Wall -O3 -c test/test.cc -o test_amalgamated.o \
-		$(PROTOBUF_CFLAGS) \
-		-I amalgamated -I $(CKB_C_STDLIB) -I $(LIBPROTOBUF_MUTATOR)
-
-.PHONY: flatten fmt gen-proto test-build
+.PHONY: libfuzzer hfuzz aflxx clean fmt flatten

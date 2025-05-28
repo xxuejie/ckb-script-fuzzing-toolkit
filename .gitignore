@@ -1,4 +1,3 @@
-/*.o
-/ci_deps/
-/mock_syscalls/traces.pb.h
-/mock_syscalls/traces.pb.cc
+/obj
+/protos/*.pb.*
+/amalgamated/fuzzing_syscalls_all_in_one.h

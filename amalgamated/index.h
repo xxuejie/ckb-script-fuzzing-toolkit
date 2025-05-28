@@ -17,7 +17,7 @@
 #if defined(CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL) ||    \
     defined(CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE) || \
     defined(CKB_FUZZING_DEFINE_FILENAME_INTERFACE)
-#include "fuzzing_syscalls_internal.h"
+#include "syscalls/protobuf.h"
 #endif /* CKB_FUZZING_INCLUDE_INTERNAL_DEFS */
 
 /* Extra syscall utilities that can be handy */
@@ -30,24 +30,24 @@
 #endif /* CKB_FUZZING_INCLUDE_PROTOBUF_IMPL */
 
 #ifdef CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL
-#include "fuzzing_syscalls.cc"
+#include "syscalls/protobuf.cc"
 #endif /* CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL */
 
 /* Fuzzer interfaces */
 #ifdef CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE
-#include "libfuzzer_interface.cc"
+#include "interfaces/libfuzzer.cc"
 #endif /* CKB_FUZZING_DEFINE_LLVM_FUZZER_INTERFACE */
 
 #ifdef CKB_FUZZING_DEFINE_FILENAME_INTERFACE
-#include "file_interface.cc"
+#include "interfaces/file.cc"
 #endif /* CKB_FUZZING_DEFINE_FILENAME_INTERFACE */
 
 #ifdef CKB_FUZZING_DEFINE_AFLXX_INTERFACE
-#include "aflxx_interface.cc"
+#include "interfaces/aflxx.cc"
 #endif /* CKB_FUZZING_DEFINE_AFLXX_INTERFACE */
 
 #ifdef CKB_FUZZING_DEFINE_BINARY_TO_TEXT_CONVERTER
-#include "binary_to_text_converter.cc"
+#include "tools/binary_to_text_converter.cc"
 #endif /* CKB_FUZZING_DEFINE_BINARY_TO_TEXT_CONVERTER */
 
 #endif /* CKB_FUZZING_MOCK_SYSCALLS_ALL_IN_ONE_H_ */

@@ -3,7 +3,7 @@
  * Since prost does not support text format, we provide the utility
  * as a component of the toolkit.
  */
-#include "fuzzing_syscalls_internal.h"
+#include "syscalls/protobuf.h"
 
 #include <google/protobuf/text_format.h>
 #include <assert.h>
