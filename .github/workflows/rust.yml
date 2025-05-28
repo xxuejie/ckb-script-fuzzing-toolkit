@@ -23,7 +23,11 @@ jobs:
       with:
         submodules: "true"
     - name: Install deps
-      run: sudo apt update && sudo apt install -y clang llvm clang-format protobuf-compiler pkg-config binutils cmake ninja-build liblzma-dev libz-dev autoconf libtool
+      run: |
+        sudo apt update
+        sudo apt install -y clang llvm clang-format protobuf-compiler pkg-config \
+          binutils cmake ninja-build liblzma-dev libz-dev autoconf libtool \
+          binutils-dev libunwind-dev libblocksruntime-dev
     - uses: actions-rust-lang/setup-rust-toolchain@v1
     - name: Install libprotobuf-mutator
       run: |
@@ -36,5 +40,36 @@ jobs:
         sudo ninja install
         cd ../..
         rm -rf libprotobuf-mutator
+    - name: Install honggfuzz
+      run: |
+        git clone https://github.com/google/honggfuzz
+        cd honggfuzz
+        make
+        sudo make install
+        cd ..
+        rm -rf honggfuzz
+    - name: Install aflxx
+      run: |
+        git clone https://github.com/AFLplusplus/AFLplusplus
+        cd AFLplusplus
+        make source-only
+        sudo make install
+        cd ..
+        rm -rf AFLplusplus
     - name: make
       run: make all flatten fmt && git diff --exit-code
+
+  build-docker:
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: "true"
+    - name: Build in docker
+      run: docker run --rm -v `pwd`:/code docker.io/xxuejie/ckb-script-fuzzing-toolkit:20250410 make all flatten
