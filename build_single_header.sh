@@ -10,10 +10,7 @@ then
   git checkout $1
 fi
 
-git clone https://github.com/nervosnetwork/ckb-c-stdlib deps/ckb-c-stdlib
-cd deps/ckb-c-stdlib
-git checkout 7245b6268ef623f204501dc2beb6b3ae7d7b3cf4
-cd ../..
+git submodule update --init
 
 make flatten
 
