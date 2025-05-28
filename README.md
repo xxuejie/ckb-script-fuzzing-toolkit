@@ -11,23 +11,21 @@ For traditional C style users, clone the repo and generate protobuf files:
 ```
 $ git clone https://github.com/xxuejie/ckb-script-fuzzing-toolkit
 $ cd ckb-script-fuzzing-toolkit
-$ make gen-proto
+$ make
 ```
 
-All the header / source files you need will be in `mock_syscalls` folders. Depending on the fuzzing engine you use, you need to pick either `file_interface.cc` and `libfuzzer_interface.cc`, then compile it together with other `.cc` files, you will get the library to link against.
-
-For single header file lovers, use the following steps:
+However, since fuzzing objects might require special compilers for some fuzzing engines, it might be easier to compile in docker where all deps are already installed:
 
 ```
-$ git clone https://github.com/xxuejie/ckb-script-fuzzing-toolkit
-$ cd ckb-script-fuzzing-toolkit
-$ make flatten
+$ docker run --rm -v `pwd`:/code docker.io/xxuejie/ckb-script-fuzzing-toolkit:20250410 make
 ```
 
-Then just copy `amalgamated/fuzzing_syscalls_all_in_one.h` anywhere you like and just get rid of the whole toolkit repo. You will be good to go.
+There will be a series of archives created in `obj` folder for you to use.
 
-Or you can use our one-liner build script:
+For single header file lovers, you can use our one-liner build script:
 
 ```
 $ curl -sSf https://raw.githubusercontent.com/xxuejie/ckb-script-fuzzing-toolkit/refs/heads/main/build_single_header.sh | sh
 ```
+
+It will generate a siingle `fuzzing_syscalls_all_in_one.h` header file containing everything for ease of integration.
