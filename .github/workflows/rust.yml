@@ -24,7 +24,7 @@ jobs:
         submodules: "true"
     - name: Install deps
       run: sudo apt update && sudo apt install -y clang llvm clang-format protobuf-compiler pkg-config \
-        binutils cmake ninja-build liblzma-dev libz-dev pkg-config autoconf libtool
+        cmake ninja-build liblzma-dev libz-dev pkg-config autoconf libtool
     - uses: actions-rust-lang/setup-rust-toolchain@v1
     - name: Install libprotobuf-mutator
       run: |
@@ -49,8 +49,18 @@ jobs:
       with:
         submodules: true
     - name: Install deps
-      run: brew install llvm
-    - name: Build in docker
-      run: docker run --rm -v `pwd`:/code docker.io/xxuejie/ckb-script-fuzzing-toolkit:20250410 make all flatten
-    - name: fmt
-      run: make fmt && git diff --exit-code
+      run: brew install llvm protobuf pkgconfig ninja cmake
+    - uses: actions-rust-lang/setup-rust-toolchain@v1
+    - name: Install libprotobuf-mutator
+      run: |
+        git clone https://github.com/google/libprotobuf-mutator
+        cd libprotobuf-mutator
+        mkdir build
+        cd build
+        cmake .. -GNinja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug
+        ninja
+        sudo ninja install
+        cd ../..
+        rm -rf libprotobuf-mutator
+    - name: make
+      run: make all flatten fmt && git diff --exit-code
