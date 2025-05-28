@@ -3,8 +3,7 @@
  *
  * https://github.com/google/libprotobuf-mutator
  */
-
-#include "fuzzing_syscalls_internal.h"
+#include "syscalls/protobuf.h"
 
 #include <src/libfuzzer/libfuzzer_macro.h>
 
@@ -13,5 +12,5 @@ DEFINE_TEXT_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
 #else
 DEFINE_BINARY_PROTO_FUZZER(const generated::traces::Syscalls& syscalls) {
 #endif
-  ckb_fuzzing_start_syscall_flavor(&syscalls);
+  ckb_fuzzing_start_with_protobuf(&syscalls);
 }

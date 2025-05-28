@@ -25,6 +25,7 @@ extern "C" {
 #include "ckb_syscall_apis.h"
 
 extern int CKB_FUZZING_ENTRYPOINT(int argc, char* argv[]);
+extern int ckb_fuzzing_start(const uint8_t* data, size_t length);
 
 /*
  * !!!!!!!!!!!!!!!!!!!!!!!IMPORTANT!!!!!!!!!!!!!!!!!!!!!!!!!!!!

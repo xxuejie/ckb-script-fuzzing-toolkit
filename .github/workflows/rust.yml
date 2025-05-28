@@ -23,51 +23,53 @@ jobs:
       with:
         submodules: "true"
     - name: Install deps
-      run: sudo apt update && sudo apt install -y clang llvm clang-format protobuf-compiler pkg-config
+      run: |
+        sudo apt update
+        sudo apt install -y clang llvm clang-format protobuf-compiler pkg-config \
+          binutils cmake ninja-build liblzma-dev libz-dev autoconf libtool \
+          binutils-dev libunwind-dev libblocksruntime-dev
     - uses: actions-rust-lang/setup-rust-toolchain@v1
-    - name: fmt
-      run: make fmt && git diff --exit-code
-    - name: Clone deps
+    - name: Install libprotobuf-mutator
       run: |
-        git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
-        cd ci_deps/ckb-c-stdlib
-        git checkout 7245b6268ef623f204501dc2beb6b3ae7d7b3cf4
+        git clone https://github.com/google/libprotobuf-mutator
+        cd libprotobuf-mutator
+        mkdir build
+        cd build
+        cmake .. -GNinja -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_BUILD_TYPE=Debug
+        ninja
+        sudo ninja install
         cd ../..
-        git clone https://github.com/google/libprotobuf-mutator ci_deps/libprotobuf-mutator
-        cd ci_deps/libprotobuf-mutator
-        git checkout dc4ced337a9fb4047e2dc727268fbac55ca82f73
-    - name: make
+        rm -rf libprotobuf-mutator
+    - name: Install honggfuzz
       run: |
-        make CKB_C_STDLIB=ci_deps/ckb-c-stdlib LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
-          gen-proto flatten test-build
-    - name: On ubuntu we can ensure amalgamated file do not change
-      run: git diff --exit-code
+        git clone https://github.com/google/honggfuzz
+        cd honggfuzz
+        make
+        sudo make install
+        cd ..
+        rm -rf honggfuzz
+    - name: Install aflxx
+      run: |
+        git clone https://github.com/AFLplusplus/AFLplusplus
+        cd AFLplusplus
+        make source-only
+        sudo make install
+        cd ..
+        rm -rf AFLplusplus
+    - name: make
+      run: make all flatten fmt && git diff --exit-code
 
-  macos-build:
+  build-docker:
 
-    runs-on: macos-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
       with:
-        submodules: true
-    - name: Install deps
-      run: brew install llvm protobuf pkgconfig
-    - uses: actions-rust-lang/setup-rust-toolchain@v1
-    - name: fmt
-      run: make fmt && git diff --exit-code
-    - name: Clone deps
-      run: |
-        git clone https://github.com/nervosnetwork/ckb-c-stdlib ci_deps/ckb-c-stdlib
-        cd ci_deps/ckb-c-stdlib
-        git checkout 7245b6268ef623f204501dc2beb6b3ae7d7b3cf4
-        cd ../..
-        git clone https://github.com/google/libprotobuf-mutator ci_deps/libprotobuf-mutator
-        cd ci_deps/libprotobuf-mutator
-        git checkout dc4ced337a9fb4047e2dc727268fbac55ca82f73
-    - name: make
-      run: |
-        make \
-          CKB_C_STDLIB=ci_deps/ckb-c-stdlib \
-          LIBPROTOBUF_MUTATOR=ci_deps/libprotobuf-mutator \
-          gen-proto flatten test-build
+        submodules: "true"
+    - name: Build in docker
+      run: docker run --rm -v `pwd`:/code docker.io/xxuejie/ckb-script-fuzzing-toolkit:20250410 make all flatten
