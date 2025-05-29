@@ -3,6 +3,7 @@
  */
 
 #include "syscalls/protobuf.h"
+#include "syscalls/argv_builder.h"
 
 #include <assert.h>
 #include <setjmp.h>
@@ -31,53 +32,29 @@ _ckb_fuzzing_context_t* _CKB_FUZZING_GCONTEXT = NULL;
 
 int ckb_fuzzing_start_with_protobuf(
     const generated::traces::Syscalls* syscalls) {
-  // Cleanup work first
-  if (_CKB_FUZZING_GCONTEXT != NULL) {
-    if (_CKB_FUZZING_GCONTEXT->traces != NULL) {
-      assert(_CKB_FUZZING_GCONTEXT->flavor == _CKB_FUZZING_SYSCALL_FLAVOR);
-
-      // traces is passed as a parameter, it should be cleaned up outside
-      _CKB_FUZZING_GCONTEXT->traces = NULL;
-    }
-    free(_CKB_FUZZING_GCONTEXT);
-    _CKB_FUZZING_GCONTEXT = NULL;
-  }
-
-  _CKB_FUZZING_GCONTEXT =
-      (_ckb_fuzzing_context_t*)malloc(sizeof(_ckb_fuzzing_context_t));
-  _CKB_FUZZING_GCONTEXT->flavor = _CKB_FUZZING_SYSCALL_FLAVOR;
-  _CKB_FUZZING_GCONTEXT->traces = syscalls;
-  _CKB_FUZZING_GCONTEXT->counter = 0;
+  _ckb_fuzzing_context_t context = {
+      .flavor = _CKB_FUZZING_SYSCALL_FLAVOR,
+      .traces = syscalls,
+      .counter = 0,
+  };
+  _CKB_FUZZING_GCONTEXT = &context;
 
   // Flatten args in protobuf to plain array
-  // At the start, each argv item requires a pointer, plus a NULL pointer
-  size_t offset = (syscalls->args_size() + 1) * sizeof(size_t);
-  size_t argv_len = offset;
+  ArgvBuilder argv_builder;
   for (int i = 0; i < syscalls->args_size(); i++) {
-    // Each argv is aligned by 8 bytes.
-    size_t current_len = syscalls->args(i).length() + 1;
-    size_t rounded_len = ((current_len + 7) / 8) * 8;
-    argv_len += rounded_len;
+    argv_builder.push(syscalls->args(i).c_str());
   }
-  char* flattened_argv = (char*)malloc(argv_len);
-  ((size_t*)flattened_argv)[syscalls->args_size()] = 0;
-  for (int i = 0; i < syscalls->args_size(); i++) {
-    ((size_t*)flattened_argv)[i] = (size_t)(&flattened_argv[offset]);
-    strcpy(&flattened_argv[offset], syscalls->args(i).c_str());
-
-    size_t current_len = syscalls->args(i).length() + 1;
-    size_t rounded_len = ((current_len + 7) / 8) * 8;
-    offset += rounded_len;
-  }
+  int argc = argv_builder.argc();
+  char** argv = argv_builder.argv();
 
   if (!setjmp(_CKB_FUZZING_GCONTEXT->buf)) {
-    _CKB_FUZZING_GCONTEXT->exit_code =
-        CKB_FUZZING_ENTRYPOINT(syscalls->args_size(), (char**)flattened_argv);
+    _CKB_FUZZING_GCONTEXT->exit_code = CKB_FUZZING_ENTRYPOINT(argc, argv);
   } else {
     // No action is needed in this branch.
   }
-  free(flattened_argv);
-  return _CKB_FUZZING_GCONTEXT->exit_code;
+  free(argv);
+  _CKB_FUZZING_GCONTEXT = NULL;
+  return context.exit_code;
 }
 
 int ckb_fuzzing_start(const uint8_t* data, size_t length) {
@@ -419,7 +396,7 @@ int ckb_inherited_fds(uint64_t* out_fds, size_t* length) {
     for (size_t i = 0; i < count; i++) {
       out_fds[i] = fds.fds(i);
     }
-    *length = count;
+    *length = fds.fds_size();
     _CKB_FUZZING_GCONTEXT->counter += 1;
     return CKB_SUCCESS;
   }
