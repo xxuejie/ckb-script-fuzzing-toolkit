@@ -58,6 +58,8 @@ jobs:
         rm -rf AFLplusplus
     - name: make
       run: make all flatten fmt && git diff --exit-code
+    - name: Build Rust code
+      run: cargo build && cargo fmt && git diff --exit-code
 
   build-docker:
 

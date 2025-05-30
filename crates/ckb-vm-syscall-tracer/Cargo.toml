@@ -1,0 +1,38 @@
+[package]
+name = "ckb-vm-syscall-tracer"
+version = "0.1.0"
+description = "A utility that runs a CKB transaction, and then gathers syscall input/outputs for each individual VM instances to seperate files"
+edition = "2024"
+
+autobins = false
+
+[[bin]]
+name = "ckb-vm-syscall-tracer"
+path = "src/tracer.rs"
+
+[[bin]]
+name = "ckb-vm-syscall-reader"
+path = "src/reader.rs"
+
+[features]
+default = ["asm"]
+asm = ["ckb-script/asm"]
+
+[dependencies]
+ckb-chain-spec.workspace = true
+ckb-mock-tx-types.workspace = true
+ckb-script.workspace = true
+ckb-types.workspace = true
+ckb-traits.workspace = true
+ckb-vm.workspace = true
+
+clap.workspace = true
+hex.workspace = true
+int-enum.workspace = true
+prost.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+
+[build-dependencies]
+prost-build.workspace = true
