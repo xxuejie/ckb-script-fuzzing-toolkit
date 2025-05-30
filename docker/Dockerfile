@@ -2,7 +2,7 @@ FROM docker.io/buildpack-deps:noble as builder
 MAINTAINER Xuejie Xiao <xxuejie@gmail.com>
 
 RUN apt-get update
-RUN apt-get install -y llvm clang lld git \
+RUN apt-get install -y llvm clang clang-format lld git \
   binutils-dev libunwind-dev libblocksruntime-dev \
   protobuf-compiler libprotobuf-dev binutils cmake \
   ninja-build liblzma-dev libz-dev pkg-config autoconf libtool
@@ -39,8 +39,8 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
 ENV PATH "${PATH}:/root/.cargo/bin"
 
 RUN cargo install \
-  --git https://github.com/xxuejie/ckb-standalone-debugger \
-  --rev ac77ef1d3cf9322e486a1d741e59f6acf462d2c1 \
+  --git https://github.com/xxuejie/ckb-script-fuzzing-toolkit \
+  --rev b3b3f42a9e72705e6574c56fc83afbfd1a3c34d2 \
   ckb-vm-syscall-tracer
 
 RUN mkdir /code
