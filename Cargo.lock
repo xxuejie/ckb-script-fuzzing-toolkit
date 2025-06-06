@@ -169,6 +169,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "buddy-alloc"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee741d62dcaf41ca303576ef890989ccb01d5dd77f8ce1a6d6c7846ab5d09efb"
+
+[[package]]
 name = "byteorder"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -235,7 +241,7 @@ dependencies = [
  "ckb-crypto",
  "ckb-dao-utils",
  "ckb-error",
- "ckb-hash",
+ "ckb-hash 0.202.0-pre",
  "ckb-jsonrpc-types",
  "ckb-logger",
  "ckb-pow",
@@ -326,16 +332,36 @@ dependencies = [
 
 [[package]]
 name = "ckb-gen-types"
+version = "0.200.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dc8b9b56ee90afca6710a512abac5c4d7dba69b39b63ed9c246ec17aee764bf8"
+dependencies = [
+ "cfg-if",
+ "ckb-hash 0.200.0",
+ "molecule",
+]
+
+[[package]]
+name = "ckb-gen-types"
 version = "0.202.0-pre"
 source = "git+https://github.com/nervosnetwork/ckb?rev=99cd201#99cd2011b677af776d6014df8f18e59900f07b80"
 dependencies = [
  "cfg-if",
  "ckb-error",
  "ckb-fixed-hash",
- "ckb-hash",
+ "ckb-hash 0.202.0-pre",
  "ckb-occupied-capacity",
  "molecule",
  "numext-fixed-uint",
+]
+
+[[package]]
+name = "ckb-hash"
+version = "0.200.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "93571b17af91fc16f03275bd70612e16092ad4d2e89eaed9cdf513cd3f1e20e7"
+dependencies = [
+ "blake2b-ref",
 ]
 
 [[package]]
@@ -420,7 +446,7 @@ version = "0.202.0-pre"
 source = "git+https://github.com/nervosnetwork/ckb?rev=99cd201#99cd2011b677af776d6014df8f18e59900f07b80"
 dependencies = [
  "byteorder",
- "ckb-hash",
+ "ckb-hash 0.202.0-pre",
  "ckb-types",
  "eaglesong",
  "log",
@@ -458,7 +484,7 @@ dependencies = [
  "byteorder",
  "ckb-chain-spec",
  "ckb-error",
- "ckb-hash",
+ "ckb-hash 0.202.0-pre",
  "ckb-logger",
  "ckb-traits",
  "ckb-types",
@@ -466,6 +492,27 @@ dependencies = [
  "faster-hex",
  "serde",
  "tokio",
+]
+
+[[package]]
+name = "ckb-std"
+version = "0.17.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d399a77aef9814044db51bfd61a4aaa42ee468bfb9a13e83ba656bd95f7793ca"
+dependencies = [
+ "buddy-alloc",
+ "cc",
+ "ckb-gen-types 0.200.0",
+ "gcd",
+]
+
+[[package]]
+name = "ckb-syscall-defs"
+version = "0.1.0"
+dependencies = [
+ "ckb-std",
+ "ckb-vm",
+ "int-enum",
 ]
 
 [[package]]
@@ -500,8 +547,8 @@ dependencies = [
  "ckb-constant",
  "ckb-error",
  "ckb-fixed-hash",
- "ckb-gen-types",
- "ckb-hash",
+ "ckb-gen-types 0.202.0-pre",
+ "ckb-hash 0.202.0-pre",
  "ckb-merkle-mountain-range",
  "ckb-occupied-capacity",
  "ckb-rational",
@@ -547,12 +594,12 @@ dependencies = [
  "ckb-chain-spec",
  "ckb-mock-tx-types",
  "ckb-script",
+ "ckb-syscall-defs",
  "ckb-traits",
  "ckb-types",
  "ckb-vm",
  "clap",
  "hex",
- "int-enum",
  "prost",
  "prost-build",
  "serde",
@@ -886,6 +933,12 @@ dependencies = [
  "pin-utils",
  "slab",
 ]
+
+[[package]]
+name = "gcd"
+version = "2.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1d758ba1b47b00caf47f24925c0074ecb20d6dfcffe7f6d53395c0465674841a"
 
 [[package]]
 name = "generic-array"

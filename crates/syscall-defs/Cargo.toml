@@ -1,0 +1,13 @@
+[package]
+name = "ckb-syscall-defs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ckb-std = { workspace = true, optional = true }
+ckb-vm.workspace = true
+int-enum.workspace = true
+
+[features]
+default = []
+ckb-std = ["dep:ckb-std"]

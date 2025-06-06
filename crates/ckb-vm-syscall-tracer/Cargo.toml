@@ -19,6 +19,8 @@ default = ["asm"]
 asm = ["ckb-script/asm"]
 
 [dependencies]
+ckb-syscall-defs = { path = "../syscall-defs", default-features = false }
+
 ckb-chain-spec.workspace = true
 ckb-mock-tx-types.workspace = true
 ckb-script.workspace = true
@@ -28,7 +30,6 @@ ckb-vm.workspace = true
 
 clap.workspace = true
 hex.workspace = true
-int-enum.workspace = true
 prost.workspace = true
 serde.workspace = true
 serde_json.workspace = true

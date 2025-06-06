@@ -19,6 +19,7 @@ use ckb_script::{
     TransactionScriptsVerifier, TxVerifyEnv,
     types::{DataPieceId, Machine},
 };
+use ckb_syscall_defs::types::{Source, SyscallCode};
 use ckb_traits::{CellDataProvider, ExtensionProvider, HeaderProvider};
 use ckb_types::{
     core::{EpochNumberWithFraction, HeaderView, cell::resolve_transaction, hardfork},
@@ -32,7 +33,6 @@ use ckb_vm::{
     snapshot2::DataSource,
 };
 use clap::{Args, ValueEnum};
-use int_enum::IntEnum;
 use prost::Message;
 use serde::{Deserialize, Serialize};
 use std::collections::{HashMap, HashSet};
@@ -1239,48 +1239,6 @@ fn normalize_locator<DL: CellDataProvider>(
     locator.length = length as u32;
 
     Ok(locator)
-}
-
-#[repr(u64)]
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, IntEnum)]
-pub enum SyscallCode {
-    LoadTransaction = 2051,
-    LoadScript = 2052,
-    LoadTxHash = 2061,
-    LoadScriptHash = 2062,
-    LoadCell = 2071,
-    LoadHeader = 2072,
-    LoadInput = 2073,
-    LoadWitness = 2074,
-    LoadCellByField = 2081,
-    LoadHeaderByField = 2082,
-    LoadInputByField = 2083,
-    LoadCellDataAsCode = 2091,
-    LoadCellData = 2092,
-    LoadBlockExtension = 2104,
-    VmVersion = 2041,
-    CurrentCycles = 2042,
-    Exec = 2043,
-    Spawn = 2601,
-    Wait = 2602,
-    ProcessId = 2603,
-    Pipe = 2604,
-    Write = 2605,
-    Read = 2606,
-    InheritedFd = 2607,
-    Close = 2608,
-    Debug = 2177,
-}
-
-#[repr(u64)]
-#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, IntEnum)]
-pub enum Source {
-    Input = 1,
-    Output = 2,
-    CellDep = 3,
-    HeaderDep = 4,
-    GroupInput = 0x0100000000000001,
-    GroupOutput = 0x0100000000000002,
 }
 
 fn delegate_to_syscalls<M: SupportMachine>(

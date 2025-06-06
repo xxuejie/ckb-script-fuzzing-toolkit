@@ -2,6 +2,7 @@
 resolver = "2"
 members = [
   "crates/ckb-vm-syscall-tracer",
+  "crates/syscall-defs",
   "tools/flattener"
 ]
 
@@ -12,8 +13,10 @@ ckb-traits = { git = "https://github.com/nervosnetwork/ckb", rev = "99cd201" }
 ckb-types = { git = "https://github.com/nervosnetwork/ckb", rev = "99cd201" }
 ckb-mock-tx-types = { git = "https://github.com/xxuejie/ckb-vm-contrib", rev = "56ae386" }
 ckb-vm = "=0.24.14"
+ckb-std = "0.17.2"
 
 clap = { version = "4.5.35", features = ["cargo", "derive"] }
+fork = "0.2.0"
 hex = "0.4"
 int-enum = "1.1.2"
 prost = "0.13.5"
