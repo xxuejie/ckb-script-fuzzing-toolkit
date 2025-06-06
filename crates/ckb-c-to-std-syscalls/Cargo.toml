@@ -1,0 +1,8 @@
+[package]
+name = "ckb-c-to-std-syscalls"
+description = "Translate ckb-std style syscall invocations to ckb-c-stdlib style syscalls"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ckb-std.workspace = true

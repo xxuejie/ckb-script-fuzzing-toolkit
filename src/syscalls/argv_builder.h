@@ -3,6 +3,9 @@
 
 #include <vector>
 
+#include <stdlib.h>
+#include <string.h>
+
 class ArgvBuilder {
   char* buffer_;
   size_t length_;

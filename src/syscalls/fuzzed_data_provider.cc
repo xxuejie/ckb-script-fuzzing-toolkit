@@ -19,9 +19,8 @@ _ckb_fuzzing_context_t* _CKB_FUZZING_GCONTEXT = NULL;
 
 int ckb_fuzzing_start(const uint8_t* data, size_t length) {
   FuzzedDataProvider provider(data, length);
-  _ckb_fuzzing_context_t context = {
-      .provider = &provider,
-  };
+  _ckb_fuzzing_context_t context;
+  context.provider = &provider;
   _CKB_FUZZING_GCONTEXT = &context;
 
   ArgvBuilder argv_builder;
@@ -98,6 +97,7 @@ int ckb_load_cell(void* addr, uint64_t* len, size_t offset, size_t index,
                   size_t source) {
   (void)offset;
   (void)index;
+  (void)source;
   (void)offset;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
@@ -108,6 +108,7 @@ int ckb_load_input(void* addr, uint64_t* len, size_t offset, size_t index,
   (void)offset;
   (void)index;
   (void)offset;
+  (void)source;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
 }
@@ -117,6 +118,7 @@ int ckb_load_header(void* addr, uint64_t* len, size_t offset, size_t index,
   (void)offset;
   (void)index;
   (void)offset;
+  (void)source;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
 }
@@ -126,6 +128,7 @@ int ckb_load_witness(void* addr, uint64_t* len, size_t offset, size_t index,
   (void)offset;
   (void)index;
   (void)offset;
+  (void)source;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
 }
@@ -147,6 +150,7 @@ int ckb_load_cell_by_field(void* addr, uint64_t* len, size_t offset,
   (void)offset;
   (void)index;
   (void)offset;
+  (void)source;
   (void)field;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
@@ -157,6 +161,7 @@ int ckb_load_header_by_field(void* addr, uint64_t* len, size_t offset,
   (void)offset;
   (void)index;
   (void)offset;
+  (void)source;
   (void)field;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
@@ -167,6 +172,7 @@ int ckb_load_input_by_field(void* addr, uint64_t* len, size_t offset,
   (void)offset;
   (void)index;
   (void)offset;
+  (void)source;
   (void)field;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
@@ -177,6 +183,7 @@ int ckb_load_cell_data(void* addr, uint64_t* len, size_t offset, size_t index,
   (void)offset;
   (void)index;
   (void)offset;
+  (void)source;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
 }
@@ -184,6 +191,13 @@ int ckb_load_cell_data(void* addr, uint64_t* len, size_t offset, size_t index,
 int ckb_load_cell_data_as_code(void* addr, size_t memory_size,
                                size_t content_offset, size_t content_size,
                                size_t index, size_t source) {
+  (void)addr;
+  (void)memory_size;
+  (void)content_offset;
+  (void)content_size;
+  (void)index;
+  (void)source;
+
   fprintf(stderr, "Load cell data as code is not supported!\n");
   abort();
 }
@@ -319,6 +333,7 @@ int ckb_load_block_extension(void* addr, uint64_t* len, size_t offset,
   (void)offset;
   (void)index;
   (void)offset;
+  (void)source;
 
   return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT->provider);
 }

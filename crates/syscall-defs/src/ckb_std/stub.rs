@@ -39,7 +39,7 @@ pub fn current_cycles() -> u64 {
 }
 
 pub fn debug(s: String) {
-    get().debug(s)
+    get().debug(&s)
 }
 
 pub fn exec(index: usize, source: Source, place: usize, bounds: usize, argv: &[&CStr]) -> u64 {

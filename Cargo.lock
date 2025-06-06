@@ -232,6 +232,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
+name = "ckb-c-to-std-syscalls"
+version = "0.1.0"
+dependencies = [
+ "ckb-std",
+]
+
+[[package]]
 name = "ckb-chain-spec"
 version = "0.202.0-pre"
 source = "git+https://github.com/nervosnetwork/ckb?rev=99cd201#99cd2011b677af776d6014df8f18e59900f07b80"
@@ -820,6 +827,16 @@ name = "fastrand"
 version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
+
+[[package]]
+name = "fdp-ckb-syscalls"
+version = "0.1.0"
+dependencies = [
+ "cc",
+ "ckb-c-to-std-syscalls",
+ "ckb-std",
+ "ckb-syscall-defs",
+]
 
 [[package]]
 name = "fixedbitset"

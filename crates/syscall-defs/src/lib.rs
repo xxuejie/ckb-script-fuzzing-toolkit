@@ -1,5 +1,4 @@
 #![no_std]
-
 #[macro_use]
 extern crate alloc;
 
@@ -18,7 +17,7 @@ use core::ffi::CStr;
 use core::marker::PhantomData;
 
 pub trait SyscallImpls {
-    fn debug(&self, s: String);
+    fn debug(&self, s: &str);
     fn exit(&self, code: i8) -> !;
     fn load_cell(&self, buf: &mut [u8], offset: usize, index: usize, source: Source) -> IoResult;
     fn load_cell_by_field(
@@ -501,7 +500,7 @@ where
                 let b = load_c_string_byte_by_byte(machine.memory_mut(), &addr)?;
                 let s = String::from_utf8(b.to_vec())
                     .map_err(|e| VMError::External(format!("String from buffer {e:?}")))?;
-                self.impls.debug(s);
+                self.impls.debug(&s);
             }
         }
         Ok(true)

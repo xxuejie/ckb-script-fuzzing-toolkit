@@ -29,8 +29,17 @@
 #include "traces.pb.cc"
 #endif /* CKB_FUZZING_INCLUDE_PROTOBUF_IMPL */
 
+#if defined(CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL) || \
+  defined(CKB_FUZZING_INCLUDE_FDP_SYSCALL_IMPL)
+#include "syscalls/argv_builder.h"
+#endif
+
 #ifdef CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL
 #include "syscalls/protobuf.cc"
+#endif /* CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL */
+
+#ifdef CKB_FUZZING_INCLUDE_FDP_SYSCALL_IMPL
+#include "syscalls/fuzzed_data_provider.cc"
 #endif /* CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL */
 
 /* Fuzzer interfaces */
