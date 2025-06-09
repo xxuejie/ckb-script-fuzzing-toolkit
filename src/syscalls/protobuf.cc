@@ -360,6 +360,7 @@ int ckb_read(uint64_t fd, void* buffer, size_t* length) {
   (void)fd;
 
   assert(sizeof(size_t) == sizeof(uint64_t));
+  // TODO: fix this wrong implementation
   WHEN_SYSCALL_FLAVOR(
       _ckb_fuzzing_io_data(buffer, (uint64_t*)length, syscalls, counter));
 

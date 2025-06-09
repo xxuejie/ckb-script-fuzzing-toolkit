@@ -1461,6 +1461,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "protobuf-ckb-syscalls"
+version = "0.1.0"
+dependencies = [
+ "ckb-syscall-defs",
+ "prost",
+ "prost-build",
+ "spin",
+]
+
+[[package]]
 name = "quote"
 version = "1.0.40"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1782,6 +1792,12 @@ checksum = "8f92a496fb766b417c996b9c5e57daf2f7ad3b0bebe1ccfca4856390e3d3bb67"
 dependencies = [
  "autocfg",
 ]
+
+[[package]]
+name = "spin"
+version = "0.10.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d5fe4ccb98d9c292d56fec89a5e07da7fc4cf0dc11e156b41793132775d3e591"
 
 [[package]]
 name = "ssri"

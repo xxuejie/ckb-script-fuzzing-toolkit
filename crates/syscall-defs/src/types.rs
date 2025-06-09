@@ -50,6 +50,12 @@ pub enum Error {
     Other(u64),
 }
 
+impl From<Error> for IoResult {
+    fn from(e: Error) -> IoResult {
+        IoResult::Error(e)
+    }
+}
+
 impl From<Error> for u64 {
     fn from(e: Error) -> u64 {
         match e {

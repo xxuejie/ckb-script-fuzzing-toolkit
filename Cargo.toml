@@ -4,6 +4,7 @@ members = [
   "crates/ckb-c-to-std-syscalls",
   "crates/ckb-vm-syscall-tracer",
   "crates/fdp-ckb-syscalls",
+  "crates/protobuf-ckb-syscalls",
   "crates/syscall-defs",
   "tools/flattener"
 ]

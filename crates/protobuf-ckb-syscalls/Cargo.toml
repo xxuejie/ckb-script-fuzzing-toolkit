@@ -1,0 +1,12 @@
+[package]
+name = "protobuf-ckb-syscalls"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ckb-syscall-defs = { path = "../syscall-defs" }
+prost.workspace = true
+spin.workspace = true
+
+[build-dependencies]
+prost-build.workspace = true
