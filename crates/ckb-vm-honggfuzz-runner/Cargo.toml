@@ -1,0 +1,10 @@
+[package]
+name = "ckb-vm-honggfuzz-runner"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ckb-script.workspace = true
+ckb-vm.workspace = true
+
+fork.workspace = true

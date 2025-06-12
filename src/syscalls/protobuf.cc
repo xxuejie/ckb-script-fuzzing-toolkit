@@ -359,12 +359,22 @@ int ckb_pipe(uint64_t out_fds[2]) {
 int ckb_read(uint64_t fd, void* buffer, size_t* length) {
   (void)fd;
 
-  assert(sizeof(size_t) == sizeof(uint64_t));
-  // TODO: fix this wrong implementation
-  WHEN_SYSCALL_FLAVOR(
-      _ckb_fuzzing_io_data(buffer, (uint64_t*)length, syscalls, counter));
+  ASSERT_SYSCALL_FLAVOR;
+  if (!syscall.has_io_data()) {
+    return CKB_FUZZING_UNEXPECTED;
+  }
 
-  return CKB_FUZZING_UNEXPECTED;
+  const generated::traces::IoData io_data = syscall.io_data();
+  size_t read = *length;
+  if (read > io_data.available_data().length()) {
+    read = io_data.available_data().length();
+  }
+  if (read > 0) {
+    memcpy(buffer, io_data.available_data().data(), read);
+  }
+  *length = read;
+  _CKB_FUZZING_GCONTEXT->counter += 1;
+  return CKB_SUCCESS;
 }
 
 int ckb_write(uint64_t fd, const void* buffer, size_t* length) {
