@@ -19,7 +19,7 @@ default = ["asm"]
 asm = ["ckb-script/asm"]
 
 [dependencies]
-ckb-syscall-defs = { path = "../syscall-defs", default-features = false }
+ckb-vm-fuzzing-utils = { path = "../ckb-vm-fuzzing-utils" }
 
 ckb-chain-spec.workspace = true
 ckb-mock-tx-types.workspace = true
@@ -27,6 +27,7 @@ ckb-script.workspace = true
 ckb-types.workspace = true
 ckb-traits.workspace = true
 ckb-vm.workspace = true
+ckb-std.workspace = true
 
 clap.workspace = true
 hex.workspace = true

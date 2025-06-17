@@ -4,9 +4,13 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-ckb-c-to-std-syscalls = { path = "../ckb-c-to-std-syscalls" }
-ckb-syscall-defs = { path = "../syscall-defs", features = ["ckb-std"] }
-ckb-std.workspace = true
+ckb-vm-fuzzing-utils = { path = "../ckb-vm-fuzzing-utils" }
+
+ckb-std = { workspace = true, features = ["stub-syscalls"] }
 
 [build-dependencies]
 cc = "1.0"
+
+[features]
+default = ["std"]
+std = []

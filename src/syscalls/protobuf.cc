@@ -3,7 +3,7 @@
  */
 
 #include "syscalls/protobuf.h"
-#include "syscalls/argv_builder.h"
+#include "syscalls/utils.h"
 
 #include <assert.h>
 #include <setjmp.h>
@@ -144,12 +144,13 @@ int64_t _ckb_fuzzing_return_code(const generated::traces::Syscalls* syscalls,
     }                                                                        \
   } while (0)
 
-int ckb_exit(int8_t code) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(exit)(int8_t code) {
   _CKB_FUZZING_GCONTEXT->exit_code = (int)code;
   longjmp(_CKB_FUZZING_GCONTEXT->buf, 1);
 }
 
-int ckb_load_tx_hash(void* addr, uint64_t* len, size_t offset) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_tx_hash)(void* addr, uint64_t* len,
+                                                 size_t offset) {
   (void)offset;
 
   WHEN_SYSCALL_FLAVOR(_ckb_fuzzing_io_data(addr, len, syscalls, counter));
@@ -157,7 +158,8 @@ int ckb_load_tx_hash(void* addr, uint64_t* len, size_t offset) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_script_hash(void* addr, uint64_t* len, size_t offset) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_script_hash)(void* addr, uint64_t* len,
+                                                     size_t offset) {
   (void)offset;
 
   WHEN_SYSCALL_FLAVOR(_ckb_fuzzing_io_data(addr, len, syscalls, counter));
@@ -165,8 +167,9 @@ int ckb_load_script_hash(void* addr, uint64_t* len, size_t offset) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_cell(void* addr, uint64_t* len, size_t offset, size_t index,
-                  size_t source) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell)(void* addr, uint64_t* len,
+                                              size_t offset, size_t index,
+                                              size_t source) {
   (void)offset;
   (void)index;
   (void)offset;
@@ -176,8 +179,9 @@ int ckb_load_cell(void* addr, uint64_t* len, size_t offset, size_t index,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_input(void* addr, uint64_t* len, size_t offset, size_t index,
-                   size_t source) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_input)(void* addr, uint64_t* len,
+                                               size_t offset, size_t index,
+                                               size_t source) {
   (void)offset;
   (void)index;
   (void)offset;
@@ -187,8 +191,9 @@ int ckb_load_input(void* addr, uint64_t* len, size_t offset, size_t index,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_header(void* addr, uint64_t* len, size_t offset, size_t index,
-                    size_t source) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_header)(void* addr, uint64_t* len,
+                                                size_t offset, size_t index,
+                                                size_t source) {
   (void)offset;
   (void)index;
   (void)offset;
@@ -198,8 +203,9 @@ int ckb_load_header(void* addr, uint64_t* len, size_t offset, size_t index,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_witness(void* addr, uint64_t* len, size_t offset, size_t index,
-                     size_t source) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_witness)(void* addr, uint64_t* len,
+                                                 size_t offset, size_t index,
+                                                 size_t source) {
   (void)offset;
   (void)index;
   (void)offset;
@@ -209,7 +215,8 @@ int ckb_load_witness(void* addr, uint64_t* len, size_t offset, size_t index,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_script(void* addr, uint64_t* len, size_t offset) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_script)(void* addr, uint64_t* len,
+                                                size_t offset) {
   (void)offset;
 
   WHEN_SYSCALL_FLAVOR(_ckb_fuzzing_io_data(addr, len, syscalls, counter));
@@ -217,7 +224,8 @@ int ckb_load_script(void* addr, uint64_t* len, size_t offset) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_transaction(void* addr, uint64_t* len, size_t offset) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_transaction)(void* addr, uint64_t* len,
+                                                     size_t offset) {
   (void)offset;
 
   WHEN_SYSCALL_FLAVOR(_ckb_fuzzing_io_data(addr, len, syscalls, counter));
@@ -225,20 +233,9 @@ int ckb_load_transaction(void* addr, uint64_t* len, size_t offset) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_cell_by_field(void* addr, uint64_t* len, size_t offset,
-                           size_t index, size_t source, size_t field) {
-  (void)offset;
-  (void)index;
-  (void)offset;
-  (void)field;
-
-  WHEN_SYSCALL_FLAVOR(_ckb_fuzzing_io_data(addr, len, syscalls, counter));
-
-  return CKB_FUZZING_UNEXPECTED;
-}
-
-int ckb_load_header_by_field(void* addr, uint64_t* len, size_t offset,
-                             size_t index, size_t source, size_t field) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell_by_field)(
+    void* addr, uint64_t* len, size_t offset, size_t index, size_t source,
+    size_t field) {
   (void)offset;
   (void)index;
   (void)offset;
@@ -249,8 +246,9 @@ int ckb_load_header_by_field(void* addr, uint64_t* len, size_t offset,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_input_by_field(void* addr, uint64_t* len, size_t offset,
-                            size_t index, size_t source, size_t field) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_header_by_field)(
+    void* addr, uint64_t* len, size_t offset, size_t index, size_t source,
+    size_t field) {
   (void)offset;
   (void)index;
   (void)offset;
@@ -261,8 +259,22 @@ int ckb_load_input_by_field(void* addr, uint64_t* len, size_t offset,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_cell_data(void* addr, uint64_t* len, size_t offset, size_t index,
-                       size_t source) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_input_by_field)(
+    void* addr, uint64_t* len, size_t offset, size_t index, size_t source,
+    size_t field) {
+  (void)offset;
+  (void)index;
+  (void)offset;
+  (void)field;
+
+  WHEN_SYSCALL_FLAVOR(_ckb_fuzzing_io_data(addr, len, syscalls, counter));
+
+  return CKB_FUZZING_UNEXPECTED;
+}
+
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell_data)(void* addr, uint64_t* len,
+                                                   size_t offset, size_t index,
+                                                   size_t source) {
   (void)offset;
   (void)index;
   (void)offset;
@@ -272,32 +284,33 @@ int ckb_load_cell_data(void* addr, uint64_t* len, size_t offset, size_t index,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_cell_data_as_code(void* addr, size_t memory_size,
-                               size_t content_offset, size_t content_size,
-                               size_t index, size_t source) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell_data_as_code)(
+    void* addr, size_t memory_size, size_t content_offset, size_t content_size,
+    size_t index, size_t source) {
   fprintf(stderr, "Load cell data as code is not supported!\n");
   abort();
 }
 
-int ckb_debug(const char* s) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(debug)(const char* s) {
   fprintf(stderr, "Script debug message: %s\n", s);
   return CKB_SUCCESS;
 }
 
-int ckb_vm_version() {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(vm_version)() {
   WHEN_SYSCALL_FLAVOR((int)_ckb_fuzzing_return_code(syscalls, counter));
 
   return CKB_FUZZING_UNEXPECTED;
 }
 
-uint64_t ckb_current_cycles() {
+uint64_t _CKB_FUZZING_SYSCALL_FUNC_NAME(current_cycles)() {
   WHEN_SYSCALL_FLAVOR((uint64_t)_ckb_fuzzing_return_code(syscalls, counter));
 
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_exec(size_t index, size_t source, size_t place, size_t bounds, int argc,
-             const char* argv[]) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(exec)(size_t index, size_t source,
+                                         size_t place, size_t bounds, int argc,
+                                         const char* argv[]) {
   ASSERT_SYSCALL_FLAVOR;
 
   if (syscall.has_terminated()) {
@@ -308,8 +321,9 @@ int ckb_exec(size_t index, size_t source, size_t place, size_t bounds, int argc,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_spawn(size_t index, size_t source, size_t place, size_t bounds,
-              spawn_args_t* spawn_args) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(spawn)(size_t index, size_t source,
+                                          size_t place, size_t bounds,
+                                          spawn_args_t* spawn_args) {
   ASSERT_SYSCALL_FLAVOR;
 
   if (syscall.has_success_output_data()) {
@@ -321,7 +335,7 @@ int ckb_spawn(size_t index, size_t source, size_t place, size_t bounds,
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_wait(uint64_t pid, int8_t* exit_code) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(wait)(uint64_t pid, int8_t* exit_code) {
   ASSERT_SYSCALL_FLAVOR;
 
   if (syscall.has_success_output_data()) {
@@ -333,13 +347,13 @@ int ckb_wait(uint64_t pid, int8_t* exit_code) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-uint64_t ckb_process_id() {
+uint64_t _CKB_FUZZING_SYSCALL_FUNC_NAME(process_id)() {
   WHEN_SYSCALL_FLAVOR((uint64_t)_ckb_fuzzing_return_code(syscalls, counter));
 
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_pipe(uint64_t out_fds[2]) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(pipe)(uint64_t out_fds[2]) {
   ASSERT_SYSCALL_FLAVOR;
 
   if (syscall.has_fds()) {
@@ -356,7 +370,8 @@ int ckb_pipe(uint64_t out_fds[2]) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_read(uint64_t fd, void* buffer, size_t* length) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(read)(uint64_t fd, void* buffer,
+                                         size_t* length) {
   (void)fd;
 
   ASSERT_SYSCALL_FLAVOR;
@@ -377,7 +392,8 @@ int ckb_read(uint64_t fd, void* buffer, size_t* length) {
   return CKB_SUCCESS;
 }
 
-int ckb_write(uint64_t fd, const void* buffer, size_t* length) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(write)(uint64_t fd, const void* buffer,
+                                          size_t* length) {
   (void)fd;
   (void)buffer;
 
@@ -392,7 +408,8 @@ int ckb_write(uint64_t fd, const void* buffer, size_t* length) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_inherited_fds(uint64_t* out_fds, size_t* length) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(inherited_fds)(uint64_t* out_fds,
+                                                  size_t* length) {
   ASSERT_SYSCALL_FLAVOR;
 
   if (syscall.has_fds()) {
@@ -415,7 +432,7 @@ int ckb_inherited_fds(uint64_t* out_fds, size_t* length) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_close(uint64_t fd) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(close)(uint64_t fd) {
   (void)fd;
 
   WHEN_SYSCALL_FLAVOR((int)_ckb_fuzzing_return_code(syscalls, counter));
@@ -423,8 +440,8 @@ int ckb_close(uint64_t fd) {
   return CKB_FUZZING_UNEXPECTED;
 }
 
-int ckb_load_block_extension(void* addr, uint64_t* len, size_t offset,
-                             size_t index, size_t source) {
+int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_block_extension)(
+    void* addr, uint64_t* len, size_t offset, size_t index, size_t source) {
   (void)offset;
   (void)index;
   (void)offset;

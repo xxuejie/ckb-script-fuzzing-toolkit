@@ -1,13 +1,13 @@
-#![no_std]
+#![cfg_attr(not(feature = "std"), no_std)]
+
 #[macro_use]
 extern crate alloc;
 
-#[cfg(feature = "ckb-std")]
-pub mod ckb_std;
-pub mod types;
-
-use crate::types::{CellField, Error, HeaderField, InputField, IoResult, Source, SyscallCode};
-use alloc::{ffi::CString, string::String, vec::Vec};
+use alloc::{ffi::CString, vec::Vec};
+use ckb_std::{
+    ckb_constants::Source,
+    syscalls::traits::{Error, IoResult, SyscallImpls},
+};
 use ckb_vm::{
     Error as VMError, Memory, Register, SupportMachine, Syscalls,
     memory::load_c_string_byte_by_byte,
@@ -15,105 +15,38 @@ use ckb_vm::{
 };
 use core::ffi::CStr;
 use core::marker::PhantomData;
+use core::pin::Pin;
+use int_enum::IntEnum;
 
-pub trait SyscallImpls {
-    fn debug(&self, s: &str);
-    fn exit(&self, code: i8) -> !;
-    fn load_cell(&self, buf: &mut [u8], offset: usize, index: usize, source: Source) -> IoResult;
-    fn load_cell_by_field(
-        &self,
-        buf: &mut [u8],
-        offset: usize,
-        index: usize,
-        source: Source,
-        field: CellField,
-    ) -> IoResult;
-    fn load_cell_code(
-        &self,
-        buf_ptr: *mut u8,
-        len: usize,
-        content_offset: usize,
-        content_size: usize,
-        index: usize,
-        source: Source,
-    ) -> Result<(), Error>;
-    fn load_cell_data_raw(
-        &self,
-        buf_ptr: *mut u8,
-        len: usize,
-        offset: usize,
-        index: usize,
-        source: Source,
-    ) -> IoResult;
-    fn load_header(&self, buf: &mut [u8], offset: usize, index: usize, source: Source) -> IoResult;
-    fn load_header_by_field(
-        &self,
-        buf: &mut [u8],
-        offset: usize,
-        index: usize,
-        source: Source,
-        field: HeaderField,
-    ) -> IoResult;
-    fn load_input(&self, buf: &mut [u8], offset: usize, index: usize, source: Source) -> IoResult;
-    fn load_input_by_field(
-        &self,
-        buf: &mut [u8],
-        offset: usize,
-        index: usize,
-        source: Source,
-        field: InputField,
-    ) -> IoResult;
-    fn load_script(&self, buf: &mut [u8], offset: usize) -> IoResult;
-    fn load_script_hash(&self, buf: &mut [u8], offset: usize) -> IoResult;
-    fn load_transaction(&self, buf: &mut [u8], offset: usize) -> IoResult;
-    fn load_tx_hash(&self, buf: &mut [u8], offset: usize) -> IoResult;
-    fn load_witness(&self, buf: &mut [u8], offset: usize, index: usize, source: Source)
-    -> IoResult;
-
-    fn vm_version(&self) -> u64;
-    fn current_cycles(&self) -> u64;
-    fn exec(
-        &self,
-        index: usize,
-        source: Source,
-        place: usize,
-        bounds: usize,
-        argv: &[&CStr],
-    ) -> Result<(), Error>;
-
-    fn spawn(
-        &self,
-        index: usize,
-        source: Source,
-        place: usize,
-        bounds: usize,
-        argv: &[&CStr],
-        inherited_fds: &[u64],
-    ) -> Result<u64, Error>;
-    fn pipe(&self) -> Result<(u64, u64), Error>;
-    fn inherited_fds(&self, fds: &mut [u64]) -> Result<usize, Error>;
-    fn read(&self, fd: u64, buffer: &mut [u8]) -> Result<usize, Error>;
-    fn write(&self, fd: u64, buffer: &[u8]) -> Result<usize, Error>;
-    fn close(&self, fd: u64) -> Result<(), Error>;
-    fn wait(&self, pid: u64) -> Result<i8, Error>;
-    fn process_id(&self) -> u64;
-    fn load_block_extension(
-        &self,
-        buf: &mut [u8],
-        offset: usize,
-        index: usize,
-        source: Source,
-    ) -> IoResult;
-
-    fn load_cell_data(
-        &self,
-        buf: &mut [u8],
-        offset: usize,
-        index: usize,
-        source: Source,
-    ) -> IoResult {
-        self.load_cell_data_raw(buf.as_mut_ptr(), buf.len(), offset, index, source)
-    }
+#[repr(u64)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, Hash, IntEnum)]
+pub enum SyscallCode {
+    LoadTransaction = 2051,
+    LoadScript = 2052,
+    LoadTxHash = 2061,
+    LoadScriptHash = 2062,
+    LoadCell = 2071,
+    LoadHeader = 2072,
+    LoadInput = 2073,
+    LoadWitness = 2074,
+    LoadCellByField = 2081,
+    LoadHeaderByField = 2082,
+    LoadInputByField = 2083,
+    LoadCellDataAsCode = 2091,
+    LoadCellData = 2092,
+    LoadBlockExtension = 2104,
+    VmVersion = 2041,
+    CurrentCycles = 2042,
+    Exec = 2043,
+    Spawn = 2601,
+    Wait = 2602,
+    ProcessId = 2603,
+    Pipe = 2604,
+    Write = 2605,
+    Read = 2606,
+    InheritedFd = 2607,
+    Close = 2608,
+    Debug = 2177,
 }
 
 pub struct SyscallImplsSynchronousWrapper<S, M> {
@@ -295,7 +228,7 @@ where
             }
             SyscallCode::LoadCellData => {
                 self.load_ois(machine, |buf, impls, offset, index, source| {
-                    impls.load_cell_data_raw(buf.as_mut_ptr(), buf.len(), offset, index, source)
+                    impls.load_cell_data(buf, offset, index, source)
                 })?
             }
             SyscallCode::LoadBlockExtension => {
@@ -498,11 +431,85 @@ where
             SyscallCode::Debug => {
                 let addr = machine.registers()[A0].clone();
                 let b = load_c_string_byte_by_byte(machine.memory_mut(), &addr)?;
-                let s = String::from_utf8(b.to_vec())
-                    .map_err(|e| VMError::External(format!("String from buffer {e:?}")))?;
-                self.impls.debug(&s);
+                let s = unsafe { CStr::from_ptr(b.as_ptr() as *const _) };
+                self.impls.debug(s);
             }
         }
         Ok(true)
     }
+}
+
+#[cfg(feature = "std")]
+pub fn entry<S, F>(impls: S, f: F, argv: &'static [ckb_std::env::Arg]) -> i8
+where
+    S: SyscallImpls + 'static,
+    F: Fn() -> i8 + std::panic::UnwindSafe,
+{
+    let impls = Box::new(impls);
+    unsafe { ckb_std::env::set_argv(argv) };
+    ckb_std::syscalls::init(impls);
+
+    match std::panic::catch_unwind(f) {
+        Ok(code) => code,
+        Err(e) => {
+            let mut code = None;
+            if let Some(s) = e.downcast_ref::<&str>() {
+                code = parse_panic_for_exit_code(s);
+            } else if let Some(s) = e.downcast_ref::<String>() {
+                code = parse_panic_for_exit_code(s);
+            }
+
+            if let Some(exit_code) = code {
+                exit_code
+            } else {
+                std::panic::resume_unwind(e)
+            }
+        }
+    }
+}
+
+pub fn exit_with_panic(code: i8) -> ! {
+    panic!("@@@@CKB@@@@FUZING@@@@EXIT@@@@{}@@@@", code);
+}
+
+pub fn parse_panic_for_exit_code(s: &str) -> Option<i8> {
+    let re = regex::Regex::new(r"@@@@CKB@@@@FUZING@@@@EXIT@@@@([0-9]+)@@@@").unwrap();
+    if let Some(caps) = re.captures(s) {
+        if let Some(m) = caps.get(1) {
+            return m.as_str().parse::<i8>().ok();
+        }
+    }
+    None
+}
+
+pub fn flatten_args(args: &[Vec<u8>]) -> (usize, Pin<Box<[u8]>>) {
+    let mut total_length = (args.len() + 1) * 8;
+    for arg in args {
+        let current_len = if arg.last().map(|b| *b == 0).unwrap_or(false) {
+            arg.len()
+        } else {
+            arg.len() + 1
+        };
+        let rounded_len = current_len.div_ceil(8) * 8;
+
+        total_length += rounded_len;
+    }
+
+    let mut buf = vec![0u8; total_length];
+    let mut offsets = (args.len() + 1) * 8;
+    for (i, arg) in args.iter().enumerate() {
+        let ptr = buf[offsets..offsets + arg.len()].as_ptr() as u64;
+        unsafe { (buf[i * 8..i * 8 + 8].as_mut_ptr() as *mut u64).write(ptr) };
+        buf[offsets..offsets + arg.len()].copy_from_slice(arg);
+
+        let current_len = if arg.last().map(|b| *b == 0).unwrap_or(false) {
+            arg.len()
+        } else {
+            arg.len() + 1
+        };
+        let rounded_len = current_len.div_ceil(8) * 8;
+        offsets += rounded_len;
+    }
+
+    (args.len(), Pin::new(buf.into()))
 }

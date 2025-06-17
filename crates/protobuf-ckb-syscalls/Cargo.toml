@@ -4,9 +4,15 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-ckb-syscall-defs = { path = "../syscall-defs" }
+ckb-vm-fuzzing-utils = { path = "../ckb-vm-fuzzing-utils" }
+
+ckb-std = { workspace = true, features = ["stub-syscalls"] }
 prost.workspace = true
 spin.workspace = true
 
 [build-dependencies]
 prost-build.workspace = true
+
+[features]
+default = ["std"]
+std = []

@@ -19,7 +19,7 @@ use ckb_script::{
     TransactionScriptsVerifier, TxVerifyEnv,
     types::{DataPieceId, Machine},
 };
-use ckb_syscall_defs::types::{Source, SyscallCode};
+use ckb_std::ckb_constants::Source;
 use ckb_traits::{CellDataProvider, ExtensionProvider, HeaderProvider};
 use ckb_types::{
     core::{EpochNumberWithFraction, HeaderView, cell::resolve_transaction, hardfork},
@@ -32,6 +32,7 @@ use ckb_vm::{
     registers::{A0, A1, A2, A3, A4, A5, A7},
     snapshot2::DataSource,
 };
+use ckb_vm_fuzzing_utils::SyscallCode;
 use clap::{Args, ValueEnum};
 use prost::Message;
 use serde::{Deserialize, Serialize};

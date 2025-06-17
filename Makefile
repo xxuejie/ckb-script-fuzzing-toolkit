@@ -27,7 +27,14 @@ SRCS := $(shell find src -name "*.cc")
 HDRS := $(shell find src include -name "*.h")
 PROTO_SRCS := protos/traces.pb.cc
 
+DOCKER := docker
+DOCKER_IMAGE := docker.io/xxuejie/ckb-script-fuzzing-toolkit:20250611
+DOCKER_RUN_ARGS :=
+
 all: libfuzzer hfuzz aflxx
+
+repl:
+	$(DOCKER) run --rm -it $(DOCKER_RUN_ARGS) -u `id -u`:`id -g` -v $(TOP):/code $(DOCKER_IMAGE)
 
 libfuzzer: obj/libckb-fuzzing-libfuzzer-protobuf.a
 hfuzz: obj/libckb-fuzzing-hfuzz-protobuf.a obj/libckb-fuzzing-hfuzz-fdp.a
@@ -79,4 +86,4 @@ flatten: $(PROTO_SRCS)
 		-o amalgamated/fuzzing_syscalls_all_in_one.h \
 		src include protos $(CKB_C_STDLIB)
 
-.PHONY: libfuzzer hfuzz aflxx clean fmt flatten
+.PHONY: libfuzzer hfuzz aflxx clean fmt flatten repl

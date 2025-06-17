@@ -31,7 +31,7 @@
 
 #if defined(CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL) || \
   defined(CKB_FUZZING_INCLUDE_FDP_SYSCALL_IMPL)
-#include "syscalls/argv_builder.h"
+#include "syscalls/utils.h"
 #endif
 
 #ifdef CKB_FUZZING_INCLUDE_MOCK_SYSCALL_IMPL

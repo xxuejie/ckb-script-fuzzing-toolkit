@@ -1,0 +1,14 @@
+[package]
+name = "ckb-vm-fuzzing-utils"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+int-enum = "1.2.0"
+ckb-vm.workspace = true
+ckb-std.workspace = true
+regex.workspace = true
+
+[features]
+default = ["std"]
+std = ["regex/std"]

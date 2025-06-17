@@ -1,22 +1,21 @@
 [workspace]
 resolver = "2"
 members = [
-  "crates/ckb-c-to-std-syscalls",
+  "crates/ckb-vm-fuzzing-utils",
   "crates/ckb-vm-syscall-tracer",
   "crates/fdp-ckb-syscalls",
   "crates/protobuf-ckb-syscalls",
-  "crates/syscall-defs",
   "tools/flattener"
 ]
 
 [workspace.dependencies]
-ckb-chain-spec = { git = "https://github.com/nervosnetwork/ckb", rev = "99cd201" }
-ckb-script = { git = "https://github.com/nervosnetwork/ckb", rev = "99cd201" }
-ckb-traits = { git = "https://github.com/nervosnetwork/ckb", rev = "99cd201" }
-ckb-types = { git = "https://github.com/nervosnetwork/ckb", rev = "99cd201" }
-ckb-mock-tx-types = { git = "https://github.com/xxuejie/ckb-vm-contrib", rev = "56ae386" }
+ckb-chain-spec = "0.202.0"
+ckb-script = "0.202.0"
+ckb-traits = "0.202.0"
+ckb-types = "0.202.0"
+ckb-mock-tx-types = "0.202.0"
 ckb-vm = "=0.24.14"
-ckb-std = "0.17.2"
+ckb-std = { git = "https://github.com/xxuejie/ckb-std", rev = "5b2d9d0" }
 
 clap = { version = "4.5.35", features = ["cargo", "derive"] }
 fork = "0.2.0"
@@ -24,7 +23,7 @@ hex = "0.4"
 int-enum = "1.1.2"
 prost = "0.13.5"
 prost-build = "0.13.5"
-regex = "1.11.1"
+regex = { version = "1.11.1", default-features = false }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 

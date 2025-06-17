@@ -1,4 +1,4 @@
-#![no_std]
+#![cfg_attr(not(feature = "std"), no_std)]
 
 extern crate alloc;
 
@@ -9,13 +9,26 @@ pub mod generated {
 }
 
 use crate::generated::traces;
-use alloc::{boxed::Box, collections::VecDeque};
-use ckb_syscall_defs::{
-    SyscallImpls,
-    types::{CellField, Error, HeaderField, InputField, IoResult, Source},
+use alloc::{boxed::Box, collections::VecDeque, vec::Vec};
+use ckb_std::{
+    ckb_constants::{CellField, HeaderField, InputField, Source},
+    syscalls::traits::{Error, IoResult, SyscallImpls},
 };
+use ckb_vm_fuzzing_utils::{exit_with_panic, flatten_args};
 use core::ffi::CStr;
+use prost::Message;
 use spin::Mutex;
+
+#[cfg(feature = "std")]
+pub fn entry<F>(data: &[u8], f: F) -> i8
+where
+    F: Fn() -> i8 + std::panic::UnwindSafe,
+{
+    let impls = ProtobufBasedSyscallImpls::new_with_bytes(data);
+    let (argc, argv) = flatten_args(impls.args());
+    let argv = unsafe { core::slice::from_raw_parts(argv.as_ptr() as *const _, argc) };
+    ckb_vm_fuzzing_utils::entry(impls, f, argv)
+}
 
 pub const UNEXPECTED: u64 = 19;
 pub const UNEXPECTED_ERROR: Error = Error::Other(UNEXPECTED);
@@ -23,10 +36,39 @@ pub const UNEXPECTED_RESULT: IoResult = IoResult::Error(UNEXPECTED_ERROR);
 
 pub struct ProtobufBasedSyscallImpls {
     syscalls: Mutex<VecDeque<traces::Syscall>>,
+    args: Vec<Vec<u8>>,
     debug_printer: Box<dyn Fn(&str) + Send + Sync>,
 }
 
 impl ProtobufBasedSyscallImpls {
+    pub fn new(data: traces::Root) -> Self {
+        let Some(traces::root::Value::Syscalls(syscalls)) = data.value else {
+            todo!("Support for other trace types will be added in the future!");
+        };
+        Self {
+            syscalls: Mutex::new(syscalls.syscalls.into()),
+            args: syscalls.args,
+            #[allow(unused_variables)]
+            debug_printer: Box::new(|message| {
+                #[cfg(feature = "std")]
+                eprintln!("Script message: {}", message);
+            }),
+        }
+    }
+
+    pub fn new_with_bytes<B: AsRef<[u8]>>(bytes: B) -> Self {
+        Self::new(traces::Root::decode(bytes.as_ref()).expect("parse trace file"))
+    }
+
+    #[cfg(feature = "std")]
+    pub fn new_with_file<P: AsRef<std::path::Path>>(path: P) -> Self {
+        Self::new_with_bytes(std::fs::read(path).expect("read trace file"))
+    }
+
+    pub fn args(&self) -> &[Vec<u8>] {
+        &self.args
+    }
+
     fn syscall(&self) -> Option<traces::syscall::Value> {
         let mut syscalls = self.syscalls.lock();
         syscalls.pop_front().and_then(|s| s.value)
@@ -72,12 +114,12 @@ impl ProtobufBasedSyscallImpls {
 }
 
 impl SyscallImpls for ProtobufBasedSyscallImpls {
-    fn debug(&self, s: &str) {
-        (self.debug_printer)(s);
+    fn debug(&self, s: &CStr) {
+        (self.debug_printer)(s.to_str().unwrap_or("utf8 error"));
     }
 
     fn exit(&self, code: i8) -> ! {
-        panic!("@@@@CKB@@@@FUZING@@@@EXIT@@@@{}@@@@", code);
+        exit_with_panic(code);
     }
 
     fn load_cell(
@@ -113,15 +155,13 @@ impl SyscallImpls for ProtobufBasedSyscallImpls {
         panic!("Load cell data as code is not suported!");
     }
 
-    fn load_cell_data_raw(
+    fn load_cell_data(
         &self,
-        buf_ptr: *mut u8,
-        len: usize,
+        buf: &mut [u8],
         _offset: usize,
         _index: usize,
         _source: Source,
     ) -> IoResult {
-        let buf = unsafe { core::slice::from_raw_parts_mut(buf_ptr, len) };
         self.io_syscall(buf)
     }
 
@@ -266,9 +306,7 @@ impl SyscallImpls for ProtobufBasedSyscallImpls {
             }
             Some(traces::syscall::Value::Fds(fds)) => {
                 let count = core::cmp::min(out_fds.len(), fds.fds.len());
-                for i in 0..count {
-                    out_fds[i] = fds.fds[i];
-                }
+                out_fds[..count].copy_from_slice(&fds.fds[..count]);
                 Ok(fds.fds.len())
             }
             _ => Err(UNEXPECTED_ERROR),
