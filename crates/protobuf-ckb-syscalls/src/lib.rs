@@ -60,7 +60,9 @@ impl ProtobufBasedSyscallImpls {
     }
 
     pub fn new_with_bytes<B: AsRef<[u8]>>(bytes: B) -> Option<Self> {
-        Self::new(traces::Root::decode(bytes.as_ref()).expect("parse trace file"))
+        traces::Root::decode(bytes.as_ref())
+            .ok()
+            .and_then(|data| Self::new(data))
     }
 
     #[cfg(feature = "std")]
