@@ -19,20 +19,22 @@ use core::ffi::CStr;
 use prost::Message;
 use spin::Mutex;
 
+pub const UNEXPECTED: u64 = 19;
+pub const UNEXPECTED_ERROR: Error = Error::Other(UNEXPECTED);
+pub const UNEXPECTED_RESULT: IoResult = IoResult::Error(UNEXPECTED_ERROR);
+
 #[cfg(feature = "std")]
 pub fn entry<F>(data: &[u8], f: F) -> i8
 where
     F: Fn() -> i8 + std::panic::UnwindSafe,
 {
-    let impls = ProtobufBasedSyscallImpls::new_with_bytes(data);
+    let Some(impls) = ProtobufBasedSyscallImpls::new_with_bytes(data) else {
+        return UNEXPECTED as i8;
+    };
     let (argc, argv) = flatten_args(impls.args());
     let argv = unsafe { core::slice::from_raw_parts(argv.as_ptr() as *const _, argc) };
     ckb_vm_fuzzing_utils::entry(impls, f, argv)
 }
-
-pub const UNEXPECTED: u64 = 19;
-pub const UNEXPECTED_ERROR: Error = Error::Other(UNEXPECTED);
-pub const UNEXPECTED_RESULT: IoResult = IoResult::Error(UNEXPECTED_ERROR);
 
 pub struct ProtobufBasedSyscallImpls {
     syscalls: Mutex<VecDeque<traces::Syscall>>,
@@ -41,11 +43,12 @@ pub struct ProtobufBasedSyscallImpls {
 }
 
 impl ProtobufBasedSyscallImpls {
-    pub fn new(data: traces::Root) -> Self {
+    pub fn new(data: traces::Root) -> Option<Self> {
         let Some(traces::root::Value::Syscalls(syscalls)) = data.value else {
-            todo!("Support for other trace types will be added in the future!");
+            // Support for other trace types will be added in the future.
+            return None;
         };
-        Self {
+        Some(Self {
             syscalls: Mutex::new(syscalls.syscalls.into()),
             args: syscalls.args,
             #[allow(unused_variables)]
@@ -53,15 +56,15 @@ impl ProtobufBasedSyscallImpls {
                 #[cfg(feature = "std")]
                 eprintln!("Script message: {}", message);
             }),
-        }
+        })
     }
 
-    pub fn new_with_bytes<B: AsRef<[u8]>>(bytes: B) -> Self {
+    pub fn new_with_bytes<B: AsRef<[u8]>>(bytes: B) -> Option<Self> {
         Self::new(traces::Root::decode(bytes.as_ref()).expect("parse trace file"))
     }
 
     #[cfg(feature = "std")]
-    pub fn new_with_file<P: AsRef<std::path::Path>>(path: P) -> Self {
+    pub fn new_with_file<P: AsRef<std::path::Path>>(path: P) -> Option<Self> {
         Self::new_with_bytes(std::fs::read(path).expect("read trace file"))
     }
 
