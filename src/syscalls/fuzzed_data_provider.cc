@@ -23,8 +23,8 @@ typedef struct {
 
 _ckb_fuzzing_context_t _CKB_FUZZING_GCONTEXT;
 
-const _ckb_fuzzing_fdp_data_t* ckb_fuzzing_fdp_init(const uint8_t* data,
-                                                    size_t length) {
+extern "C" const _ckb_fuzzing_fdp_data_t* ckb_fuzzing_fdp_init(
+    const uint8_t* data, size_t length) {
   FuzzedDataProvider* provider = new FuzzedDataProvider(data, length);
 
   ArgvBuilder argv_builder;
@@ -42,7 +42,7 @@ const _ckb_fuzzing_fdp_data_t* ckb_fuzzing_fdp_init(const uint8_t* data,
   return &(_CKB_FUZZING_GCONTEXT.d);
 }
 
-void ckb_fuzzing_fdp_cleanup() {
+extern "C" void ckb_fuzzing_fdp_cleanup() {
   if (_CKB_FUZZING_GCONTEXT.d.provider != NULL) {
     delete _CKB_FUZZING_GCONTEXT.d.provider;
     _CKB_FUZZING_GCONTEXT.d.provider = NULL;
