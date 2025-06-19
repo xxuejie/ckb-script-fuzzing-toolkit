@@ -37,23 +37,21 @@ fn main() -> io::Result<()> {
                     included_file
                 ));
                 processed = true;
-            } else {
-                if let Some(path) = find_file(&included_file, &cli.includes) {
-                    lines.push_front(format!("/* End of {} */", included_file));
-                    for line in read_lines(&path)?.into_iter().rev() {
-                        lines.push_front(line);
-                    }
-                    lines.push_front(format!("/* Start of {} */", included_file));
-                    included.insert(included_file);
-                    processed = true;
-                } else {
-                    println!("Cannot find {}, skipping", included_file);
+            } else if let Some(path) = find_file(&included_file, &cli.includes) {
+                lines.push_front(format!("/* End of {} */", included_file));
+                for line in read_lines(&path)?.into_iter().rev() {
+                    lines.push_front(line);
                 }
+                lines.push_front(format!("/* Start of {} */", included_file));
+                included.insert(included_file);
+                processed = true;
+            } else {
+                println!("Cannot find {}, skipping", included_file);
             }
         }
 
         if !processed {
-            write!(&mut output, "{}\n", line)?;
+            writeln!(&mut output, "{}", line)?;
         }
     }
 

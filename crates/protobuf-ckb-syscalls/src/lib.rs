@@ -85,7 +85,7 @@ impl ProtobufBasedSyscallImpls {
         };
         traces::Syscalls::decode(bytes.as_ref())
             .ok()
-            .and_then(|data| Self::new(data))
+            .and_then(Self::new)
     }
 
     #[cfg(feature = "std")]

@@ -132,7 +132,7 @@ where
         println!("Script group consumes {} cycles.", cycles);
 
         let output_path = Path::new(&cli.output);
-        std::fs::create_dir_all(&output_path).expect("mkdir -p");
+        std::fs::create_dir_all(output_path).expect("mkdir -p");
 
         let vms = traces.len();
         let mut locators = HashMap::with_capacity(vms);

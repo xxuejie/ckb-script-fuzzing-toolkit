@@ -413,10 +413,10 @@ where
                 let mut fds = vec![0; length];
                 let result = self.impls.inherited_fds(&mut fds);
                 if let Ok(wrote_length) = result {
-                    for i in 0..wrote_length {
+                    for (i, fd) in fds.iter().enumerate().take(wrote_length) {
                         machine.memory_mut().store64(
                             &buffer_addr.overflowing_add(&M::REG::from_u64(i as u64 * 8)),
-                            &M::REG::from_u64(fds[i]),
+                            &M::REG::from_u64(*fd),
                         )?;
                     }
                 }
