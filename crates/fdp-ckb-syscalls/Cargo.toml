@@ -5,8 +5,7 @@ edition = "2024"
 
 [dependencies]
 ckb-vm-fuzzing-utils = { path = "../ckb-vm-fuzzing-utils" }
-
-ckb-std = { workspace = true, features = ["stub-syscalls"] }
+ckb-std.workspace = true
 
 [build-dependencies]
 cc = "1.0"

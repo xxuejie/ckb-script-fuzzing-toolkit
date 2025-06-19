@@ -43,11 +43,7 @@ pub struct ProtobufBasedSyscallImpls {
 }
 
 impl ProtobufBasedSyscallImpls {
-    pub fn new(data: traces::Root) -> Option<Self> {
-        let Some(traces::root::Value::Syscalls(syscalls)) = data.value else {
-            // Support for other trace types will be added in the future.
-            return None;
-        };
+    fn new(syscalls: traces::Syscalls) -> Option<Self> {
         Some(Self {
             syscalls: Mutex::new(syscalls.syscalls.into()),
             args: syscalls.args,
@@ -60,7 +56,7 @@ impl ProtobufBasedSyscallImpls {
     }
 
     pub fn new_with_bytes<B: AsRef<[u8]>>(bytes: B) -> Option<Self> {
-        traces::Root::decode(bytes.as_ref())
+        traces::Syscalls::decode(bytes.as_ref())
             .ok()
             .and_then(|data| Self::new(data))
     }
