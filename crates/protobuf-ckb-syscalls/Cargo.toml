@@ -7,13 +7,17 @@ edition = "2024"
 ckb-vm-fuzzing-utils = { path = "../ckb-vm-fuzzing-utils" }
 ckb-std.workspace = true
 
+once_cell.workspace = true
 prost.workspace = true
+prost-reflect.workspace = true
 spin.workspace = true
 
 [build-dependencies]
 prost-build.workspace = true
+prost-reflect-build.workspace = true
 
 [features]
 default = ["std", "stub-c-syscalls"]
 std = []
 stub-c-syscalls = ["ckb-std/stub-c-syscalls"]
+text-format = []

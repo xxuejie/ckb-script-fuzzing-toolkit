@@ -65,6 +65,10 @@ struct Cli {
 
     #[arg(long)]
     cell_index: Option<usize>,
+
+    /// If set, generates text based protobuf message
+    #[arg(long)]
+    text: bool,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -137,7 +141,20 @@ where
             locators.insert(vm_name.clone(), locator);
 
             let file_path = output_path.join(format!("{}.traces", vm_name));
-            let bytes: Vec<u8> = trace.into();
+            let mut bytes: Vec<u8> = trace.into();
+            if cli.text {
+                // Use proto-reflect to convert binary proto to text
+                let descriptor = ckb_vm_syscall_tracer::generated::traces::DESCRIPTOR_POOL
+                    .get_message_by_name(cli.collector.message_name())
+                    .expect("extracting protobuf message descriptor");
+                let dmessage = prost_reflect::DynamicMessage::decode(descriptor, &bytes[..])
+                    .expect("decode dynamic message");
+                bytes = dmessage
+                    .to_text_format_with_options(
+                        &prost_reflect::text_format::FormatOptions::new().pretty(true),
+                    )
+                    .into_bytes();
+            }
             std::fs::write(file_path, bytes)?
         }
         {

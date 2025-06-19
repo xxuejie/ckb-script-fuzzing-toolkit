@@ -31,10 +31,13 @@ ckb-std.workspace = true
 
 clap.workspace = true
 hex.workspace = true
+once_cell.workspace = true
 prost.workspace = true
+prost-reflect.workspace = true
 serde.workspace = true
 serde_json.workspace = true
 
 
 [build-dependencies]
 prost-build.workspace = true
+prost-reflect-build.workspace = true

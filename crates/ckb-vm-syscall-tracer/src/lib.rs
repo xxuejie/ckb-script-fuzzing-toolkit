@@ -1,5 +1,15 @@
 pub mod generated {
     pub mod traces {
+        use once_cell::sync::Lazy;
+        use prost_reflect::DescriptorPool;
+
+        pub static DESCRIPTOR_POOL: Lazy<DescriptorPool> = Lazy::new(|| {
+            DescriptorPool::decode(
+                include_bytes!(concat!(env!("OUT_DIR"), "/file_descriptor_set.bin")).as_ref(),
+            )
+            .unwrap()
+        });
+
         include!(concat!(env!("OUT_DIR"), "/generated.traces.rs"));
     }
 }
@@ -46,6 +56,15 @@ pub enum CollectorKind {
 
     /// Tx based collector, certain data are collected from the tx as a whole
     TxParts,
+}
+
+impl CollectorKind {
+    pub fn message_name(&self) -> &'static str {
+        match self {
+            CollectorKind::Syscall => "generated.traces.Syscalls",
+            CollectorKind::TxParts => "generated.traces.Parts",
+        }
+    }
 }
 
 impl TryFrom<&[u8]> for traces::Parts {

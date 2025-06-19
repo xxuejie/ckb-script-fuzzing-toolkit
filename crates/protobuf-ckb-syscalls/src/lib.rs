@@ -4,6 +4,16 @@ extern crate alloc;
 
 pub mod generated {
     pub mod traces {
+        use once_cell::sync::Lazy;
+        use prost_reflect::DescriptorPool;
+
+        pub static DESCRIPTOR_POOL: Lazy<DescriptorPool> = Lazy::new(|| {
+            DescriptorPool::decode(
+                include_bytes!(concat!(env!("OUT_DIR"), "/file_descriptor_set.bin")).as_ref(),
+            )
+            .unwrap()
+        });
+
         include!(concat!(env!("OUT_DIR"), "/generated.traces.rs"));
     }
 }
@@ -56,6 +66,23 @@ impl ProtobufBasedSyscallImpls {
     }
 
     pub fn new_with_bytes<B: AsRef<[u8]>>(bytes: B) -> Option<Self> {
+        #[cfg(feature = "text-format")]
+        let bytes = {
+            let descriptor = crate::generated::traces::DESCRIPTOR_POOL
+                .get_message_by_name("generated.traces.Syscalls")
+                .expect("extracting protobuf message descriptor");
+            let Ok(s) = str::from_utf8(bytes.as_ref()) else {
+                return None;
+            };
+            let Ok(dmessage) = prost_reflect::DynamicMessage::parse_text_format(descriptor, s)
+            else {
+                return None;
+            };
+            let Ok(message) = dmessage.transcode_to::<traces::Syscalls>() else {
+                return None;
+            };
+            message.encode_to_vec()
+        };
         traces::Syscalls::decode(bytes.as_ref())
             .ok()
             .and_then(|data| Self::new(data))
