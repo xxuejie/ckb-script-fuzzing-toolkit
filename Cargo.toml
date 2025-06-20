@@ -31,7 +31,7 @@ serde_json = "1.0"
 
 [workspace.dependencies.ckb-std]
 git = "https://github.com/xxuejie/ckb-std"
-rev = "96927e4"
+rev = "348f461"
 features = ["stub-syscalls"]
 
 [workspace.dependencies.spin]

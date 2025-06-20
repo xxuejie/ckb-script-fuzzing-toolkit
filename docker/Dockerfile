@@ -2,7 +2,7 @@ FROM docker.io/buildpack-deps:noble as builder
 MAINTAINER Xuejie Xiao <xxuejie@gmail.com>
 
 RUN apt-get update
-RUN apt-get install -y llvm clang clang-format lld git \
+RUN apt-get install -y llvm llvm-dev clang clang-format lld git \
   binutils-dev libunwind-dev libblocksruntime-dev \
   protobuf-compiler libprotobuf-dev binutils cmake \
   ninja-build liblzma-dev libz-dev pkg-config autoconf libtool

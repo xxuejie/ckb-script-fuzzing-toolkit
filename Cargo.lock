@@ -524,7 +524,7 @@ dependencies = [
 [[package]]
 name = "ckb-std"
 version = "0.17.2"
-source = "git+https://github.com/xxuejie/ckb-std?rev=96927e4#96927e48d72e7c44196103069f9a4917566b8304"
+source = "git+https://github.com/xxuejie/ckb-std?rev=348f461#348f4617ed4deb3e2397146968eba94725ce2380"
 dependencies = [
  "buddy-alloc",
  "cc",
