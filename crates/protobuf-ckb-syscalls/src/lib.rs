@@ -102,7 +102,12 @@ impl ProtobufBasedSyscallImpls {
         syscalls.pop_front().and_then(|s| s.value)
     }
 
-    fn io_syscall(&self, buf: &mut [u8]) -> IoResult {
+    fn io_syscall(
+        &self,
+        buf: &mut [u8],
+        offset: usize,
+        expected_length: Option<usize>,
+    ) -> IoResult {
         match self.syscall() {
             Some(traces::syscall::Value::ReturnWithCode(code)) => {
                 let Ok(e): Result<Error, _> = (code as u64).try_into() else {
@@ -111,6 +116,14 @@ impl ProtobufBasedSyscallImpls {
                 e.into()
             }
             Some(traces::syscall::Value::IoData(io_data)) => {
+                if let Some(length) = expected_length {
+                    if offset > length {
+                        return UNEXPECTED_RESULT;
+                    }
+                    if io_data.available_data.len() != length - offset {
+                        return UNEXPECTED_RESULT;
+                    }
+                }
                 let result = if buf.len() > io_data.available_data.len() {
                     if io_data.additional_length > 0 {
                         return UNEXPECTED_RESULT;
@@ -150,25 +163,27 @@ impl SyscallImpls for ProtobufBasedSyscallImpls {
         exit_with_panic(code);
     }
 
-    fn load_cell(
-        &self,
-        buf: &mut [u8],
-        _offset: usize,
-        _index: usize,
-        _source: Source,
-    ) -> IoResult {
-        self.io_syscall(buf)
+    fn load_cell(&self, buf: &mut [u8], offset: usize, _index: usize, _source: Source) -> IoResult {
+        self.io_syscall(buf, offset, None)
     }
 
     fn load_cell_by_field(
         &self,
         buf: &mut [u8],
-        _offset: usize,
+        offset: usize,
         _index: usize,
         _source: Source,
-        _field: CellField,
+        field: CellField,
     ) -> IoResult {
-        self.io_syscall(buf)
+        let expected_length = match field {
+            CellField::Capacity => Some(8),
+            CellField::DataHash => Some(32),
+            CellField::LockHash => Some(32),
+            CellField::TypeHash => Some(32),
+            CellField::OccupiedCapacity => Some(8),
+            _ => None,
+        };
+        self.io_syscall(buf, offset, expected_length)
     }
 
     fn load_cell_code(
@@ -186,79 +201,83 @@ impl SyscallImpls for ProtobufBasedSyscallImpls {
     fn load_cell_data(
         &self,
         buf: &mut [u8],
-        _offset: usize,
+        offset: usize,
         _index: usize,
         _source: Source,
     ) -> IoResult {
-        self.io_syscall(buf)
+        self.io_syscall(buf, offset, None)
     }
 
     fn load_header(
         &self,
         buf: &mut [u8],
-        _offset: usize,
+        offset: usize,
         _index: usize,
         _source: Source,
     ) -> IoResult {
-        self.io_syscall(buf)
+        self.io_syscall(buf, offset, None)
     }
 
     fn load_header_by_field(
         &self,
         buf: &mut [u8],
-        _offset: usize,
+        offset: usize,
         _index: usize,
         _source: Source,
         _field: HeaderField,
     ) -> IoResult {
-        self.io_syscall(buf)
+        self.io_syscall(buf, offset, Some(8))
     }
 
     fn load_input(
         &self,
         buf: &mut [u8],
-        _offset: usize,
+        offset: usize,
         _index: usize,
         _source: Source,
     ) -> IoResult {
-        self.io_syscall(buf)
+        self.io_syscall(buf, offset, None)
     }
 
     fn load_input_by_field(
         &self,
         buf: &mut [u8],
-        _offset: usize,
+        offset: usize,
         _index: usize,
         _source: Source,
-        _field: InputField,
+        field: InputField,
     ) -> IoResult {
-        self.io_syscall(buf)
+        let expected_length = match field {
+            InputField::Since => Some(8),
+            _ => None,
+        };
+        self.io_syscall(buf, offset, expected_length)
     }
 
-    fn load_script(&self, buf: &mut [u8], _offset: usize) -> IoResult {
-        self.io_syscall(buf)
+    fn load_script(&self, buf: &mut [u8], offset: usize) -> IoResult {
+        self.io_syscall(buf, offset, None)
     }
 
-    fn load_script_hash(&self, buf: &mut [u8], _offset: usize) -> IoResult {
-        self.io_syscall(buf)
+    fn load_script_hash(&self, buf: &mut [u8], offset: usize) -> IoResult {
+        self.io_syscall(buf, offset, Some(32))
     }
 
-    fn load_transaction(&self, buf: &mut [u8], _offset: usize) -> IoResult {
-        self.io_syscall(buf)
+    fn load_transaction(&self, buf: &mut [u8], offset: usize) -> IoResult {
+        self.io_syscall(buf, offset, None)
     }
 
-    fn load_tx_hash(&self, buf: &mut [u8], _offset: usize) -> IoResult {
-        self.io_syscall(buf)
+    fn load_tx_hash(&self, buf: &mut [u8], offset: usize) -> IoResult {
+        self.io_syscall(buf, offset, Some(32))
     }
 
     fn load_witness(
         &self,
         buf: &mut [u8],
-        _offset: usize,
+        offset: usize,
         _index: usize,
         _source: Source,
     ) -> IoResult {
-        self.io_syscall(buf)
+        self.io_syscall(buf, offset, None)
     }
 
     fn vm_version(&self) -> u64 {
@@ -398,10 +417,10 @@ impl SyscallImpls for ProtobufBasedSyscallImpls {
     fn load_block_extension(
         &self,
         buf: &mut [u8],
-        _offset: usize,
+        offset: usize,
         _index: usize,
         _source: Source,
     ) -> IoResult {
-        self.io_syscall(buf)
+        self.io_syscall(buf, offset, None)
     }
 }

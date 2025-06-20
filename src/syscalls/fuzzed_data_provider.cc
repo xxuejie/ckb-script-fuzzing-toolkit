@@ -73,13 +73,23 @@ int _CKB_FUZZING_SYSCALL_FUNC_NAME(exit)(int8_t code) {
 }
 
 int _ckb_fuzzing_io_data(void* addr, uint64_t* len,
-                         FuzzedDataProvider* provider) {
+                         FuzzedDataProvider* provider, size_t offset,
+                         size_t expected_length) {
   if (provider->ConsumeIntegral<uint8_t>() > 127) {
     // Return with a non zero error code
     return (int)provider->ConsumeIntegralInRange<uint8_t>(1, 255);
   }
 
   uint64_t available_length = provider->ConsumeIntegral<uint64_t>();
+  if (expected_length > 0) {
+    if (offset > expected_length) {
+      return CKB_FUZZING_UNEXPECTED;
+    }
+    if (available_length != expected_length - offset) {
+      return CKB_FUZZING_UNEXPECTED;
+    }
+  }
+
   std::vector<uint8_t> available_data =
       provider->ConsumeBytes<uint8_t>(available_length);
   uint64_t remaining_length = provider->ConsumeIntegral<uint64_t>();
@@ -109,121 +119,133 @@ int64_t _ckb_fuzzing_return_code(FuzzedDataProvider* provider) {
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_tx_hash)(void* addr, uint64_t* len,
                                                  size_t offset) {
-  (void)offset;
-
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 32);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_script_hash)(void* addr, uint64_t* len,
                                                      size_t offset) {
-  (void)offset;
-
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 32);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell)(void* addr, uint64_t* len,
                                               size_t offset, size_t index,
                                               size_t source) {
-  (void)offset;
   (void)index;
   (void)source;
-  (void)offset;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 0);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_input)(void* addr, uint64_t* len,
                                                size_t offset, size_t index,
                                                size_t source) {
-  (void)offset;
   (void)index;
-  (void)offset;
   (void)source;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 0);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_header)(void* addr, uint64_t* len,
                                                 size_t offset, size_t index,
                                                 size_t source) {
-  (void)offset;
   (void)index;
-  (void)offset;
   (void)source;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 0);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_witness)(void* addr, uint64_t* len,
                                                  size_t offset, size_t index,
                                                  size_t source) {
-  (void)offset;
   (void)index;
-  (void)offset;
   (void)source;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 0);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_script)(void* addr, uint64_t* len,
                                                 size_t offset) {
-  (void)offset;
-
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 0);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_transaction)(void* addr, uint64_t* len,
                                                      size_t offset) {
-  (void)offset;
-
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 0);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell_by_field)(
     void* addr, uint64_t* len, size_t offset, size_t index, size_t source,
     size_t field) {
-  (void)offset;
   (void)index;
-  (void)offset;
   (void)source;
-  (void)field;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  size_t expected_length = 0;
+  switch (field) {
+    case CKB_CELL_FIELD_CAPACITY: {
+      expected_length = 8;
+    } break;
+    case CKB_CELL_FIELD_DATA_HASH: {
+      expected_length = 32;
+    } break;
+    case CKB_CELL_FIELD_LOCK_HASH: {
+      expected_length = 32;
+    } break;
+    case CKB_CELL_FIELD_TYPE_HASH: {
+      expected_length = 32;
+    } break;
+    case CKB_CELL_FIELD_OCCUPIED_CAPACITY: {
+      expected_length = 8;
+    } break;
+  }
+
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, expected_length);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_header_by_field)(
     void* addr, uint64_t* len, size_t offset, size_t index, size_t source,
     size_t field) {
-  (void)offset;
   (void)index;
-  (void)offset;
   (void)source;
   (void)field;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 8);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_input_by_field)(
     void* addr, uint64_t* len, size_t offset, size_t index, size_t source,
     size_t field) {
-  (void)offset;
   (void)index;
-  (void)offset;
   (void)source;
-  (void)field;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  size_t expected_length = 0;
+  switch (field) {
+    case CKB_INPUT_FIELD_SINCE: {
+      expected_length = 8;
+    } break;
+  }
+
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, expected_length);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell_data)(void* addr, uint64_t* len,
                                                    size_t offset, size_t index,
                                                    size_t source) {
-  (void)offset;
   (void)index;
-  (void)offset;
   (void)source;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 0);
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell_data_as_code)(
@@ -323,7 +345,18 @@ int _CKB_FUZZING_SYSCALL_FUNC_NAME(read)(uint64_t fd, void* buffer,
                                          size_t* length) {
   (void)fd;
 
-  return _ckb_fuzzing_io_data(buffer, length, _CKB_FUZZING_GCONTEXT.d.provider);
+  FuzzedDataProvider* provider = _CKB_FUZZING_GCONTEXT.d.provider;
+  if (provider->ConsumeIntegral<uint8_t>() > 127) {
+    // Return with a non zero error code
+    return (int)provider->ConsumeIntegralInRange<uint8_t>(1, 255);
+  }
+  uint64_t read = provider->ConsumeIntegralInRange<uint64_t>(0, *length);
+  std::vector<uint8_t> data = provider->ConsumeBytes<uint8_t>(read);
+
+  memcpy(buffer, data.data(), read);
+  *length = read;
+
+  return CKB_SUCCESS;
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(write)(uint64_t fd, const void* buffer,
@@ -373,10 +406,9 @@ int _CKB_FUZZING_SYSCALL_FUNC_NAME(close)(uint64_t fd) {
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_block_extension)(
     void* addr, uint64_t* len, size_t offset, size_t index, size_t source) {
-  (void)offset;
   (void)index;
-  (void)offset;
   (void)source;
 
-  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider);
+  return _ckb_fuzzing_io_data(addr, len, _CKB_FUZZING_GCONTEXT.d.provider,
+                              offset, 0);
 }
