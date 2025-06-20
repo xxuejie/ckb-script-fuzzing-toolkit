@@ -35,12 +35,13 @@ RUN git clone https://github.com/AFLplusplus/AFLplusplus /tmp/aflpp && \
   rm -rf /tmp/aflpp
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- \
-  -y --default-toolchain 1.85.0 --target riscv64imac-unknown-none-elf
+  -y --default-toolchain 1.87.0 --target riscv64imac-unknown-none-elf
 ENV PATH "${PATH}:/root/.cargo/bin"
+RUN rustup toolchain install nightly
 
 RUN cargo install \
   --git https://github.com/xxuejie/ckb-script-fuzzing-toolkit \
-  --rev b3b3f42a9e72705e6574c56fc83afbfd1a3c34d2 \
+  --rev 61bb5a737fddc6dbfa50dd92df43879abb53129a \
   ckb-vm-syscall-tracer
 
 RUN mkdir /code
