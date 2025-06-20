@@ -320,7 +320,10 @@ int _CKB_FUZZING_SYSCALL_FUNC_NAME(load_cell_data_as_code)(
 }
 
 int _CKB_FUZZING_SYSCALL_FUNC_NAME(debug)(const char* s) {
+  (void) s;
+#ifdef CKB_FUZZING_PRINT_DEBUG_MESSAGE
   fprintf(stderr, "Script debug message: %s\n", s);
+#endif
   return CKB_SUCCESS;
 }
 

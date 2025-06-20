@@ -59,8 +59,8 @@ impl ProtobufBasedSyscallImpls {
             args: syscalls.args,
             #[allow(unused_variables)]
             debug_printer: Box::new(|message| {
-                #[cfg(feature = "std")]
-                eprintln!("Script message: {}", message);
+                #[cfg(feature = "print-debug-messages")]
+                eprintln!("Script debug message: {}", message);
             }),
         })
     }
