@@ -41,7 +41,7 @@ RUN rustup toolchain install nightly
 
 RUN cargo install \
   --git https://github.com/xxuejie/ckb-script-fuzzing-toolkit \
-  --rev 61bb5a737fddc6dbfa50dd92df43879abb53129a \
+  --rev 479052e565ef872fbf60531a1ce2dcf54e83085a \
   ckb-vm-syscall-tracer
 
 RUN mkdir /code
