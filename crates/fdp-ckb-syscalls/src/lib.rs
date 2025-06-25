@@ -26,6 +26,11 @@ unsafe extern "C" {
     fn ckb_fuzzing_fdp_cleanup();
 }
 
+#[unsafe(no_mangle)]
+pub extern "C" fn _ckb_fuzzing_entrypoint(_argc: c_int, _argv: *const *const i8) -> c_int {
+    panic!("Please use Rust's own entrypoint");
+}
+
 #[cfg(feature = "std")]
 pub fn entry<F>(data: &[u8], f: F) -> i8
 where
