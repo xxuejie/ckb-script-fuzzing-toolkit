@@ -40,7 +40,9 @@ where
     let s = unsafe { &*p };
     let argv = unsafe { core::slice::from_raw_parts(s.argv as *const _, s.argc as usize) };
     let impls = FdpSyscallImpls {};
-    ckb_vm_fuzzing_utils::entry(impls, f, argv)
+    let result = ckb_vm_fuzzing_utils::entry(impls, f, argv);
+    unsafe { ckb_fuzzing_fdp_cleanup() };
+    result
 }
 
 pub struct FdpSyscallImpls {}
