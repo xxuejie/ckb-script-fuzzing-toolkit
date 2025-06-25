@@ -43,6 +43,9 @@ RUN cargo install \
   --git https://github.com/xxuejie/ckb-script-fuzzing-toolkit \
   --rev 479052e565ef872fbf60531a1ce2dcf54e83085a \
   ckb-vm-syscall-tracer
+RUN cargo install cargo-fuzz
+RUN cargo install honggfuzz
+RUN cargo install cargo-afl
 
 RUN mkdir /code
 WORKDIR /code
