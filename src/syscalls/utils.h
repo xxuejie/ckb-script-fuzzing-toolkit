@@ -55,6 +55,10 @@ class ArgvBuilder {
   }
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if CKB_FUZZING_OVERRIDE_INTERNAL_SYSCALL == 1
 
 #ifndef _CKB_FUZZING_SYSCALL_FUNC_NAME
@@ -240,6 +244,10 @@ long __internal_syscall(long n, long a0, long a1, long a2, long a3, long a4,
     } break;
   }
   return _CKB_FUZZING_SYSCALL_FUNC_NAME(exit)(CKB_FUZZING_UNEXPECTED);
+}
+#endif
+
+#ifdef __cplusplus
 }
 #endif
 
